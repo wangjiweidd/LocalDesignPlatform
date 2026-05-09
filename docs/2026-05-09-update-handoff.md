@@ -4,9 +4,15 @@
 
 ## 当前工程定位
 
-目录：`/Users/jiweiwang/Downloads/Code case/Remotion-Video`
+本机工作目录：`/Users/jiweiwang/Downloads/Code case/Remotion-Video`
+
+GitHub 仓库：`https://github.com/wangjiweidd/LocalDesignPlatform`
+
+远端分支：`codex/remotion-video-pipeline`
 
 这是一个独立的 Remotion 分支视频工程，用来验证新的动画生产流程。它不依赖、也不修改原始真实 Remotion 工程在本地设计平台里的地址记录。
+
+注意：这个工程目前是推到 `LocalDesignPlatform` 仓库里的独立分支，不是远端 `main`。这样可以复用同一个 GitHub 仓库同步工作，又不会影响主工程。
 
 今天的核心目标不是只做一个视频，而是把动画生产方式改成可复用流程：
 
@@ -127,7 +133,15 @@
 
 ## 复现命令
 
-在另一台电脑拉取仓库后，进入工程目录：
+在另一台电脑上，从 GitHub 拉取这个独立分支：
+
+```bash
+git clone https://github.com/wangjiweidd/LocalDesignPlatform.git
+cd LocalDesignPlatform
+git checkout codex/remotion-video-pipeline
+```
+
+进入该分支后，安装依赖并重新生成视频：
 
 ```bash
 npm install
@@ -160,6 +174,7 @@ c3a2206 Create reusable Remotion branch video
 49cc46c Improve reusable Remotion visual pipeline
 f44c8d6 Restore inner page caption layout
 5d34040 Separate persistent titles from animated captions
+a3aaa34 Add Remotion update handoff
 ```
 
 本文件对应今天的交接文档提交。
@@ -203,6 +218,27 @@ f44c8d6 Restore inner page caption layout
    - `tmp/`
    - `.DS_Store`
 
-## 当前限制
+## Git 同步状态
 
-当前仓库没有配置 remote，所以今天只能本地提交，不能推送到远端。换电脑前需要先补 remote，或者用别的方式把这个仓库同步过去。
+当前 remote 已配置为：
+
+```text
+origin https://github.com/wangjiweidd/LocalDesignPlatform.git
+```
+
+当前工作分支：
+
+```text
+codex/remotion-video-pipeline
+```
+
+后续如果继续改这个分支，正常提交并推送即可：
+
+```bash
+git status
+git add <需要提交的文件>
+git commit -m "<提交说明>"
+git push
+```
+
+不要把这个分支直接合并到 `main`，除非后面明确决定把视频生产线并入主工程。当前更稳妥的方式，是把它当作独立分支工程使用。
