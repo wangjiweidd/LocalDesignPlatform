@@ -18,6 +18,8 @@ export const demoScript: ScriptData = {
     {
       text: 'AI 学习工具，别先买会员',
       keyword: '买会员',
+      caption: '很多时候，先看孩子怎么用，再决定买不买',
+      captionKeyword: '怎么用',
       scene: 'kid-meets-ai',
       captionMotion: 'slide-fade',
       highlightSync: 'robot',
@@ -59,6 +61,8 @@ export const demoScript: ScriptData = {
     {
       text: '先看孩子有没有真实场景',
       keyword: '真实场景',
+      caption: '问题不在工具多少，而在有没有真实任务',
+      captionKeyword: '真实任务',
       scene: 'family-rules-board',
       captionMotion: 'emphasis-pop',
       highlightSync: 'rules',
@@ -90,6 +94,8 @@ export const demoScript: ScriptData = {
     {
       text: '问问题，要先说清目的',
       keyword: '目的',
+      caption: '让孩子先讲自己的想法，再请 AI 帮忙补充',
+      captionKeyword: '自己的想法',
       scene: 'ask-the-purpose',
       captionMotion: 'emphasis-pop',
       highlightSync: 'lightbulb',
@@ -121,6 +127,8 @@ export const demoScript: ScriptData = {
     {
       text: '拿到答案，必须核对来源',
       keyword: '核对',
+      caption: '看到答案先别抄，至少追问一次来源',
+      captionKeyword: '来源',
       scene: 'verify-answer',
       captionMotion: 'emphasis-pop',
       highlightSync: 'magnifier',
@@ -152,6 +160,8 @@ export const demoScript: ScriptData = {
     {
       text: '练口语做图，够用就停',
       keyword: '够用',
+      caption: '口语、做图、整理资料，够用就别继续刷',
+      captionKeyword: '够用',
       scene: 'time-limit',
       captionMotion: 'soft-shake',
       highlightSync: 'hourglass',
@@ -183,6 +193,8 @@ export const demoScript: ScriptData = {
     {
       text: '先试一周，再决定付费',
       keyword: '付费',
+      caption: '先免费试一周，再看它是不是真的省时间',
+      captionKeyword: '省时间',
       scene: 'kid-vs-trap',
       captionMotion: 'soft-shake',
       highlightSync: 'warning',

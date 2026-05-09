@@ -166,7 +166,7 @@ const Progress: React.FC<{index: number; total: number; frame: number; shotDurat
         position: 'absolute',
         left: 336,
         right: 336,
-        bottom: 126,
+        bottom: 70,
         height: 8,
         borderRadius: 999,
         background: '#FFE6C8',

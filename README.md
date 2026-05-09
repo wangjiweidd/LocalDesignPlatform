@@ -47,3 +47,13 @@ Keep generated text out of image assets whenever possible. Chinese titles, label
 Reusable assets that should be committed live in `public/assets/generated/`. Intermediate chroma-key sources and final renders should not be committed.
 
 The cover is a separate `BranchCover` composition. Do not assume the main video frame is also a good cover; design and render the cover independently.
+
+## Inner Page Layout
+
+Each video shot uses a fixed three-part structure:
+
+```text
+top title -> center animated visual -> bottom caption card
+```
+
+Use `shot.text` and `shot.keyword` for the top title. Use `shot.caption` and `shot.captionKeyword` for the bottom subtitle/caption card. Do not move subtitles into the top title area.

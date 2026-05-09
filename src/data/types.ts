@@ -42,6 +42,8 @@ export type VisualBeat = {
 export type ShotData = {
   text: string;
   keyword: string;
+  caption: string;
+  captionKeyword: string;
   scene: SceneId;
   captionMotion: CaptionMotion;
   highlightSync: string;
