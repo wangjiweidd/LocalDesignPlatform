@@ -1,0 +1,5 @@
+{
+  "name": "Remotion Motion Video",
+  "outputs": ["video.mp4", "remotion-source", "subtitles.srt", "cover.png"],
+  "sections": ["script", "storyboard", "motion-components", "voiceover", "captions", "render"]
+}

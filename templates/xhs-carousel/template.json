@@ -1,0 +1,5 @@
+{
+  "name": "XHS Carousel",
+  "outputs": ["cards/*.png", "preview.html", "post-caption.md", "xhs-carousel.zip"],
+  "sections": ["cover", "problem", "insight", "method", "example", "summary"]
+}

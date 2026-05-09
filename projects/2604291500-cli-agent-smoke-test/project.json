@@ -1,0 +1,10 @@
+{
+  "id": "2604291500-cli-agent-smoke-test",
+  "name": "CLI Agent Smoke Test",
+  "type": "portfolio",
+  "brief": "用于验证本地项目创建链路。",
+  "status": "created",
+  "createdAt": "2026-04-29T07:00:53.940Z",
+  "updatedAt": "2026-04-29T07:00:53.940Z",
+  "outputs": []
+}

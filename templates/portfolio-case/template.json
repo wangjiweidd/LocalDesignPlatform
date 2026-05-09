@@ -1,0 +1,12 @@
+{
+  "name": "Portfolio Case Study",
+  "outputs": ["index.html", "case-study.pdf", "section-images", "portfolio-case.zip"],
+  "sections": [
+    "overview",
+    "project-background",
+    "design-goals",
+    "process",
+    "solution-showcase",
+    "results"
+  ]
+}

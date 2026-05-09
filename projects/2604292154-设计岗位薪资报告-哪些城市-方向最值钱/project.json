@@ -1,0 +1,127 @@
+{
+  "id": "2604292154-设计岗位薪资报告-哪些城市-方向最值钱",
+  "name": "设计岗位薪资报告-哪些城市-方向最值钱",
+  "type": "xhs",
+  "skill": "odin-design-job-xhs-cards",
+  "relatedSkills": [
+    "xhs-images",
+    "zh-writing-guardrails"
+  ],
+  "workflow": [
+    "source",
+    "research",
+    "card-planning",
+    "copy",
+    "html",
+    "png",
+    "acceptance"
+  ],
+  "brief": "材料来源：/Volumes/Energey/第二大脑/01_Odin/03_内容生产中/02_多图图文/260429_设计岗位薪资报告-哪些城市-方向最值钱\n生产线：小红书多图信息图\n绑定 skill：odin-design-job-xhs-cards\n\n## ._M35_设计岗位薪资报告-哪些城市-方向最值钱.md\n\u0005\u0016\u0007\u0002Mac OS X        \u0002\t2\u000e�\u0002\u000e�\u0001\u001eATTR\u000e��\u000b\u0001�\u000b\u0015com.apple.provenance\u0001\u0002��\u001en���B\u0001\u0001\u001eThis resource fork intentionally left blank   \u0001\u0001\u001e\u001c\u001e��\n\n## M35_设计岗位薪资报告-哪些城市-方向最值钱.md\n---\n编号: M35\n标题: 设计岗位薪资报告-哪些城市-方向最值钱\n领域: 行业洞察\n优先级: P1\n选题状态: 制作中\n类型: 数据权威\n创建时间: 2026-04-23\n发布时间:\n状态: 制作中\n---\n\n# 设计岗位薪资报告-哪些城市-方向最值钱\n\n> 编号：M35 | 优先级：P1 | 类型：数据权威\n\n---\n\n## 📝 选题要讲什么\n\n基于招聘数据的设计师薪资报告：一线城市 vs 新一线城市薪资对比、不同方向薪资排名（UX/UI/品牌/交互/产品）、3 年经验 vs 5 年经验 vs 10 年经验的薪资差距。\n\n## 💡 为什么这个选题有价值\n\n数据权威型选题，薪资是设计师最关心的话题。这类选题收藏率极高，设计师会对照自己的薪资水平。\n\n---\n\n*创建时间：2026-04-23*\n\n已导入本地资料目录：/Volumes/Energey/第二大脑/01_Odin/03_内容生产中/02_多图图文/260429_设计岗位薪资报告-哪些城市-方向最值钱",
+  "sourcePath": "/Volumes/Energey/第二大脑/01_Odin/03_内容生产中/02_多图图文/260429_设计岗位薪资报告-哪些城市-方向最值钱",
+  "status": "completed",
+  "createdAt": "2026-04-29T13:54:41.589Z",
+  "updatedAt": "2026-05-01T16:42:09.761Z",
+  "outputs": [
+    {
+      "type": "research",
+      "path": "source/research.md"
+    },
+    {
+      "type": "outline",
+      "path": "source/outline.md"
+    },
+    {
+      "type": "copy",
+      "path": "source/copy.md"
+    },
+    {
+      "type": "caption",
+      "path": "配文文稿.md"
+    },
+    {
+      "type": "html-preview",
+      "path": "preview/index.html"
+    },
+    {
+      "type": "html",
+      "path": "html/index.html"
+    },
+    {
+      "type": "html",
+      "path": "html/p1-cover.html"
+    },
+    {
+      "type": "html",
+      "path": "html/p2-city-gap.html"
+    },
+    {
+      "type": "html",
+      "path": "html/p3-city-choice.html"
+    },
+    {
+      "type": "html",
+      "path": "html/p4-direction.html"
+    },
+    {
+      "type": "html",
+      "path": "html/p5-experience.html"
+    },
+    {
+      "type": "html",
+      "path": "html/p6-portfolio.html"
+    },
+    {
+      "type": "html",
+      "path": "html/p7-salary-check.html"
+    },
+    {
+      "type": "html",
+      "path": "html/p8-summary.html"
+    },
+    {
+      "type": "png",
+      "path": "png/p1-cover.png"
+    },
+    {
+      "type": "png",
+      "path": "png/p2-city-gap.png"
+    },
+    {
+      "type": "png",
+      "path": "png/p3-city-choice.png"
+    },
+    {
+      "type": "png",
+      "path": "png/p4-direction.png"
+    },
+    {
+      "type": "png",
+      "path": "png/p5-experience.png"
+    },
+    {
+      "type": "png",
+      "path": "png/p6-portfolio.png"
+    },
+    {
+      "type": "png",
+      "path": "png/p7-salary-check.png"
+    },
+    {
+      "type": "png",
+      "path": "png/p8-summary.png"
+    },
+    {
+      "type": "acceptance",
+      "path": "source/acceptance.md"
+    },
+    {
+      "type": "acceptance",
+      "path": "验收记录.md"
+    },
+    {
+      "type": "odin-sync",
+      "path": "/Volumes/Energey/第二大脑/01_Odin/03_内容生产中/02_多图图文/260429_设计岗位薪资报告-哪些城市-方向最值钱"
+    }
+  ],
+  "odinOutputDir": "/Volumes/Energey/第二大脑/01_Odin/03_内容生产中/02_多图图文/260429_设计岗位薪资报告-哪些城市-方向最值钱"
+}

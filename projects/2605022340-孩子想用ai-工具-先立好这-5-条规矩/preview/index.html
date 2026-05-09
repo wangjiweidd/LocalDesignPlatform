@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>孩子想用AI 工具？先立好这 5 条规矩 - Remotion Preview</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: #101412;
+      color: #f4f1e8;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    }
+
+    .page {
+      width: min(100vw, 520px);
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      background:
+        radial-gradient(circle at 20% 12%, rgba(41, 194, 128, 0.18), transparent 28%),
+        radial-gradient(circle at 84% 24%, rgba(240, 193, 75, 0.14), transparent 24%),
+        linear-gradient(160deg, #17221d 0%, #0b0f0d 58%, #12140f 100%);
+    }
+
+    .phone {
+      position: relative;
+      width: min(100%, 430px);
+      aspect-ratio: 9 / 16;
+      overflow: hidden;
+      border: 1px solid rgba(244, 241, 232, 0.14);
+      border-radius: 28px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 22%),
+        #0d1411;
+      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.48);
+    }
+
+    .safe-area {
+      position: absolute;
+      inset: 34px 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: rgba(244, 241, 232, 0.62);
+      font-size: 13px;
+      letter-spacing: 0;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 10px;
+      border: 1px solid rgba(244, 241, 232, 0.14);
+      border-radius: 999px;
+      background: rgba(244, 241, 232, 0.06);
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #29c280;
+      box-shadow: 0 0 14px rgba(41, 194, 128, 0.8);
+    }
+
+    .stage {
+      position: relative;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-bottom: 28px;
+    }
+
+    .question {
+      position: absolute;
+      top: 54px;
+      left: 0;
+      right: 0;
+      font-size: clamp(34px, 10vw, 52px);
+      line-height: 1.05;
+      font-weight: 850;
+      letter-spacing: 0;
+      animation: questionMove 10s linear infinite;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 4px;
+      height: 0.86em;
+      margin-left: 4px;
+      vertical-align: -0.08em;
+      background: #f0c14b;
+      animation: blink 0.8s steps(1, end) infinite;
+    }
+
+    .header-card {
+      position: absolute;
+      top: 136px;
+      left: 0;
+      right: 0;
+      padding: 20px;
+      border: 1px solid rgba(244, 241, 232, 0.16);
+      border-radius: 18px;
+      background: rgba(244, 241, 232, 0.08);
+      backdrop-filter: blur(18px);
+      animation: headerIn 10s linear infinite;
+    }
+
+    .header-card .kicker {
+      color: #f0c14b;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .header-card .title {
+      margin-top: 8px;
+      font-size: clamp(30px, 8vw, 44px);
+      line-height: 1.08;
+      font-weight: 850;
+    }
+
+    .big-five {
+      color: #29c280;
+      font-size: 1.18em;
+    }
+
+    .rules {
+      position: absolute;
+      top: 258px;
+      left: 0;
+      right: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .rule {
+      display: grid;
+      grid-template-columns: 38px 1fr;
+      align-items: center;
+      min-height: 58px;
+      padding: 10px 12px;
+      border: 1px solid rgba(244, 241, 232, 0.12);
+      border-radius: 16px;
+      background: rgba(13, 20, 17, 0.78);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      opacity: 0;
+      transform: translateY(18px);
+      animation: ruleIn 10s linear infinite;
+      animation-delay: var(--delay);
+    }
+
+    .num {
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(41, 194, 128, 0.16);
+      color: #64dfa3;
+      font-weight: 800;
+      font-size: 15px;
+    }
+
+    .rule strong {
+      display: block;
+      font-size: 17px;
+      line-height: 1.22;
+    }
+
+    .rule span {
+      display: block;
+      margin-top: 2px;
+      color: rgba(244, 241, 232, 0.62);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .closing {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 94px;
+      text-align: center;
+      font-size: clamp(28px, 7.4vw, 40px);
+      line-height: 1.12;
+      font-weight: 850;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: closingIn 10s linear infinite;
+    }
+
+    .caption {
+      position: relative;
+      min-height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 16px;
+      border-radius: 15px;
+      background: rgba(244, 241, 232, 0.92);
+      color: #12140f;
+      font-size: 16px;
+      font-weight: 750;
+      text-align: center;
+      line-height: 1.28;
+      overflow: hidden;
+    }
+
+    .caption span {
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      opacity: 0;
+      animation: captionSwap 10s linear infinite;
+      animation-delay: var(--caption-delay);
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    @keyframes questionMove {
+      0%, 11% { opacity: 0; transform: translateY(24px); }
+      14%, 22% { opacity: 1; transform: translateY(0); }
+      28%, 100% { opacity: 0.22; transform: translateY(-42px) scale(0.78); transform-origin: left top; }
+    }
+
+    @keyframes headerIn {
+      0%, 11% { opacity: 0; transform: scale(0.96) translateY(18px); }
+      14%, 78% { opacity: 1; transform: scale(1) translateY(0); }
+      84%, 100% { opacity: 0; transform: scale(0.98) translateY(-10px); }
+    }
+
+    @keyframes ruleIn {
+      0%, 22% { opacity: 0; transform: translateY(18px); }
+      28%, 78% { opacity: 1; transform: translateY(0); }
+      84%, 100% { opacity: 0; transform: translateY(-10px); }
+    }
+
+    @keyframes closingIn {
+      0%, 76% { opacity: 0; transform: translateY(16px); }
+      82%, 96% { opacity: 1; transform: translateY(0); }
+      100% { opacity: 0; transform: translateY(-8px); }
+    }
+
+    @keyframes captionSwap {
+      0%, 11% { opacity: 1; }
+      12%, 100% { opacity: 0; }
+    }
+
+    .caption span:nth-child(2) { animation-delay: -8.8s; }
+    .caption span:nth-child(3) { animation-delay: -7.8s; }
+    .caption span:nth-child(4) { animation-delay: -6.8s; }
+    .caption span:nth-child(5) { animation-delay: -5.8s; }
+    .caption span:nth-child(6) { animation-delay: -4.6s; }
+    .caption span:nth-child(7) { animation-delay: -3.4s; }
+    .caption span:nth-child(8) { animation-delay: -2.2s; }
+
+    @media (max-width: 420px) {
+      .page {
+        padding: 0;
+      }
+
+      .phone {
+        width: 100vw;
+        min-height: 100vh;
+        border-radius: 0;
+        border: 0;
+      }
+
+      .safe-area {
+        inset: 28px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="phone" aria-label="Remotion video preview">
+      <div class="safe-area">
+        <div class="meta">
+          <div class="pill"><span class="dot"></span>AI 家庭规则</div>
+          <div>10s / 9:16</div>
+        </div>
+
+        <div class="stage">
+          <h1 class="question">孩子想用 AI？<span class="cursor"></span></h1>
+
+          <div class="header-card">
+            <div class="kicker">先别急着禁，也别直接放开</div>
+            <div class="title">先立好这 <span class="big-five">5</span> 条规矩</div>
+          </div>
+
+          <div class="rules">
+            <div class="rule" style="--delay: 2.2s;">
+              <div class="num">1</div>
+              <div><strong>不填隐私</strong><span>姓名、学校、住址都不发给 AI</span></div>
+            </div>
+            <div class="rule" style="--delay: 3.1s;">
+              <div class="num">2</div>
+              <div><strong>不代写作业</strong><span>可以问思路，不能直接交答案</span></div>
+            </div>
+            <div class="rule" style="--delay: 4s;">
+              <div class="num">3</div>
+              <div><strong>答案要核对</strong><span>不确定的内容，回到课本或资料</span></div>
+            </div>
+            <div class="rule" style="--delay: 4.9s;">
+              <div class="num">4</div>
+              <div><strong>每次先限时</strong><span>先设 15 分钟，到点停下来</span></div>
+            </div>
+            <div class="rule" style="--delay: 5.8s;">
+              <div class="num">5</div>
+              <div><strong>用完说清楚</strong><span>它帮了什么，自己学会了什么</span></div>
+            </div>
+          </div>
+
+          <div class="closing">先定边界<br>再给工具</div>
+        </div>
+
+        <div class="caption" aria-label="字幕">
+          <span>孩子想用 AI，可以。</span>
+          <span>但先约好 5 件事。</span>
+          <span>第一，不填隐私信息。</span>
+          <span>第二，不让 AI 代写作业。</span>
+          <span>第三，答案必须核对。</span>
+          <span>第四，每次使用先限时。</span>
+          <span>第五，用完说清楚学到了什么。</span>
+          <span>先定边界，再给工具。</span>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

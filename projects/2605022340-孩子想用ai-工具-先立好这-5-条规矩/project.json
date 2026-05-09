@@ -1,0 +1,35 @@
+{
+  "id": "2605022340-孩子想用ai-工具-先立好这-5-条规矩",
+  "name": "孩子想用AI 工具？先立好这 5 条规矩",
+  "type": "video",
+  "skill": "remotion-video",
+  "relatedSkills": [],
+  "workflow": [
+    "script",
+    "storyboard",
+    "components",
+    "captions",
+    "render"
+  ],
+  "brief": "10 秒",
+  "status": "preview_ready",
+  "createdAt": "2026-05-02T15:40:11.367Z",
+  "updatedAt": "2026-05-02T15:40:51.000Z",
+  "outputs": [
+    {
+      "type": "outline",
+      "path": "source/outline.md",
+      "description": "内容结构、分镜规划、Remotion 组件与时间线建议"
+    },
+    {
+      "type": "copy",
+      "path": "source/copy.md",
+      "description": "10 秒口播、屏幕文案和字幕节奏"
+    },
+    {
+      "type": "html-preview",
+      "path": "preview/index.html",
+      "description": "可直接打开的 9:16 动效预览页面，内联 CSS，无构建依赖"
+    }
+  ]
+}

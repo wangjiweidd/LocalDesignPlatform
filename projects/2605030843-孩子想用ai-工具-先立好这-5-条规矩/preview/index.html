@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<!--
+  曜宁视频 · HTML 预览模板
+  使用方式：复制为 preview/index.html 后替换模板占位符。
+  视觉规范完全对齐 references/visual-style.md，不要改颜色/字号/圆角/阴影。
+  上屏对应 cover.png（封面），下屏对应 frame.png（核心内页）。
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<title>孩子想用AI 工具？先立好这 5 条规矩 · 曜宁视频预览</title>
+<style>
+  :root {
+    --bg-start: #FFF6E2;
+    --bg-end: #FFE9C4;
+    --orange: #E07A14;
+    --gold: #FFB52E;
+    --purple: #6F62A8;
+    --ink: #1F1408;
+    --note: #5F3B13;
+    --pill-border: #F1C47E;
+    --shadow-light: 0 2px 6px rgba(176, 110, 38, 0.18);
+    --shadow-strong: 0 8px 24px rgba(176, 110, 38, 0.22);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: linear-gradient(180deg, var(--bg-start) 0%, var(--bg-end) 100%);
+    color: var(--ink);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    padding: 40px 0;
+  }
+  .stage {
+    width: 1080px;
+    height: 1440px;
+    background: linear-gradient(180deg, var(--bg-start) 0%, var(--bg-end) 100%);
+    border-radius: 24px;
+    box-shadow: var(--shadow-strong);
+    position: relative;
+    overflow: hidden;
+    transform-origin: top center;
+  }
+  .stage-label {
+    position: absolute;
+    top: 18px;
+    right: 24px;
+    color: rgba(31, 20, 8, 0.4);
+    font: 600 16px/1 ui-monospace, Menlo, monospace;
+    letter-spacing: 0.04em;
+    z-index: 5;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    background: #fff;
+    border: 1px solid var(--pill-border);
+    border-radius: 999px;
+    box-shadow: var(--shadow-light);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--note);
+    letter-spacing: 0.02em;
+  }
+  .badge svg { width: 22px; height: 22px; }
+  .cover {
+    padding: 64px 80px 40px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .cover .badge { align-self: center; }
+  .cover h1 {
+    margin-top: 36px;
+    font-size: 100px;
+    line-height: 1.15;
+    letter-spacing: 0.02em;
+    font-weight: 800;
+    color: var(--ink);
+    text-align: center;
+  }
+  .cover .illustration {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 24px 0;
+  }
+  .cover .footer-note {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 26px;
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid var(--pill-border);
+    border-radius: 18px;
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--note);
+  }
+  .cover .footer-note .bulb {
+    width: 32px; height: 32px; flex: 0 0 auto;
+  }
+  .frame {
+    padding: 56px 80px 80px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .frame .topbar {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 16px;
+  }
+  .frame .topbar em {
+    font-style: normal;
+    font-size: 30px;
+    color: var(--note);
+    font-weight: 700;
+  }
+  .topbar-divider {
+    width: 1px;
+    height: 36px;
+    background: rgba(95, 59, 19, 0.28);
+  }
+  .frame .illustration {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .frame .hero {
+    margin-top: 24px;
+    text-align: center;
+    font-size: 116px;
+    line-height: 1.1;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+  }
+  .progress {
+    margin: 40px auto 0;
+    width: 36%;
+    height: 6px;
+    background: #FFE6C8;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .progress > span {
+    display: block;
+    height: 100%;
+    width: 60%;
+    background: var(--orange);
+    border-radius: 3px;
+  }
+  .highlight { color: var(--orange); }
+  .highlight.underline { text-decoration: underline wavy var(--orange); text-underline-offset: 6px; }
+</style>
+</head>
+<body>
+
+<section class="stage cover">
+  <span class="stage-label">封面 · 1080x1440</span>
+  <span class="badge">
+    <svg viewBox="0 0 32 32" aria-hidden>
+      <path d="M3 9 L9 16 L16 5 L23 16 L29 9 L26 25 H6 Z"
+            fill="#FFB52E" stroke="#B25C0C" stroke-width="1.5" stroke-linejoin="round"/>
+    </svg>
+    带曜宁玩 AI
+  </span>
+  <h1>
+    孩子想用 <span class="highlight">AI</span>？<br/>
+    先别急着<span class="highlight">答应</span>
+  </h1>
+  <div class="illustration">
+    <svg viewBox="0 0 480 360" width="560" height="420" aria-hidden>
+      <defs>
+        <linearGradient id="clock-face" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#FFD27A"/>
+          <stop offset="100%" stop-color="#E07A14"/>
+        </linearGradient>
+        <linearGradient id="pencil-body" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#FFD56C"/>
+          <stop offset="100%" stop-color="#C9760E"/>
+        </linearGradient>
+      </defs>
+      <ellipse cx="240" cy="320" rx="170" ry="14" fill="#F4C994" opacity="0.5"/>
+      <circle cx="170" cy="200" r="86" fill="url(#clock-face)" stroke="#1F1408" stroke-width="3"/>
+      <circle cx="170" cy="200" r="64" fill="#FFFFFF" stroke="#1F1408" stroke-width="2"/>
+      <line x1="170" y1="200" x2="170" y2="160" stroke="#1F1408" stroke-width="6" stroke-linecap="round"/>
+      <line x1="170" y1="200" x2="200" y2="216" stroke="#1F1408" stroke-width="6" stroke-linecap="round"/>
+      <circle cx="170" cy="200" r="6" fill="#1F1408"/>
+      <g transform="translate(244 130)">
+        <rect x="6" y="6" width="140" height="170" rx="10" fill="#6F62A8"/>
+        <rect x="0" y="0" width="140" height="170" rx="10" fill="#FFE6C8" stroke="#1F1408" stroke-width="2"/>
+        <text x="70" y="38" text-anchor="middle" font-size="20" font-weight="700" fill="#1F1408">作业本</text>
+        <g transform="translate(20 60)">
+          <rect width="14" height="14" rx="3" fill="#FFFFFF" stroke="#A88248" stroke-width="1.4"/>
+          <path d="M3 8 L7 12 L13 4" stroke="#E04545" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+          <line x1="24" y1="8" x2="100" y2="8" stroke="#C8B280" stroke-width="2"/>
+          <rect y="28" width="14" height="14" rx="3" fill="#FFFFFF" stroke="#A88248" stroke-width="1.4"/>
+          <line x1="24" y1="36" x2="100" y2="36" stroke="#C8B280" stroke-width="2"/>
+          <rect y="56" width="14" height="14" rx="3" fill="#FFFFFF" stroke="#A88248" stroke-width="1.4"/>
+          <line x1="24" y1="64" x2="92" y2="64" stroke="#C8B280" stroke-width="2"/>
+        </g>
+      </g>
+      <g transform="translate(360 100) rotate(-22)">
+        <rect x="0" y="0" width="22" height="160" rx="4" fill="url(#pencil-body)" stroke="#1F1408" stroke-width="2"/>
+        <rect x="0" y="-14" width="22" height="14" fill="#B0A790" stroke="#1F1408" stroke-width="2"/>
+        <path d="M0 -14 H22 V-30 Q11 -38 0 -30 Z" fill="#F4A6A0" stroke="#1F1408" stroke-width="2"/>
+        <path d="M0 160 L11 184 L22 160 Z" fill="#1F1408"/>
+      </g>
+      <path d="M310 60 q-30 24 -20 56 q10 26 36 20" fill="none" stroke="#6F62A8" stroke-width="5" stroke-linecap="round"/>
+      <path d="M70 300 q10 -36 28 -50 q-4 40 -10 50 z" fill="#8FC79A"/>
+      <path d="M52 302 q8 -30 24 -44 q-2 34 -9 44 z" fill="#78B787"/>
+      <circle cx="70" cy="76" r="13" fill="none" stroke="#F1C47E" stroke-width="3"/>
+      <circle cx="416" cy="250" r="11" fill="none" stroke="#F1C47E" stroke-width="3"/>
+    </svg>
+  </div>
+  <div class="footer-note">
+    <svg class="bulb" viewBox="0 0 32 32" aria-hidden>
+      <path d="M10 22 Q5 16 8 10 Q14 4 22 8 Q26 14 22 20 L21 24 H11 Z" fill="#FFD27A" stroke="#B25C0C" stroke-width="1.5"/>
+      <line x1="13" y1="26" x2="19" y2="26" stroke="#B25C0C" stroke-width="2" stroke-linecap="round"/>
+      <line x1="14" y1="29" x2="18" y2="29" stroke="#B25C0C" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+    很多时候，问题不在工具，而在<span class="highlight">边界</span>
+  </div>
+</section>
+
+<section class="stage frame">
+  <span class="stage-label">内页 · 1080x1440</span>
+  <div class="topbar">
+    <span class="badge">
+      <svg viewBox="0 0 32 32" aria-hidden>
+        <path d="M3 9 L9 16 L16 5 L23 16 L29 9 L26 25 H6 Z"
+              fill="#FFB52E" stroke="#B25C0C" stroke-width="1.5" stroke-linejoin="round"/>
+      </svg>
+      带曜宁玩 AI
+    </span>
+    <span class="topbar-divider"></span>
+    <em>孩子想用 AI 工具？</em>
+  </div>
+  <div class="illustration">
+    <svg viewBox="0 0 480 360" width="560" height="410" aria-hidden>
+      <defs>
+        <linearGradient id="clock-face2" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#FFD27A"/>
+          <stop offset="100%" stop-color="#E07A14"/>
+        </linearGradient>
+        <linearGradient id="pencil-body2" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#FFD56C"/>
+          <stop offset="100%" stop-color="#C9760E"/>
+        </linearGradient>
+      </defs>
+      <ellipse cx="240" cy="320" rx="170" ry="14" fill="#F4C994" opacity="0.5"/>
+      <circle cx="170" cy="200" r="86" fill="url(#clock-face2)" stroke="#1F1408" stroke-width="3"/>
+      <circle cx="170" cy="200" r="64" fill="#FFFFFF" stroke="#1F1408" stroke-width="2"/>
+      <line x1="170" y1="200" x2="170" y2="160" stroke="#1F1408" stroke-width="6" stroke-linecap="round"/>
+      <line x1="170" y1="200" x2="200" y2="216" stroke="#1F1408" stroke-width="6" stroke-linecap="round"/>
+      <circle cx="170" cy="200" r="6" fill="#1F1408"/>
+      <g transform="translate(244 130)">
+        <rect x="6" y="6" width="140" height="170" rx="10" fill="#6F62A8"/>
+        <rect x="0" y="0" width="140" height="170" rx="10" fill="#FFE6C8" stroke="#1F1408" stroke-width="2"/>
+        <text x="70" y="40" text-anchor="middle" font-size="20" font-weight="700" fill="#1F1408">作业本</text>
+        <g transform="translate(20 60)">
+          <rect width="14" height="14" rx="3" fill="#FFFFFF" stroke="#A88248" stroke-width="1.4"/>
+          <path d="M3 8 L7 12 L13 4" stroke="#E04545" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+          <line x1="24" y1="8" x2="100" y2="8" stroke="#C8B280" stroke-width="2"/>
+          <rect y="28" width="14" height="14" rx="3" fill="#FFFFFF" stroke="#A88248" stroke-width="1.4"/>
+          <line x1="24" y1="36" x2="100" y2="36" stroke="#C8B280" stroke-width="2"/>
+        </g>
+      </g>
+      <g transform="translate(360 100) rotate(-22)">
+        <rect x="0" y="0" width="22" height="160" rx="4" fill="url(#pencil-body2)" stroke="#1F1408" stroke-width="2"/>
+        <rect x="0" y="-14" width="22" height="14" fill="#B0A790" stroke="#1F1408" stroke-width="2"/>
+        <path d="M0 -14 H22 V-30 Q11 -38 0 -30 Z" fill="#F4A6A0" stroke="#1F1408" stroke-width="2"/>
+        <path d="M0 160 L11 184 L22 160 Z" fill="#1F1408"/>
+      </g>
+      <path d="M310 60 q-30 24 -20 56 q10 26 36 20" fill="none" stroke="#6F62A8" stroke-width="5" stroke-linecap="round"/>
+      <path d="M70 300 q10 -36 28 -50 q-4 40 -10 50 z" fill="#8FC79A"/>
+      <path d="M52 302 q8 -30 24 -44 q-2 34 -9 44 z" fill="#78B787"/>
+      <circle cx="70" cy="76" r="13" fill="none" stroke="#F1C47E" stroke-width="3"/>
+      <circle cx="416" cy="250" r="11" fill="none" stroke="#F1C47E" stroke-width="3"/>
+    </svg>
+  </div>
+  <div class="hero">
+    先定<span class="highlight">边界</span>
+  </div>
+  <div class="progress"><span></span></div>
+</section>
+
+</body>
+</html>

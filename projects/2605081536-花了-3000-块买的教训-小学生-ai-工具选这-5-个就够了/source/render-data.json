@@ -1,0 +1,148 @@
+{
+  "title": "小学生用 AI？",
+  "subtitle": "先留五个真实场景",
+  "fps": 30,
+  "width": 1080,
+  "height": 1440,
+  "shotDurationFrames": 75,
+  "cover": {
+    "title": "小学生用 AI？\n别先买会员",
+    "subtitle": "先留五个真实场景",
+    "visualRole": "problem",
+    "titleHighlight": "买会员",
+    "note": "问题不在工具，而在边界",
+    "noteHighlight": "边界"
+  },
+  "shots": [
+    {
+      "text": "小学生用 AI？别先买会员",
+      "keyword": "买会员",
+      "visualRole": "problem",
+      "scene": "kid-meets-ai",
+      "captionMotion": "slide-fade",
+      "highlightSync": "robot",
+      "visualBeats": [
+        { "frame": 8, "target": "robot", "action": "pop", "label": "豆豆" },
+        { "frame": 28, "target": "tablet", "action": "flash", "label": "会员" },
+        { "frame": 52, "target": "bubble", "action": "shake", "label": "先等等" }
+      ],
+      "visualPlan": {
+        "scene": "kid-meets-ai",
+        "intent": "用豆豆机器人和会员平板制造花钱冲动，再把注意力拉回边界。",
+        "elements": [
+          { "id": "robot", "role": "豆豆机器人主角", "text": "想用 AI?", "motion": "pop" },
+          { "id": "tablet", "role": "会员入口", "text": "先别买", "motion": "flash" },
+          { "id": "bubble", "role": "提醒气泡", "text": "停一下", "motion": "shake" }
+        ]
+      }
+    },
+    {
+      "text": "先留五个孩子会用的场景",
+      "keyword": "五个",
+      "visualRole": "method",
+      "scene": "family-rules-board",
+      "captionMotion": "emphasis-pop",
+      "highlightSync": "rules",
+      "visualBeats": [
+        { "frame": 6, "target": "rules", "action": "draw", "label": "5 个" },
+        { "frame": 30, "target": "rules-list", "action": "slide", "label": "场景" },
+        { "frame": 54, "target": "boundary", "action": "pulse", "label": "边界" }
+      ],
+      "visualPlan": {
+        "scene": "family-rules-board",
+        "intent": "把工具选择改成规则板，强调先筛场景再买工具。",
+        "elements": [
+          { "id": "rules", "role": "家庭规则板", "text": "五个场景", "motion": "draw" },
+          { "id": "rules-list", "role": "场景清单", "text": "问 读 练 画 核", "motion": "slide" },
+          { "id": "boundary", "role": "边界标签", "text": "先定", "motion": "pulse" }
+        ]
+      }
+    },
+    {
+      "text": "问问题，家长一定在旁边",
+      "keyword": "家长",
+      "visualRole": "method",
+      "scene": "ask-the-purpose",
+      "captionMotion": "emphasis-pop",
+      "highlightSync": "lightbulb",
+      "visualBeats": [
+        { "frame": 10, "target": "question", "action": "pop", "label": "怎么问" },
+        { "frame": 34, "target": "lightbulb", "action": "flash", "label": "陪用" },
+        { "frame": 56, "target": "prompt", "action": "draw", "label": "先想" }
+      ],
+      "visualPlan": {
+        "scene": "ask-the-purpose",
+        "intent": "用问号和灯泡表达家长陪孩子先想清楚问题。",
+        "elements": [
+          { "id": "question", "role": "问号气泡", "text": "问什么", "motion": "pop" },
+          { "id": "lightbulb", "role": "陪用提醒", "text": "家长在旁", "motion": "flash" },
+          { "id": "prompt", "role": "先问卡", "text": "先说思路", "motion": "draw" }
+        ]
+      }
+    },
+    {
+      "text": "读资料，不直接抄答案",
+      "keyword": "不直接抄",
+      "visualRole": "misconception",
+      "scene": "verify-answer",
+      "captionMotion": "soft-shake",
+      "highlightSync": "magnifier",
+      "visualBeats": [
+        { "frame": 8, "target": "source", "action": "slide", "label": "资料" },
+        { "frame": 32, "target": "magnifier", "action": "pulse", "label": "核对" },
+        { "frame": 54, "target": "cross", "action": "flash", "label": "别抄" }
+      ],
+      "visualPlan": {
+        "scene": "verify-answer",
+        "intent": "用放大镜扫过资料和答案，提醒 AI 输出需要复查。",
+        "elements": [
+          { "id": "source", "role": "资料来源", "text": "来源", "motion": "slide" },
+          { "id": "magnifier", "role": "核对工具", "text": "核对", "motion": "pulse" },
+          { "id": "cross", "role": "禁止照抄", "text": "不抄", "motion": "flash" }
+        ]
+      }
+    },
+    {
+      "text": "做图和英语，够用就停",
+      "keyword": "够用",
+      "visualRole": "method",
+      "scene": "time-limit",
+      "captionMotion": "emphasis-pop",
+      "highlightSync": "hourglass",
+      "visualBeats": [
+        { "frame": 8, "target": "tablet", "action": "slide", "label": "做图" },
+        { "frame": 30, "target": "hourglass", "action": "shake", "label": "限时" },
+        { "frame": 56, "target": "tablet", "action": "flash", "label": "英语" }
+      ],
+      "visualPlan": {
+        "scene": "time-limit",
+        "intent": "用沙漏和两张小卡表达工具够用就停，不把孩子困在屏幕里。",
+        "elements": [
+          { "id": "tablet", "role": "做图英语卡", "text": "做图 / 英语", "motion": "slide" },
+          { "id": "hourglass", "role": "限时器", "text": "15 分钟", "motion": "shake" }
+        ]
+      }
+    },
+    {
+      "text": "先定边界，再选 AI 工具",
+      "keyword": "边界",
+      "visualRole": "growth",
+      "scene": "kid-vs-trap",
+      "captionMotion": "soft-shake",
+      "highlightSync": "warning",
+      "visualBeats": [
+        { "frame": 6, "target": "warning", "action": "pop", "label": "风险" },
+        { "frame": 28, "target": "tablet", "action": "shake", "label": "会错" },
+        { "frame": 54, "target": "warning", "action": "flash", "label": "边界" }
+      ],
+      "visualPlan": {
+        "scene": "kid-vs-trap",
+        "intent": "用风险卡收束，强调先定边界再讨论工具名字。",
+        "elements": [
+          { "id": "warning", "role": "警示卡", "text": "边界", "motion": "pop" },
+          { "id": "tablet", "role": "错误答案平板", "text": "AI 也会错", "motion": "shake" }
+        ]
+      }
+    }
+  ]
+}

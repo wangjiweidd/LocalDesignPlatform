@@ -1,0 +1,52 @@
+{
+  "title": "孩子想用 AI 工具？",
+  "subtitle": "先立好这 5 条规矩",
+  "fps": 30,
+  "width": 1080,
+  "height": 1440,
+  "shotDurationFrames": 75,
+  "cover": {
+    "title": "孩子想用 AI？\n先别急着答应",
+    "subtitle": "先立好这 5 条规矩",
+    "titleHighlight": "答应",
+    "note": "很多时候，问题不在工具，而在边界",
+    "noteHighlight": "边界"
+  },
+  "shots": [
+    {
+      "text": "孩子想用 AI？",
+      "keyword": "AI",
+      "scene": "kid-meets-ai",
+      "captionMotion": "slide-fade",
+      "highlightSync": "robot"
+    },
+    {
+      "text": "先立好这 5 条规矩",
+      "keyword": "5 条规矩",
+      "scene": "family-rules-board",
+      "captionMotion": "emphasis-pop",
+      "highlightSync": "rules"
+    },
+    {
+      "text": "先说目的，再问思路",
+      "keyword": "思路",
+      "scene": "ask-the-purpose",
+      "captionMotion": "emphasis-pop",
+      "highlightSync": "lightbulb"
+    },
+    {
+      "text": "答案要核对，不能照抄",
+      "keyword": "核对",
+      "scene": "verify-answer",
+      "captionMotion": "emphasis-pop",
+      "highlightSync": "magnifier"
+    },
+    {
+      "text": "用完说清楚靠自己",
+      "keyword": "靠自己",
+      "scene": "kid-explains",
+      "captionMotion": "soft-shake",
+      "highlightSync": "kid"
+    }
+  ]
+}

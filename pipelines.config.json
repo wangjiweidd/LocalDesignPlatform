@@ -1,0 +1,54 @@
+[
+  {
+    "id": "xhs",
+    "name": "小红书多图信息图",
+    "description": "从文章、笔记或主题生成可发布的多页图文。",
+    "formats": ["PNG", "HTML", "标题文案", "ZIP"],
+    "accent": "#d5445f",
+    "icon": "FileImage",
+    "steps": ["读取选题资料", "确认主线角度", "拆分卡片结构", "套用视觉模板", "导出 PNG/配文"],
+    "starter": "绑定 odin-carousel-infographic 主引擎，生产线为 lines/xhs-carousel.md。输入可以是主题、文章、URL、Obsidian 目录或选题文件；设计求职类主题会自动加载 profiles/design-job.md。",
+    "skill": "odin-carousel-infographic",
+    "relatedSkills": ["lines/xhs-carousel.md", "profiles/design-job.md", "zh-writing-guardrails"],
+    "workflow": ["source", "research", "card-planning", "copy", "html", "png", "acceptance"]
+  },
+  {
+    "id": "portfolio",
+    "name": "Portfolio 页面",
+    "description": "按项目叙事生成作品集网页、分屏图和 Case Study PDF。",
+    "formats": ["HTML", "PDF", "分屏 PNG", "ZIP"],
+    "accent": "#1976d2",
+    "icon": "PanelsTopLeft",
+    "steps": ["项目资料", "页面结构", "视觉风格", "图像生成", "HTML/PDF"],
+    "starter": "输入项目背景、目标用户、内容材料、希望呈现的风格，以及最终要导出的文件。Portfolio 生产线会根据内容自动规划首页、项目背景、设计目标、流程、核心页面和结果页。",
+    "skill": "portfolio-case",
+    "relatedSkills": [],
+    "workflow": ["source", "structure", "visual", "html", "pdf"]
+  },
+  {
+    "id": "course",
+    "name": "课程 PPT",
+    "description": "把课程大纲和逐字稿转成教学型幻灯片资产包。",
+    "formats": ["PPTX", "HTML Slides", "讲稿", "PNG"],
+    "accent": "#5d6b2f",
+    "icon": "Presentation",
+    "steps": ["课程目标", "章节结构", "逐页内容", "讲稿", "PPTX 导出"],
+    "starter": "输入课程主题、目标学员、章节大纲、已有逐字稿或参考资料。也可以提供一个课程资料目录，让系统先汇总后再生成逐页内容。",
+    "skill": "course-ppt",
+    "relatedSkills": [],
+    "workflow": ["source", "outline", "slides", "speaker-notes", "pptx"]
+  },
+  {
+    "id": "video",
+    "name": "Remotion 视频动效",
+    "description": "曜宁亲子 AI 教育短视频生产线：研究 → 脚本 → 分镜 → 视觉指引 → 可预览 HTML / 封面 / 视频。",
+    "formats": ["cover.png", "frame.png", "MP4", "脚本", "分镜"],
+    "accent": "#8f4d00",
+    "icon": "Clapperboard",
+    "steps": ["选题研究", "脚本撰写", "分镜规划", "发布文案", "HTML 预览", "图像/视频渲染"],
+    "starter": "绑定 remotion-video-creator 主 skill，曜宁亲子 AI 教育账号作为视觉与文案 profile。输入一句选题或一段描述，可选材料目录；生产线会按 Remotion 工作流完成研究、脚本、分镜、预览和真实渲染。",
+    "skill": "remotion-video-creator",
+    "relatedSkills": ["yaoning-remotion-video", "yaoning-writing-assistant", "zh-writing-guardrails"],
+    "workflow": ["research", "script", "storyboard", "remotion-data", "preview", "render"]
+  }
+]

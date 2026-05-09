@@ -1,0 +1,60 @@
+{
+  "id": "2605031409-孩子想用ai-工具-先立好这-5-条规矩",
+  "name": "孩子想用AI 工具？先立好这 5 条规矩",
+  "type": "video",
+  "skill": "yaoning-remotion-video",
+  "relatedSkills": [
+    "yaoning-writing-assistant"
+  ],
+  "workflow": [
+    "research",
+    "script",
+    "storyboard",
+    "copy",
+    "preview",
+    "render"
+  ],
+  "brief": "10 秒视频",
+  "status": "rendered",
+  "createdAt": "2026-05-03T06:09:26.286Z",
+  "updatedAt": "2026-05-07T00:02:43.497Z",
+  "outputs": [
+    {
+      "type": "research",
+      "path": "source/research.md"
+    },
+    {
+      "type": "script",
+      "path": "source/script.md"
+    },
+    {
+      "type": "outline",
+      "path": "source/outline.md"
+    },
+    {
+      "type": "copy",
+      "path": "source/copy.md"
+    },
+    {
+      "type": "render-data",
+      "path": "source/render-data.json"
+    },
+    {
+      "type": "html-preview",
+      "path": "preview/index.html"
+    },
+    {
+      "type": "cover",
+      "path": "public/output/cover.png"
+    },
+    {
+      "type": "frame",
+      "path": "public/output/frame.png"
+    },
+    {
+      "type": "video",
+      "path": "public/output/demo.mp4"
+    }
+  ],
+  "hasPreview": true
+}

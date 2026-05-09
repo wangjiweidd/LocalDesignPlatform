@@ -1,0 +1,5 @@
+{
+  "name": "Course Slides",
+  "outputs": ["deck.pptx", "preview.html", "slides/*.png", "speaker-notes.md"],
+  "sections": ["opening", "chapter", "concept", "example", "exercise", "recap"]
+}

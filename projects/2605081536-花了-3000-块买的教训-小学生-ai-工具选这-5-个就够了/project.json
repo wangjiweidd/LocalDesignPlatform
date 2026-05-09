@@ -1,0 +1,63 @@
+{
+  "id": "2605081536-花了-3000-块买的教训-小学生-ai-工具选这-5-个就够了",
+  "name": "花了 3000 块买的教训！小学生 AI 工具选这 5 个就够了",
+  "type": "video",
+  "skill": "remotion-video-creator",
+  "relatedSkills": [
+    "yaoning-remotion-video",
+    "yaoning-writing-assistant",
+    "zh-writing-guardrails"
+  ],
+  "workflow": [
+    "research",
+    "script",
+    "storyboard",
+    "remotion-data",
+    "preview",
+    "render"
+  ],
+  "videoAccount": "yaoning",
+  "brief": "15 秒视频",
+  "status": "rendered",
+  "createdAt": "2026-05-08T07:36:58.467Z",
+  "updatedAt": "2026-05-08T08:34:36.962Z",
+  "outputs": [
+    {
+      "type": "research",
+      "path": "source/research.md"
+    },
+    {
+      "type": "script",
+      "path": "source/script.md"
+    },
+    {
+      "type": "outline",
+      "path": "source/outline.md"
+    },
+    {
+      "type": "copy",
+      "path": "source/copy.md"
+    },
+    {
+      "type": "render-data",
+      "path": "source/render-data.json"
+    },
+    {
+      "type": "html-preview",
+      "path": "preview/index.html"
+    },
+    {
+      "type": "cover",
+      "path": "public/output/cover.png"
+    },
+    {
+      "type": "frame",
+      "path": "public/output/frame.png"
+    },
+    {
+      "type": "video",
+      "path": "public/output/demo.mp4"
+    }
+  ],
+  "hasPreview": true
+}
