@@ -25,13 +25,6 @@ export const Caption: React.FC<{shot: ShotData; shotDuration: number}> = ({shot,
       : 1;
   const titleParts = splitKeyword(shot.text, shot.keyword);
   const captionParts = splitKeyword(shot.caption, shot.captionKeyword);
-  const keywordBeat = shot.visualBeats.find((beat) => beat.target === 'keyword');
-  const underlineStart = keywordBeat ? Math.max(0, Math.round(keywordBeat.frame + keywordBeat.offsetFrames)) : 18;
-  const underlineDuration = keywordBeat?.durationFrames || 16;
-  const underlineProgress = interpolate(frame, [underlineStart, underlineStart + underlineDuration], [0, 1], {
-    easing: Easing.bezier(0.16, 1, 0.3, 1),
-    ...clamp,
-  });
 
   return (
     <>
@@ -41,10 +34,8 @@ export const Caption: React.FC<{shot: ShotData; shotDuration: number}> = ({shot,
           left: 72,
           right: 72,
           top: 166,
-          opacity: Math.min(enter, exit),
-          transform: `translateY(${(1 - enter) * 18}px) scale(${pop})`,
-          textAlign: 'left',
-          fontSize: 64,
+          textAlign: 'center',
+          fontSize: 60,
           lineHeight: 1.12,
           fontWeight: 900,
           letterSpacing: 0,
@@ -63,8 +54,7 @@ export const Caption: React.FC<{shot: ShotData; shotDuration: number}> = ({shot,
               height: 8,
               borderRadius: 999,
               background: colors.gold,
-              clipPath: `inset(0 ${Math.max(0, 100 - underlineProgress * 100)}% 0 0)`,
-              opacity: underlineProgress,
+              opacity: 0.95,
             }}
           />
         </span>
@@ -75,7 +65,7 @@ export const Caption: React.FC<{shot: ShotData; shotDuration: number}> = ({shot,
           position: 'absolute',
           left: 108,
           right: 108,
-          bottom: 128,
+          bottom: 168,
           minHeight: 156,
           padding: '30px 44px 30px 124px',
           borderRadius: 34,
@@ -83,7 +73,7 @@ export const Caption: React.FC<{shot: ShotData; shotDuration: number}> = ({shot,
           border: `2px solid rgba(241, 196, 126, 0.7)`,
           boxShadow: '0 18px 44px rgba(176, 110, 38, 0.14)',
           opacity: Math.min(enter, exit),
-          transform: `translateY(${(1 - enter) * 18}px) translateX(${shake}px)`,
+          transform: `translateY(${(1 - enter) * 26}px) translateX(${shake}px) scale(${pop})`,
           color: colors.ink,
           fontSize: 46,
           lineHeight: 1.28,

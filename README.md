@@ -57,3 +57,5 @@ top title -> center animated visual -> bottom caption card
 ```
 
 Use `shot.text` and `shot.keyword` for the top title. Use `shot.caption` and `shot.captionKeyword` for the bottom subtitle/caption card. Do not move subtitles into the top title area.
+
+The top title is centered and persistent for the whole shot. It should not use enter/exit motion. The bottom caption card is the only text layer that follows the script timing with enter/exit motion.
