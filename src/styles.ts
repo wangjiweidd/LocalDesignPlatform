@@ -24,6 +24,11 @@ export const stage: CSSProperties = {
   overflow: 'hidden',
 };
 
+export const coverStage: CSSProperties = {
+  ...stage,
+  height: 1440,
+};
+
 export const shadow = '0 16px 42px rgba(176, 110, 38, 0.2)';
 
 export const cardBase: CSSProperties = {

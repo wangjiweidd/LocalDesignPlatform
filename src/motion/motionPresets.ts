@@ -59,13 +59,11 @@ export const motionStyleForBeat = (beat: VisualBeat, frame: number): CSSProperti
       };
     case 'soft-pop':
       return {
-        transform: `scale(${0.94 + enter * 0.06 + wave * 0.018 * amount})`,
-        opacity: 0.72 + enter * 0.28,
+        transform: `scale(${1 + wave * 0.028 * amount})`,
       };
     case 'gentle-slide':
       return {
-        transform: `translateY(${(1 - enter) * 34 * amount}px)`,
-        opacity: enter,
+        transform: `translateY(${-wave * 18 * amount}px)`,
       };
     case 'attention-flash':
       return {
@@ -74,8 +72,8 @@ export const motionStyleForBeat = (beat: VisualBeat, frame: number): CSSProperti
       };
     case 'hand-drawn-check':
       return {
-        clipPath: `inset(0 ${Math.max(0, 100 - enter * 100)}% 0 0)`,
-        opacity: enter,
+        filter: `brightness(${1 + wave * 0.12})`,
+        transform: `scale(${1 + wave * 0.018 * amount})`,
       };
     case 'scan-sweep':
       return {
@@ -89,8 +87,7 @@ export const motionStyleForBeat = (beat: VisualBeat, frame: number): CSSProperti
       };
     case 'question-bob':
       return {
-        transform: `translateY(${-wave * 12 * amount}px) scale(${0.96 + enter * 0.04})`,
-        opacity: enter,
+        transform: `translateY(${-wave * 12 * amount}px) scale(${1 + wave * 0.018 * amount})`,
       };
     case 'lightbulb-glow':
       return {
@@ -106,10 +103,7 @@ export const motionStyleForBeat = (beat: VisualBeat, frame: number): CSSProperti
         filter: `brightness(${1 + wave * 0.12})`,
       };
     case 'keyword-underline':
-      return {
-        clipPath: `inset(0 ${Math.max(0, 100 - enter * 100)}% 0 0)`,
-        opacity: enter,
-      };
+      return {};
   }
 };
 

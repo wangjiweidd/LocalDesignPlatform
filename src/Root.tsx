@@ -19,7 +19,7 @@ export const RemotionRoot: React.FC = () => {
         durationInFrames={90}
         fps={demoScript.fps}
         width={demoScript.width}
-        height={demoScript.height}
+        height={1440}
       />
     </>
   );

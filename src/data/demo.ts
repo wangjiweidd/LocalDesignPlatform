@@ -1,22 +1,22 @@
 import type {ScriptData} from './types';
 
 export const demoScript: ScriptData = {
-  title: '孩子想用 AI？',
-  subtitle: '先定边界，再选工具',
+  title: '2026 AI 学习工具',
+  subtitle: '别先买会员',
   fps: 30,
   width: 1080,
   height: 1920,
   shotDurationFrames: 75,
   cover: {
-    title: '孩子想用 AI？\n先别急着买会员',
-    subtitle: '先定边界，再选工具',
+    title: '2026 AI 学习工具\n别先急着买会员',
+    subtitle: '先看场景，再看工具',
     titleHighlight: '买会员',
-    note: '问题不在工具，而在边界',
-    noteHighlight: '边界',
+    note: '先看孩子怎么用，再决定买不买',
+    noteHighlight: '怎么用',
   },
   shots: [
     {
-      text: '孩子想用 AI？先别买会员',
+      text: 'AI 学习工具，别先买会员',
       keyword: '买会员',
       scene: 'kid-meets-ai',
       captionMotion: 'slide-fade',
@@ -57,8 +57,8 @@ export const demoScript: ScriptData = {
       ],
     },
     {
-      text: '先留三个真实使用场景',
-      keyword: '三个',
+      text: '先看孩子有没有真实场景',
+      keyword: '真实场景',
       scene: 'family-rules-board',
       captionMotion: 'emphasis-pop',
       highlightSync: 'rules',
@@ -88,8 +88,8 @@ export const demoScript: ScriptData = {
       ],
     },
     {
-      text: '问问题前，先说自己想法',
-      keyword: '自己想法',
+      text: '问问题，要先说清目的',
+      keyword: '目的',
       scene: 'ask-the-purpose',
       captionMotion: 'emphasis-pop',
       highlightSync: 'lightbulb',
@@ -119,7 +119,7 @@ export const demoScript: ScriptData = {
       ],
     },
     {
-      text: '拿到答案，一定核对来源',
+      text: '拿到答案，必须核对来源',
       keyword: '核对',
       scene: 'verify-answer',
       captionMotion: 'emphasis-pop',
@@ -150,7 +150,7 @@ export const demoScript: ScriptData = {
       ],
     },
     {
-      text: '做图和英语，够用就停',
+      text: '练口语做图，够用就停',
       keyword: '够用',
       scene: 'time-limit',
       captionMotion: 'soft-shake',
@@ -181,8 +181,8 @@ export const demoScript: ScriptData = {
       ],
     },
     {
-      text: '先定边界，再选 AI 工具',
-      keyword: '边界',
+      text: '先试一周，再决定付费',
+      keyword: '付费',
       scene: 'kid-vs-trap',
       captionMotion: 'soft-shake',
       highlightSync: 'warning',
@@ -207,7 +207,7 @@ export const demoScript: ScriptData = {
           offsetFrames: 2,
           durationFrames: 22,
           intensity: 'medium',
-          label: '边界',
+          label: '付费',
         },
       ],
     },

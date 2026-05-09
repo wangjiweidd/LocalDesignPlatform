@@ -1,5 +1,5 @@
 import type {CSSProperties, ReactNode} from 'react';
-import {useCurrentFrame} from 'remotion';
+import {Img, staticFile, useCurrentFrame} from 'remotion';
 import type {ShotData} from '../data/types';
 import {firstBeatStyle} from '../motion/motionPresets';
 import {cardBase, colors} from '../styles';
@@ -34,14 +34,19 @@ const SceneShell: React.FC<{children: ReactNode}> = ({children}) => (
   <div
     style={{
       position: 'absolute',
-      left: 90,
-      right: 90,
-      top: 330,
-      height: 860,
-      ...cardBase,
-      borderRadius: 42,
+      left: 86,
+      right: 86,
+      top: 430,
+      height: 850,
+      borderRadius: 38,
+      background: 'linear-gradient(180deg, rgba(255, 253, 247, 0.92) 0%, rgba(255, 248, 234, 0.82) 100%)',
+      border: `2.5px solid ${colors.border}`,
+      boxShadow: '0 22px 46px rgba(176, 110, 38, 0.13)',
+      overflow: 'hidden',
     }}
   >
+    <div style={{position: 'absolute', left: -110, top: -72, width: 280, height: 280, borderRadius: 999, background: 'rgba(255,181,46,0.12)'}} />
+    <div style={{position: 'absolute', right: -120, bottom: -92, width: 300, height: 300, borderRadius: 999, background: 'rgba(111,98,168,0.08)'}} />
     {children}
   </div>
 );
@@ -53,11 +58,11 @@ const Label: React.FC<{children: ReactNode; style?: CSSProperties}> = ({children
       padding: '12px 22px',
       borderRadius: 999,
       background: '#fff',
-      border: `2px solid ${colors.ink}`,
+      border: `2.5px solid ${colors.ink}`,
       color: colors.textSoft,
       fontSize: 28,
       fontWeight: 800,
-      boxShadow: '0 8px 20px rgba(176, 110, 38, 0.14)',
+      boxShadow: '0 8px 20px rgba(176, 110, 38, 0.12)',
       ...style,
     }}
   >
@@ -65,61 +70,51 @@ const Label: React.FC<{children: ReactNode; style?: CSSProperties}> = ({children
   </div>
 );
 
-const DoudouRobot: React.FC<{style?: CSSProperties}> = ({style}) => (
-  <div
-    style={{
-      position: 'absolute',
-      width: 260,
-      height: 330,
-      borderRadius: 126,
-      background: 'linear-gradient(180deg, #FFFFFF 0%, #F6FBFF 100%)',
-      border: `5px solid ${colors.ink}`,
-      boxShadow: '0 18px 0 rgba(31,20,8,0.08)',
-      ...style,
-    }}
-  >
+const GeneratedAsset: React.FC<{name: string; style?: CSSProperties; imgStyle?: CSSProperties}> = ({
+  name,
+  style,
+  imgStyle,
+}) => (
+  <div style={{position: 'absolute', ...style}}>
+    <Img
+      src={staticFile(`assets/generated/${name}`)}
+      style={{
+        width: '100%',
+        height: '100%',
+        objectFit: 'contain',
+        filter: 'drop-shadow(0 18px 26px rgba(176, 110, 38, 0.14))',
+        ...imgStyle,
+      }}
+    />
+  </div>
+);
+
+export const DoudouRobot: React.FC<{style?: CSSProperties; scale?: number}> = ({style, scale = 1}) => {
+  const {transform, ...restStyle} = style || {};
+
+  return (
     <div
       style={{
         position: 'absolute',
-        left: 43,
-        top: 66,
-        width: 174,
-        height: 102,
-        borderRadius: 46,
-        background: '#17120E',
+        width: 360,
+        height: 540,
+        transform: `scale(${scale}) ${transform || ''}`.trim(),
+        transformOrigin: 'center bottom',
+        ...restStyle,
       }}
     >
-      <div style={{position: 'absolute', left: 42, top: 34, width: 26, height: 20, borderRadius: 20, background: colors.cyan}} />
-      <div style={{position: 'absolute', right: 42, top: 34, width: 26, height: 20, borderRadius: 20, background: colors.cyan}} />
-      <div
+      <Img
+        src={staticFile('assets/generated/doudou-robot.png')}
         style={{
-          position: 'absolute',
-          left: 62,
-          top: 63,
-          width: 50,
-          height: 20,
-          borderBottom: `5px solid ${colors.cyan}`,
-          borderRadius: 999,
+          width: '100%',
+          height: '100%',
+          objectFit: 'contain',
+          filter: 'drop-shadow(0 18px 26px rgba(176, 110, 38, 0.18))',
         }}
       />
     </div>
-    <div style={{position: 'absolute', left: 122, top: -38, width: 16, height: 52, background: colors.ink, borderRadius: 999}} />
-    <div
-      style={{
-        position: 'absolute',
-        left: 107,
-        top: -64,
-        width: 48,
-        height: 48,
-        background: colors.gold,
-        border: `4px solid ${colors.ink}`,
-        transform: 'rotate(18deg)',
-        clipPath: 'polygon(50% 0%, 62% 35%, 100% 50%, 62% 65%, 50% 100%, 38% 65%, 0 50%, 38% 35%)',
-      }}
-    />
-    <div style={{position: 'absolute', left: 58, bottom: 50, width: 144, height: 34, borderRadius: 999, background: '#FFE2ED'}} />
-  </div>
-);
+  );
+};
 
 const Tablet: React.FC<{style?: CSSProperties; children?: ReactNode}> = ({style, children}) => (
   <div
@@ -128,9 +123,9 @@ const Tablet: React.FC<{style?: CSSProperties; children?: ReactNode}> = ({style,
       width: 300,
       height: 210,
       borderRadius: 34,
-      border: `5px solid ${colors.ink}`,
-      background: '#fff',
-      boxShadow: '10px 12px 0 rgba(31,20,8,0.08)',
+      border: `4px solid ${colors.ink}`,
+      background: 'linear-gradient(180deg, #FFFFFF 0%, #FFF8EE 100%)',
+      boxShadow: '0 16px 28px rgba(176, 110, 38, 0.14)',
       ...style,
     }}
   >
@@ -140,15 +135,16 @@ const Tablet: React.FC<{style?: CSSProperties; children?: ReactNode}> = ({style,
 
 const RobotScene: React.FC<{styleFor: (target: string) => CSSProperties}> = ({styleFor}) => (
   <SceneShell>
-    <DoudouRobot style={{left: 156, top: 260, ...styleFor('robot')}} />
-    <Tablet style={{right: 130, top: 305, ...styleFor('tablet')}}>
-      <div style={{fontSize: 34, fontWeight: 900, color: colors.orange, padding: '44px 30px 10px'}}>会员入口</div>
-      <div style={{margin: '18px 30px', height: 18, borderRadius: 999, background: '#FFE3BF'}} />
-      <div style={{margin: '18px 30px', height: 18, borderRadius: 999, background: '#E8DDFB'}} />
-    </Tablet>
-    <Label style={{right: 155, top: 190, ...styleFor('bubble')}}>先等等</Label>
-    <Cloud left={72} top={92} />
-    <Cloud left={650} top={92} scale={0.82} />
+    <div style={{position: 'absolute', left: 92, bottom: 116, width: 388, height: 48, borderRadius: '50%', background: 'rgba(224,122,20,0.12)'}} />
+    <DoudouRobot scale={0.78} style={{left: 105, top: 190, ...styleFor('robot')}} />
+    <div style={{position: 'absolute', right: 66, top: 286, width: 408, height: 310, ...styleFor('tablet')}}>
+      <GeneratedAsset name="membership-card.png" style={{inset: 0}} />
+      <div style={{position: 'absolute', left: 74, top: 70, fontSize: 32, fontWeight: 900, color: colors.textSoft}}>会员入口</div>
+      <div style={{position: 'absolute', left: 172, bottom: 48, fontSize: 30, fontWeight: 900, color: '#fff'}}>¥ 99</div>
+    </div>
+    <Label style={{right: 132, top: 186, background: '#FFF8EA', ...styleFor('bubble')}}>先等等</Label>
+    <Cloud left={78} top={90} />
+    <Cloud left={676} top={92} scale={0.82} />
   </SceneShell>
 );
 
@@ -157,50 +153,54 @@ const RulesScene: React.FC<{styleFor: (target: string) => CSSProperties}> = ({st
     <div
       style={{
         position: 'absolute',
-        left: 180,
-        top: 150,
-        width: 540,
-        height: 500,
-        ...cardBase,
-        padding: 42,
+        left: 246,
+        top: 68,
+        width: 414,
+        height: 610,
         ...styleFor('rules'),
       }}
     >
-      <div style={{fontSize: 42, fontWeight: 900, color: colors.orange, marginBottom: 32}}>家庭 AI 规则</div>
+      <GeneratedAsset name="rules-board.png" style={{inset: 0}} />
+      <div style={{position: 'absolute', left: 88, top: 150, fontSize: 28, fontWeight: 900, color: '#fff'}}>家庭 AI 规则</div>
       {['问前先想', '答案要核对', '够用就停'].map((item, index) => (
-        <div key={item} style={{display: 'flex', alignItems: 'center', gap: 18, marginBottom: 28, ...styleFor(index === 1 ? 'rules-list' : 'checklist')}}>
-          <span style={{width: 34, height: 34, borderRadius: 999, background: colors.gold, border: `3px solid ${colors.ink}`}} />
-          <span style={{fontSize: 38, fontWeight: 800}}>{item}</span>
+        <div
+          key={item}
+          style={{
+            position: 'absolute',
+            left: 154,
+            top: 252 + index * 84,
+            fontSize: 27,
+            fontWeight: 900,
+            color: colors.ink,
+            ...styleFor(index === 1 ? 'rules-list' : 'checklist'),
+          }}
+        >
+          {item}
         </div>
       ))}
     </div>
-    <Label style={{left: 270, bottom: 116, background: '#FFF1D7', ...styleFor('boundary')}}>边界先定</Label>
+    <Label style={{left: 286, bottom: 104, background: '#FFF1D7', ...styleFor('boundary')}}>边界先定</Label>
   </SceneShell>
 );
 
 const PurposeScene: React.FC<{styleFor: (target: string) => CSSProperties}> = ({styleFor}) => (
   <SceneShell>
-    <div
+    <GeneratedAsset
+      name="purpose-target.png"
       style={{
-        position: 'absolute',
-        left: 338,
-        top: 155,
-        width: 224,
-        height: 276,
-        borderRadius: '110px 110px 48px 48px',
-        background: colors.gold,
-        border: `5px solid ${colors.ink}`,
+        left: 326,
+        top: 102,
+        width: 248,
+        height: 248,
         ...styleFor('lightbulb'),
       }}
-    >
-      <div style={{position: 'absolute', left: 72, bottom: -64, width: 80, height: 82, borderRadius: 18, background: colors.purple, border: `5px solid ${colors.ink}`}} />
-    </div>
-    <Label style={{left: 118, top: 215, fontSize: 72, color: colors.purple, ...styleFor('question')}}>?</Label>
-    <Label style={{right: 124, top: 218, fontSize: 72, color: colors.purple, ...styleFor('question')}}>?</Label>
-    <div style={{position: 'absolute', left: 240, bottom: 126, width: 420, ...cardBase, padding: 32, ...styleFor('prompt')}}>
+    />
+    <Label style={{left: 134, top: 224, fontSize: 64, color: colors.purple, ...styleFor('question')}}>?</Label>
+    <Label style={{right: 140, top: 226, fontSize: 64, color: colors.purple, ...styleFor('question')}}>?</Label>
+    <div style={{position: 'absolute', left: 196, bottom: 112, width: 510, ...cardBase, border: `4px solid ${colors.ink}`, padding: 34, ...styleFor('prompt')}}>
       <div style={{fontSize: 40, fontWeight: 900, color: colors.orange}}>先说自己的想法</div>
-      <div style={{height: 18, borderRadius: 999, background: '#FFE4BF', marginTop: 22}} />
-      <div style={{height: 18, width: 260, borderRadius: 999, background: '#E8DDFB', marginTop: 16}} />
+      <div style={{height: 18, borderRadius: 999, background: '#FFE4BF', marginTop: 24}} />
+      <div style={{height: 18, width: 314, borderRadius: 999, background: '#E8DDFB', marginTop: 16}} />
     </div>
   </SceneShell>
 );
@@ -213,21 +213,16 @@ const VerifyScene: React.FC<{styleFor: (target: string) => CSSProperties}> = ({s
       <div style={{margin: '0 34px 18px', height: 20, background: '#E8DDFB', borderRadius: 999}} />
       <div style={{margin: '0 34px', height: 20, background: '#DDF3E2', borderRadius: 999}} />
     </Tablet>
-    <div
+    <GeneratedAsset
+      name="magnifier.png"
       style={{
-        position: 'absolute',
-        left: 536,
-        top: 420,
-        width: 160,
-        height: 160,
-        borderRadius: 999,
-        border: `14px solid ${colors.gold}`,
-        boxShadow: `0 0 0 5px ${colors.ink}`,
+        left: 524,
+        top: 398,
+        width: 196,
+        height: 196,
         ...styleFor('magnifier'),
       }}
-    >
-      <div style={{position: 'absolute', right: -66, bottom: -44, width: 102, height: 18, borderRadius: 999, background: colors.ink, transform: 'rotate(38deg)'}} />
-    </div>
+    />
     <Label style={{left: 190, bottom: 122, color: colors.green, ...styleFor('check')}}>✓ 看来源</Label>
     <Label style={{right: 168, bottom: 122, color: colors.orange, ...styleFor('cross')}}>× 不照抄</Label>
   </SceneShell>
@@ -235,15 +230,15 @@ const VerifyScene: React.FC<{styleFor: (target: string) => CSSProperties}> = ({s
 
 const TimeLimitScene: React.FC<{styleFor: (target: string) => CSSProperties}> = ({styleFor}) => (
   <SceneShell>
-    <Tablet style={{left: 142, top: 248, ...styleFor('tablet')}}>
+    <Tablet style={{left: 126, top: 246, width: 330, height: 238, ...styleFor('tablet')}}>
       <div style={{fontSize: 42, fontWeight: 900, color: colors.purple, padding: 42}}>做图</div>
       <div style={{fontSize: 34, fontWeight: 800, color: colors.orange, padding: '0 42px'}}>英语练习</div>
     </Tablet>
     <div
       style={{
         position: 'absolute',
-        right: 190,
-        top: 180,
+        right: 174,
+        top: 168,
         width: 230,
         height: 400,
         ...styleFor('hourglass'),
@@ -253,7 +248,7 @@ const TimeLimitScene: React.FC<{styleFor: (target: string) => CSSProperties}> = 
       <div style={{position: 'absolute', left: 45, right: 45, top: 56, height: 120, background: colors.gold, clipPath: 'polygon(0 0, 100% 0, 50% 100%)'}} />
       <div style={{position: 'absolute', left: 45, right: 45, bottom: 56, height: 120, background: colors.gold, clipPath: 'polygon(50% 0, 100% 100%, 0 100%)'}} />
     </div>
-    <Label style={{left: 342, bottom: 130, ...styleFor('timer')}}>15 分钟</Label>
+    <Label style={{left: 342, bottom: 112, background: '#FFF8EA', ...styleFor('timer')}}>15 分钟</Label>
   </SceneShell>
 );
 

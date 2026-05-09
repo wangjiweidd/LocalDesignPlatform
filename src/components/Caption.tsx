@@ -1,6 +1,5 @@
 import {Easing, interpolate, useCurrentFrame} from 'remotion';
 import type {ShotData} from '../data/types';
-import {firstBeatStyle} from '../motion/motionPresets';
 import {colors} from '../styles';
 
 const clamp = {
@@ -24,8 +23,14 @@ export const Caption: React.FC<{shot: ShotData; shotDuration: number}> = ({shot,
     shot.captionMotion === 'emphasis-pop'
       ? 1 + Math.sin(interpolate(frame, [18, 32], [0, Math.PI], clamp)) * 0.03
       : 1;
-  const keywordStyle = firstBeatStyle(shot.visualBeats, 'keyword', frame);
   const parts = splitKeyword(shot.text, shot.keyword);
+  const keywordBeat = shot.visualBeats.find((beat) => beat.target === 'keyword');
+  const underlineStart = keywordBeat ? Math.max(0, Math.round(keywordBeat.frame + keywordBeat.offsetFrames)) : 18;
+  const underlineDuration = keywordBeat?.durationFrames || 16;
+  const underlineProgress = interpolate(frame, [underlineStart, underlineStart + underlineDuration], [0, 1], {
+    easing: Easing.bezier(0.16, 1, 0.3, 1),
+    ...clamp,
+  });
 
   return (
     <div
@@ -33,12 +38,12 @@ export const Caption: React.FC<{shot: ShotData; shotDuration: number}> = ({shot,
         position: 'absolute',
         left: 72,
         right: 72,
-        bottom: 230,
+        top: 170,
         opacity: Math.min(enter, exit),
-        transform: `translateY(${(1 - enter) * 34}px) translateX(${shake}px) scale(${pop})`,
+        transform: `translateY(${(1 - enter) * 22}px) translateX(${shake}px) scale(${pop})`,
         textAlign: 'left',
-        fontSize: 78,
-        lineHeight: 1.12,
+        fontSize: 74,
+        lineHeight: 1.1,
         fontWeight: 900,
         letterSpacing: 0,
         color: colors.ink,
@@ -56,7 +61,8 @@ export const Caption: React.FC<{shot: ShotData; shotDuration: number}> = ({shot,
             height: 9,
             borderRadius: 999,
             background: colors.gold,
-            ...keywordStyle,
+            clipPath: `inset(0 ${Math.max(0, 100 - underlineProgress * 100)}% 0 0)`,
+            opacity: underlineProgress,
           }}
         />
       </span>
