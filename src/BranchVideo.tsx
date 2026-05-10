@@ -27,7 +27,54 @@ export const BranchVideo: React.FC = () => {
           <ShotScene shot={shot} index={index} total={shots.length} shotDuration={shotDurationFrames} />
         </Sequence>
       ))}
+      <VideoHeader />
     </AbsoluteFill>
+  );
+};
+
+const VideoHeader: React.FC = () => {
+  const titleParts = splitKeyword(demoScript.title, demoScript.subtitle);
+
+  return (
+    <div
+      style={{
+        position: 'absolute',
+        left: 72,
+        right: 72,
+        top: 150,
+        textAlign: 'center',
+        color: colors.ink,
+      }}
+    >
+      <div
+        style={{
+          fontSize: 88,
+          lineHeight: 1.12,
+          fontWeight: 900,
+          letterSpacing: 0,
+        }}
+      >
+        {titleParts.before}
+        <span style={{color: colors.orange}}>{titleParts.keyword}</span>
+        {titleParts.after}
+      </div>
+      <div
+        style={{
+          display: 'inline-block',
+          marginTop: 18,
+          padding: '9px 22px',
+          borderRadius: 999,
+          border: `2px solid ${colors.border}`,
+          background: '#FFF9EA',
+          color: colors.textSoft,
+          fontSize: 34,
+          lineHeight: 1.1,
+          fontWeight: 900,
+        }}
+      >
+        {demoScript.subtitle}
+      </div>
+    </div>
   );
 };
 

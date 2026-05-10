@@ -17,74 +17,57 @@ export const Caption: React.FC<{shot: ShotData; shotDuration: number}> = ({shot,
     easing: Easing.in(Easing.cubic),
     ...clamp,
   });
-  const shake =
-    shot.captionMotion === 'soft-shake' ? Math.sin(frame * 0.7) * interpolate(frame, [14, 24], [0, 1], clamp) * 3 : 0;
   const pop =
     shot.captionMotion === 'emphasis-pop'
       ? 1 + Math.sin(interpolate(frame, [18, 32], [0, Math.PI], clamp)) * 0.03
       : 1;
-  const titleParts = splitKeyword(shot.text, shot.keyword);
   const captionParts = splitKeyword(shot.caption, shot.captionKeyword);
+  const revealChars = Math.floor(interpolate(frame, [8, 34], [0, shot.caption.length], clamp));
+
+  return (
+    <div
+      style={{
+        position: 'absolute',
+        left: 108,
+        right: 108,
+        bottom: 395,
+        minHeight: 146,
+        padding: '28px 42px 28px 116px',
+        borderRadius: 34,
+        background: 'rgba(255, 253, 247, 0.92)',
+        border: `2px solid rgba(241, 196, 126, 0.7)`,
+        boxShadow: '0 18px 44px rgba(176, 110, 38, 0.14)',
+        opacity: Math.min(enter, exit),
+        transform: `translateY(${(1 - enter) * 26}px) scale(${pop})`,
+        color: colors.ink,
+        fontSize: 44,
+        lineHeight: 1.28,
+        fontWeight: 800,
+        letterSpacing: 0,
+      }}
+    >
+      <BulbBadge />
+      <RevealText parts={captionParts} revealChars={revealChars} />
+    </div>
+  );
+};
+
+const RevealText: React.FC<{
+  parts: ReturnType<typeof splitKeyword>;
+  revealChars: number;
+}> = ({parts, revealChars}) => {
+  const beforeCount = parts.before.length;
+  const keywordCount = parts.keyword.length;
+  const visibleBefore = Math.min(revealChars, beforeCount);
+  const visibleKeyword = Math.min(Math.max(revealChars - beforeCount, 0), keywordCount);
+  const visibleAfter = Math.max(revealChars - beforeCount - keywordCount, 0);
 
   return (
     <>
-      <div
-        style={{
-          position: 'absolute',
-          left: 72,
-          right: 72,
-          top: 166,
-          textAlign: 'center',
-          fontSize: 60,
-          lineHeight: 1.12,
-          fontWeight: 900,
-          letterSpacing: 0,
-          color: colors.ink,
-        }}
-      >
-        {titleParts.before}
-        <span style={{position: 'relative', color: colors.orange, display: 'inline-block'}}>
-          {titleParts.keyword}
-          <span
-            style={{
-              position: 'absolute',
-              left: 0,
-              right: 0,
-              bottom: -8,
-              height: 8,
-              borderRadius: 999,
-              background: colors.gold,
-              opacity: 0.95,
-            }}
-          />
-        </span>
-        {titleParts.after}
-      </div>
-      <div
-        style={{
-          position: 'absolute',
-          left: 108,
-          right: 108,
-          bottom: 168,
-          minHeight: 156,
-          padding: '30px 44px 30px 124px',
-          borderRadius: 34,
-          background: 'rgba(255, 253, 247, 0.92)',
-          border: `2px solid rgba(241, 196, 126, 0.7)`,
-          boxShadow: '0 18px 44px rgba(176, 110, 38, 0.14)',
-          opacity: Math.min(enter, exit),
-          transform: `translateY(${(1 - enter) * 26}px) translateX(${shake}px) scale(${pop})`,
-          color: colors.ink,
-          fontSize: 46,
-          lineHeight: 1.28,
-          fontWeight: 800,
-          letterSpacing: 0,
-        }}
-      >
-        <BulbBadge />
-        {captionParts.before}
+      <span>{parts.before.slice(0, visibleBefore)}</span>
+      {visibleKeyword > 0 ? (
         <span style={{position: 'relative', color: colors.orange, fontWeight: 900, display: 'inline-block'}}>
-          {captionParts.keyword}
+          {parts.keyword.slice(0, visibleKeyword)}
           <span
             style={{
               position: 'absolute',
@@ -98,8 +81,8 @@ export const Caption: React.FC<{shot: ShotData; shotDuration: number}> = ({shot,
             }}
           />
         </span>
-        {captionParts.after}
-      </div>
+      ) : null}
+      <span>{parts.after.slice(0, visibleAfter)}</span>
     </>
   );
 };

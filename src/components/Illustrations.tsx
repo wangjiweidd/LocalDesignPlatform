@@ -1,5 +1,5 @@
 import type {CSSProperties, ReactNode} from 'react';
-import {Img, staticFile, useCurrentFrame} from 'remotion';
+import {Img, interpolate, spring, staticFile, useCurrentFrame} from 'remotion';
 import type {ShotData} from '../data/types';
 import {firstBeatStyle} from '../motion/motionPresets';
 import {cardBase, colors} from '../styles';
@@ -30,26 +30,37 @@ export const SceneIllustration: React.FC<Props> = ({shot}) => {
   }
 };
 
-const SceneShell: React.FC<{children: ReactNode}> = ({children}) => (
-  <div
-    style={{
-      position: 'absolute',
-      left: 86,
-      right: 86,
-      top: 430,
-      height: 850,
-      borderRadius: 38,
-      background: 'linear-gradient(180deg, rgba(255, 253, 247, 0.92) 0%, rgba(255, 248, 234, 0.82) 100%)',
-      border: `2.5px solid ${colors.border}`,
-      boxShadow: '0 22px 46px rgba(176, 110, 38, 0.13)',
-      overflow: 'hidden',
-    }}
-  >
-    <div style={{position: 'absolute', left: -110, top: -72, width: 280, height: 280, borderRadius: 999, background: 'rgba(255,181,46,0.12)'}} />
-    <div style={{position: 'absolute', right: -120, bottom: -92, width: 300, height: 300, borderRadius: 999, background: 'rgba(111,98,168,0.08)'}} />
-    {children}
-  </div>
-);
+const SceneShell: React.FC<{children: ReactNode}> = ({children}) => {
+  const frame = useCurrentFrame();
+  const enter = spring({
+    frame,
+    fps: 30,
+    config: {
+      damping: 18,
+      stiffness: 88,
+      mass: 0.9,
+    },
+  });
+  const y = interpolate(enter, [0, 1], [28, 0]);
+  const floatY = Math.sin(frame / 24) * 3;
+
+  return (
+    <div
+      style={{
+        position: 'absolute',
+        left: 86,
+        right: 86,
+        top: 378,
+        height: 760,
+        opacity: enter,
+        transform: `translateY(${y + floatY}px)`,
+        overflow: 'visible',
+      }}
+    >
+      {children}
+    </div>
+  );
+};
 
 const Label: React.FC<{children: ReactNode; style?: CSSProperties}> = ({children, style}) => (
   <div
@@ -135,16 +146,34 @@ const Tablet: React.FC<{style?: CSSProperties; children?: ReactNode}> = ({style,
 
 const RobotScene: React.FC<{styleFor: (target: string) => CSSProperties}> = ({styleFor}) => (
   <SceneShell>
-    <div style={{position: 'absolute', left: 92, bottom: 116, width: 388, height: 48, borderRadius: '50%', background: 'rgba(224,122,20,0.12)'}} />
-    <DoudouRobot scale={0.78} style={{left: 105, top: 190, ...styleFor('robot')}} />
-    <div style={{position: 'absolute', right: 66, top: 286, width: 408, height: 310, ...styleFor('tablet')}}>
-      <GeneratedAsset name="membership-card.png" style={{inset: 0}} />
-      <div style={{position: 'absolute', left: 74, top: 70, fontSize: 32, fontWeight: 900, color: colors.textSoft}}>会员入口</div>
-      <div style={{position: 'absolute', left: 172, bottom: 48, fontSize: 30, fontWeight: 900, color: '#fff'}}>¥ 99</div>
+    <div style={{position: 'absolute', left: 92, bottom: 118, width: 392, height: 50, borderRadius: '50%', background: 'rgba(224,122,20,0.12)'}} />
+    <PlantPot style={{left: 132, top: 150, width: 350, height: 420}} />
+    <DoudouRobot scale={0.45} style={{left: 418, top: 338, ...styleFor('robot')}} />
+    <div
+      style={{
+        position: 'absolute',
+        right: 82,
+        top: 150,
+        width: 360,
+        height: 430,
+        borderRadius: 34,
+        background: '#FFFDF7',
+        border: `5px solid ${colors.ink}`,
+        boxShadow: '12px 14px 0 rgba(224, 122, 20, 0.14)',
+        ...styleFor('tablet'),
+      }}
+    >
+      <PhotoIcon style={{left: 44, top: 42}} />
+      <div style={{position: 'absolute', left: 44, top: 192, fontSize: 34, lineHeight: 1.18, fontWeight: 900, color: colors.textSoft}}>
+        叶子颜色
+        <br />
+        新芽变化
+      </div>
+      <div style={{position: 'absolute', left: 44, right: 44, bottom: 52, height: 18, borderRadius: 999, background: '#DDF3E2'}} />
+      <div style={{position: 'absolute', left: 44, width: 172, bottom: 24, height: 18, borderRadius: 999, background: '#FFE4BF'}} />
     </div>
-    <Label style={{right: 132, top: 186, background: '#FFF8EA', ...styleFor('bubble')}}>先等等</Label>
-    <Cloud left={78} top={90} />
-    <Cloud left={676} top={92} scale={0.82} />
+    <Label style={{left: 118, top: 92, background: '#FFF8EA'}}>先观察</Label>
+    <Label style={{right: 126, bottom: 126, background: '#FFF1D7', ...styleFor('bubble')}}>拍下来</Label>
   </SceneShell>
 );
 
@@ -153,78 +182,94 @@ const RulesScene: React.FC<{styleFor: (target: string) => CSSProperties}> = ({st
     <div
       style={{
         position: 'absolute',
-        left: 246,
-        top: 68,
-        width: 414,
-        height: 610,
+        left: 184,
+        top: 88,
+        width: 540,
+        height: 520,
+        ...cardBase,
+        background: '#FFFDF7',
+        border: `5px solid ${colors.ink}`,
         ...styleFor('rules'),
       }}
     >
-      <GeneratedAsset name="rules-board.png" style={{inset: 0}} />
-      <div style={{position: 'absolute', left: 88, top: 150, fontSize: 28, fontWeight: 900, color: '#fff'}}>家庭 AI 规则</div>
-      {['问前先想', '答案要核对', '够用就停'].map((item, index) => (
+      <div style={{position: 'absolute', left: 44, top: 38, fontSize: 44, fontWeight: 900, color: colors.orange}}>观察卡</div>
+      <div style={{position: 'absolute', right: 42, top: 34, width: 110, height: 94, borderRadius: 22, background: '#DDF3E2', border: `4px solid ${colors.ink}`}}>
+        <Leaf style={{left: 34, top: 18, width: 42, height: 58}} />
+      </div>
+      {['照片', '日期', '发现', '追问'].map((item, index) => (
         <div
           key={item}
           style={{
             position: 'absolute',
-            left: 154,
-            top: 252 + index * 84,
-            fontSize: 27,
+            left: 58,
+            top: 158 + index * 72,
+            fontSize: 34,
             fontWeight: 900,
             color: colors.ink,
-            ...styleFor(index === 1 ? 'rules-list' : 'checklist'),
+          }}
+        >
+          <span style={{color: colors.green, marginRight: 18}}>✓</span>
+          {item}
+        </div>
+      ))}
+    </div>
+    <Label style={{left: 286, bottom: 108, background: '#FFF1D7', ...styleFor('boundary')}}>整理完成</Label>
+  </SceneShell>
+);
+
+const PurposeScene: React.FC<{styleFor: (target: string) => CSSProperties}> = ({styleFor}) => (
+  <SceneShell>
+    <PlantPot style={{left: 92, top: 184, width: 300, height: 360, transform: 'scale(0.92)'}} />
+    <div style={{position: 'absolute', left: 364, top: 112, width: 420, height: 508, ...cardBase, border: `5px solid ${colors.ink}`, padding: 36, ...styleFor('question')}}>
+      <div style={{fontSize: 42, fontWeight: 900, color: colors.orange}}>先写问题</div>
+      {['叶尖为什么发黄？', '新叶为什么更浅？', '今天要浇水吗？'].map((item, index) => (
+        <div
+          key={item}
+          style={{
+            marginTop: 28,
+            padding: '18px 22px',
+            borderRadius: 20,
+            background: index === 1 ? '#E8DDFB' : '#FFF1D7',
+            fontSize: 27,
+            lineHeight: 1.16,
+            fontWeight: 900,
+            color: colors.textSoft,
           }}
         >
           {item}
         </div>
       ))}
     </div>
-    <Label style={{left: 286, bottom: 104, background: '#FFF1D7', ...styleFor('boundary')}}>边界先定</Label>
-  </SceneShell>
-);
-
-const PurposeScene: React.FC<{styleFor: (target: string) => CSSProperties}> = ({styleFor}) => (
-  <SceneShell>
-    <GeneratedAsset
-      name="purpose-target.png"
-      style={{
-        left: 326,
-        top: 102,
-        width: 248,
-        height: 248,
-        ...styleFor('lightbulb'),
-      }}
-    />
-    <Label style={{left: 134, top: 224, fontSize: 64, color: colors.purple, ...styleFor('question')}}>?</Label>
-    <Label style={{right: 140, top: 226, fontSize: 64, color: colors.purple, ...styleFor('question')}}>?</Label>
-    <div style={{position: 'absolute', left: 196, bottom: 112, width: 510, ...cardBase, border: `4px solid ${colors.ink}`, padding: 34, ...styleFor('prompt')}}>
-      <div style={{fontSize: 40, fontWeight: 900, color: colors.orange}}>先说自己的想法</div>
-      <div style={{height: 18, borderRadius: 999, background: '#FFE4BF', marginTop: 24}} />
-      <div style={{height: 18, width: 314, borderRadius: 999, background: '#E8DDFB', marginTop: 16}} />
-    </div>
+    <Label style={{right: 104, top: 86, fontSize: 58, color: colors.purple, ...styleFor('lightbulb')}}>?</Label>
+    <Label style={{left: 330, bottom: 106, background: '#FFF8EA'}}>再问 AI</Label>
   </SceneShell>
 );
 
 const VerifyScene: React.FC<{styleFor: (target: string) => CSSProperties}> = ({styleFor}) => (
   <SceneShell>
-    <Tablet style={{left: 245, top: 190, width: 410, height: 310, ...styleFor('source')}}>
-      <div style={{fontSize: 34, fontWeight: 900, color: colors.textSoft, padding: 34}}>AI 回答</div>
+    <Tablet style={{left: 128, top: 148, width: 392, height: 320, ...styleFor('source')}}>
+      <div style={{fontSize: 34, fontWeight: 900, color: colors.textSoft, padding: 34}}>AI 解释</div>
       <div style={{margin: '0 34px 18px', height: 20, background: '#FFE4BF', borderRadius: 999}} />
-      <div style={{margin: '0 34px 18px', height: 20, background: '#E8DDFB', borderRadius: 999}} />
-      <div style={{margin: '0 34px', height: 20, background: '#DDF3E2', borderRadius: 999}} />
+      <div style={{margin: '0 34px 18px', height: 20, background: '#DDF3E2', borderRadius: 999}} />
+      <div style={{fontSize: 25, fontWeight: 900, color: colors.orange, padding: '8px 34px'}}>需要核对来源</div>
     </Tablet>
+    <div style={{position: 'absolute', right: 134, top: 146, width: 270, height: 312, borderRadius: 34, background: '#FFFDF7', border: `5px solid ${colors.ink}`}}>
+      <Leaf style={{left: 84, top: 42, width: 92, height: 140}} />
+      <div style={{position: 'absolute', left: 42, right: 42, bottom: 48, height: 18, borderRadius: 999, background: '#DDF3E2'}} />
+      <div style={{position: 'absolute', left: 42, width: 124, bottom: 20, height: 18, borderRadius: 999, background: '#FFE4BF'}} />
+    </div>
     <GeneratedAsset
       name="magnifier.png"
       style={{
-        left: 524,
-        top: 398,
-        width: 196,
-        height: 196,
+        left: 486,
+        top: 344,
+        width: 214,
+        height: 214,
         ...styleFor('magnifier'),
       }}
     />
     <Label style={{left: 190, bottom: 122, color: colors.green, ...styleFor('check')}}>✓ 看来源</Label>
-    <Label style={{right: 168, bottom: 122, color: colors.orange, ...styleFor('cross')}}>× 不照抄</Label>
+    <Label style={{right: 168, bottom: 122, color: colors.orange, ...styleFor('cross')}}>× 不硬抄</Label>
   </SceneShell>
 );
 
@@ -289,6 +334,88 @@ const ExplainScene: React.FC<{styleFor: (target: string) => CSSProperties}> = ({
     </div>
     <Label style={{right: 160, bottom: 128, ...styleFor('speech')}}>讲清楚</Label>
   </SceneShell>
+);
+
+const PlantPot: React.FC<{style?: CSSProperties}> = ({style}) => (
+  <div style={{position: 'absolute', ...style}}>
+    <div
+      style={{
+        position: 'absolute',
+        left: '50%',
+        bottom: 28,
+        width: 190,
+        height: 150,
+        transform: 'translateX(-50%)',
+        borderRadius: '24px 24px 42px 42px',
+        background: 'linear-gradient(180deg, #F6A23A 0%, #D96F18 100%)',
+        border: `5px solid ${colors.ink}`,
+        boxShadow: '10px 12px 0 rgba(224, 122, 20, 0.15)',
+      }}
+    />
+    <div
+      style={{
+        position: 'absolute',
+        left: '50%',
+        bottom: 158,
+        width: 16,
+        height: 188,
+        transform: 'translateX(-50%)',
+        borderRadius: 999,
+        background: colors.green,
+        border: `3px solid ${colors.ink}`,
+      }}
+    />
+    <Leaf style={{left: 48, top: 82, width: 118, height: 156, transform: 'rotate(-24deg)'}} />
+    <Leaf style={{right: 48, top: 90, width: 116, height: 150, transform: 'rotate(24deg) scaleX(-1)'}} />
+    <Leaf style={{left: 116, top: 22, width: 126, height: 176}} />
+  </div>
+);
+
+const Leaf: React.FC<{style?: CSSProperties}> = ({style}) => (
+  <div
+    style={{
+      position: 'absolute',
+      width: 86,
+      height: 126,
+      borderRadius: '70% 10% 70% 10%',
+      background: 'linear-gradient(135deg, #B7D878 0%, #6FB757 100%)',
+      border: `4px solid ${colors.ink}`,
+      boxShadow: '8px 10px 0 rgba(150, 199, 106, 0.18)',
+      ...style,
+    }}
+  >
+    <div
+      style={{
+        position: 'absolute',
+        left: '50%',
+        top: 18,
+        bottom: 18,
+        width: 4,
+        transform: 'translateX(-50%) rotate(-14deg)',
+        borderRadius: 999,
+        background: 'rgba(31,20,8,0.34)',
+      }}
+    />
+  </div>
+);
+
+const PhotoIcon: React.FC<{style?: CSSProperties}> = ({style}) => (
+  <div
+    style={{
+      position: 'absolute',
+      width: 170,
+      height: 124,
+      borderRadius: 24,
+      background: '#EAF7E8',
+      border: `5px solid ${colors.ink}`,
+      overflow: 'hidden',
+      ...style,
+    }}
+  >
+    <div style={{position: 'absolute', left: 18, bottom: 16, width: 132, height: 54, borderRadius: '50% 50% 0 0', background: '#9FD27A'}} />
+    <Leaf style={{left: 64, top: 18, width: 42, height: 60, borderWidth: 3}} />
+    <div style={{position: 'absolute', right: 18, top: 18, width: 24, height: 24, borderRadius: 999, background: colors.gold}} />
+  </div>
 );
 
 const Cloud: React.FC<{left: number; top: number; scale?: number}> = ({left, top, scale = 1}) => (
