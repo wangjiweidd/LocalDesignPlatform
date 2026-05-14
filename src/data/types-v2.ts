@@ -27,6 +27,11 @@ export type KnowledgeMotionPresetId =
   | 'stat-slam' | 'counter-tick' | 'list-stagger'
   | 'highlight-sweep' | 'split-slide' | 'check-draw' | 'dot-appear';
 
+export type TimelineEvent = {
+  label?: string;
+  text: string;
+};
+
 export type KnowledgeShotData = {
   text: string;
   keyword: string;
@@ -40,6 +45,16 @@ export type KnowledgeShotData = {
   listIndex?: number;
   timelineYear?: string;
   comparisonSide?: 'left' | 'right' | 'neutral';
+  // ComparisonSplit
+  comparisonLeft?: string;
+  comparisonRight?: string;
+  leftText?: string;
+  rightText?: string;
+  // ChecklistReveal
+  checklistItems?: string[];
+  sectionLabel?: string;
+  // TimelineFlow
+  timelineEvents?: TimelineEvent[];
   lottieId?: string;
   characterId?: string;
 };
