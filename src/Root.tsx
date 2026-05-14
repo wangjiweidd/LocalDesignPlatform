@@ -8,10 +8,12 @@ import {VideoComposition, calculateVideoMetadata} from './VideoComposition';
 import {OdinCover}    from './covers/OdinCover';
 import {YaoningCover} from './covers/YaoningCover';
 import {script as currentScript} from './data/current-video';
-import type {KnowledgeScriptData, EducationScriptData} from './data/types-v2';
+import type {KnowledgeScriptData, EducationScriptData, ScriptDataV2} from './data/types-v2';
+
+const script = currentScript as ScriptDataV2;
 
 export const RemotionRoot: React.FC = () => {
-  const isKnowledge = currentScript.track === 'knowledge-sharing';
+  const isKnowledge = script.track === 'knowledge-sharing';
 
   return (
     <>
@@ -38,11 +40,11 @@ export const RemotionRoot: React.FC = () => {
         id="VideoComposition"
         component={VideoComposition}
         calculateMetadata={calculateVideoMetadata}
-        defaultProps={{script: currentScript}}
+        defaultProps={{script}}
         fps={30}
         width={1080}
         height={1920}
-        durationInFrames={currentScript.shots.length * currentScript.shotDurationFrames}
+        durationInFrames={script.shots.length * script.shotDurationFrames}
       />
       {isKnowledge && (
         <Composition
@@ -53,8 +55,8 @@ export const RemotionRoot: React.FC = () => {
           width={1080}
           height={1920}
           defaultProps={{
-            cover: (currentScript as KnowledgeScriptData).cover,
-            accentColor: currentScript.accentColor,
+            cover: (script as KnowledgeScriptData).cover,
+            accentColor: script.accentColor,
           }}
         />
       )}
@@ -67,8 +69,8 @@ export const RemotionRoot: React.FC = () => {
           width={1080}
           height={1920}
           defaultProps={{
-            cover: (currentScript as unknown as EducationScriptData).cover,
-            accentColor: currentScript.accentColor,
+            cover: (script as EducationScriptData).cover,
+            accentColor: script.accentColor,
           }}
         />
       )}
