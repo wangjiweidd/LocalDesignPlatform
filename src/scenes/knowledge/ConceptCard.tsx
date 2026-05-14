@@ -28,29 +28,27 @@ export const ConceptCard: React.FC<{shot: KnowledgeShotData; theme: OdinTheme; s
         background: 'linear-gradient(160deg, #1E1B4B 0%, #312E81 100%)',
         opacity:    reveal,
         transform:  `scale(${scale})`,
+        display:       'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        padding:       '0 88px',
       }}
     >
       {/* Accent bar */}
       <div
         style={{
-          position:     'absolute',
-          left:         88,
-          top:          220,
-          width:        60,
+          width:        interpolate(reveal, [0, 1], [0, 60], clamp),
           height:       6,
           borderRadius: 999,
           background:   theme.colors.accent,
+          marginBottom: 36,
         }}
       />
 
       {/* Concept term with highlight-sweep */}
       <div
         style={{
-          position:   'absolute',
-          left:       88,
-          right:      88,
-          top:        260,
-          fontSize:   72,
+          fontSize:   84,
           fontWeight: 900,
           color:      '#F1F5F9',
           fontFamily: theme.fonts.body,

@@ -19,42 +19,50 @@ export const QuoteHero: React.FC<{shot: KnowledgeShotData; theme: OdinTheme; sho
 
   return (
     <AbsoluteFill style={{background: bg}}>
-      {/* Decorative quote mark */}
+      {/* Decorative quote mark — bottom-right, large background element */}
       <div
         style={{
           position:   'absolute',
-          left:       72,
-          top:        200,
-          fontSize:   200,
+          right:      40,
+          bottom:     320,
+          fontSize:   320,
           fontWeight: 900,
           color:      theme.colors.accent,
-          opacity:    0.2,
+          opacity:    0.08,
           lineHeight: 1,
           fontFamily: theme.fonts.display,
+          userSelect: 'none',
         }}
       >
         "
       </div>
 
-      {/* Quote text */}
+      {/* Quote text — vertically centered */}
       <div
         style={{
-          position:   'absolute',
-          left:       88,
-          right:      88,
-          top:        '50%',
-          transform:  `translateY(-50%) scale(${scale})`,
-          fontSize:   80,
-          fontWeight: 900,
-          lineHeight: 1.25,
-          color:      '#F1F5F9',
-          fontFamily: theme.fonts.body,
-          textAlign:  'center',
+          position:       'absolute',
+          inset:          0,
+          display:        'flex',
+          alignItems:     'center',
+          justifyContent: 'center',
+          padding:        '0 88px',
         }}
       >
-        {parts.before}
-        <span style={{color: theme.colors.accent}}>{parts.keyword}</span>
-        {parts.after}
+        <div
+          style={{
+            transform:  `scale(${scale})`,
+            fontSize:   88,
+            fontWeight: 900,
+            lineHeight: 1.25,
+            color:      '#F1F5F9',
+            fontFamily: theme.fonts.body,
+            textAlign:  'center',
+          }}
+        >
+          {parts.before}
+          <span style={{color: theme.colors.accent}}>{parts.keyword}</span>
+          {parts.after}
+        </div>
       </div>
 
       <ThemeCaption shot={shot} shotDuration={shotDuration} theme={theme} />

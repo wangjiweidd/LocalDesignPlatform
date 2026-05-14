@@ -43,45 +43,10 @@ export const ThemeCaption: React.FC<{shot: AnyShot; shotDuration: number; theme:
             bgColor: c.surface, borderColor: c.border};
   })();
 
-  const textParts    = splitKeyword(shot.text,    shot.keyword);
   const captionParts = splitKeyword(shot.caption, shot.captionKeyword);
 
   return (
     <>
-      {/* Hero text */}
-      <div
-        style={{
-          position:   'absolute',
-          left:       72,
-          right:      72,
-          top:        160,
-          textAlign:  'center',
-          fontSize:   60,
-          lineHeight: 1.12,
-          fontWeight: 900,
-          color:      textColor,
-          fontFamily: theme.fonts.body,
-        }}
-      >
-        {textParts.before}
-        <span style={{position: 'relative', color: accentColor, display: 'inline-block'}}>
-          {textParts.keyword}
-          <span
-            style={{
-              position:     'absolute',
-              left:         0,
-              right:        0,
-              bottom:       -7,
-              height:       7,
-              borderRadius: 999,
-              background:   accentColor,
-              opacity:      0.35,
-            }}
-          />
-        </span>
-        {textParts.after}
-      </div>
-
       {/* Caption card */}
       <div
         style={{
