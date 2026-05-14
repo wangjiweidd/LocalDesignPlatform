@@ -1,8 +1,9 @@
 // Maps catalog IDs (from content-system/asset-library/catalog.md) to local Lottie JSON.
 // Add entries here after downloading assets to public/assets/lottie/.
 
+import type {LottieAnimationData} from '@remotion/lottie';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type LottieData = Record<string, any>;
+type LottieData = LottieAnimationData & Record<string, any>;
 
 import confettiWarm   from '../../public/assets/lottie/effects/confetti-warm.json';
 import starBurst      from '../../public/assets/lottie/effects/star-burst.json';
