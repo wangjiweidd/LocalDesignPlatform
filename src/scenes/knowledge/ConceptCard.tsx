@@ -2,6 +2,7 @@ import {AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig} from 'remoti
 import type {KnowledgeShotData} from '../../data/types-v2';
 import type {OdinTheme} from '../../themes';
 import {ThemeCaption} from '../../components/ThemeCaption';
+import {TechDots} from '../../components/illustrations/TechDots';
 import {clamp, smoothReveal} from '../../utils/springs';
 import {splitKeyword} from '../../utils/text';
 
@@ -34,6 +35,7 @@ export const ConceptCard: React.FC<{shot: KnowledgeShotData; theme: OdinTheme; s
         padding:       '0 88px',
       }}
     >
+      <TechDots width={1080} height={1920} color="#ffffff" frame={frame} cols={8} rows={14} opacity={0.08} />
       {/* Accent bar */}
       <div
         style={{

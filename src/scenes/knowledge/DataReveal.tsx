@@ -2,6 +2,8 @@ import {AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig} from 'remoti
 import type {KnowledgeShotData} from '../../data/types-v2';
 import type {OdinTheme} from '../../themes';
 import {ThemeCaption} from '../../components/ThemeCaption';
+import {DataArc} from '../../components/illustrations/DataArc';
+import {TechDots} from '../../components/illustrations/TechDots';
 import {clamp, counterTick, dramaticSlam} from '../../utils/springs';
 import {parseDataValue, splitKeyword} from '../../utils/text';
 
@@ -20,8 +22,17 @@ export const DataReveal: React.FC<{shot: KnowledgeShotData; theme: OdinTheme; sh
   const contextEnter = dramaticSlam(Math.max(0, frame - 12), fps);
   const parts        = splitKeyword(shot.text, shot.keyword);
 
+  const arcProgress = interpolate(slam, [0, 1], [0, 1], clamp);
+
   return (
     <AbsoluteFill style={{background: theme.colors.bgDark}}>
+      <TechDots width={1080} height={1920} color="#ffffff" frame={frame} cols={10} rows={16} opacity={0.1} />
+
+      {/* Data arc — centered behind the number */}
+      <div style={{position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%) translateY(-60px)'}}>
+        <DataArc progress={arcProgress} size={520} color={theme.colors.accent} strokeWidth={18} />
+      </div>
+
       <div
         style={{
           position:       'absolute',

@@ -2,6 +2,7 @@ import {AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig} from 'remoti
 import type {EducationShotData} from '../../data/types-v2';
 import type {YaoningTheme} from '../../themes';
 import {ThemeCaption} from '../../components/ThemeCaption';
+import {AiRobot} from '../../components/illustrations/AiRobot';
 import {bouncyEnter, clamp, staggerSpring} from '../../utils/springs';
 import {splitKeyword} from '../../utils/text';
 
@@ -46,33 +47,19 @@ export const AiIntro: React.FC<{shot: EducationShotData; theme: YaoningTheme; sh
         }}
       />
 
-      {/* AI icon / robot head */}
+      {/* AiRobot illustration */}
       <div
         style={{
           position:       'absolute',
-          top:            220,
+          top:            160,
           left:           0,
           right:          0,
           display:        'flex',
           justifyContent: 'center',
           opacity:        iconEnter,
-          transform:      `scale(${interpolate(iconEnter, [0, 1], [0.5, 1], clamp)}) translateY(${(1 - iconEnter) * -30}px)`,
         }}
       >
-        <div
-          style={{
-            width:        200,
-            height:       200,
-            borderRadius: 40,
-            background:   `linear-gradient(135deg, ${theme.colors.accentViolet}, ${theme.colors.accent})`,
-            display:        'flex',
-            alignItems:     'center',
-            justifyContent: 'center',
-            fontSize:       100,
-          }}
-        >
-          🤖
-        </div>
+        <AiRobot size={300} accentColor={theme.colors.accent} eyeColor={theme.colors.accentViolet} />
       </div>
 
       {/* Concept text */}
@@ -81,7 +68,7 @@ export const AiIntro: React.FC<{shot: EducationShotData; theme: YaoningTheme; sh
           position:       'absolute',
           left:           72,
           right:          72,
-          top:            520,
+          top:            620,
           textAlign:      'center',
           opacity:        enter,
           transform:      `scale(${scale})`,

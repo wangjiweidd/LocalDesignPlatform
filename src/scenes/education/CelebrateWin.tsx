@@ -3,6 +3,7 @@ import {Lottie} from '@remotion/lottie';
 import type {EducationShotData} from '../../data/types-v2';
 import type {YaoningTheme} from '../../themes';
 import {ThemeCaption} from '../../components/ThemeCaption';
+import {AiRobot} from '../../components/illustrations/AiRobot';
 import {clamp, snappyPop, staggerSpring} from '../../utils/springs';
 import {getLottie} from '../../utils/assetCatalog';
 import {splitKeyword} from '../../utils/text';
@@ -33,11 +34,11 @@ export const CelebrateWin: React.FC<{shot: EducationShotData; theme: YaoningThem
         </div>
       )}
 
-      {/* Trophy / star */}
+      {/* Robot character celebrating */}
       <div
         style={{
           position:       'absolute',
-          top:            200,
+          top:            160,
           left:           0,
           right:          0,
           display:        'flex',
@@ -46,7 +47,7 @@ export const CelebrateWin: React.FC<{shot: EducationShotData; theme: YaoningThem
           transform:      `scale(${interpolate(enter, [0, 1], [0.3, 1], clamp)}) rotate(${interpolate(enter, [0, 1], [-20, 0], clamp)}deg)`,
         }}
       >
-        <div style={{fontSize: 160}}>🏆</div>
+        <AiRobot size={280} accentColor={theme.colors.celebrate} eyeColor={theme.colors.accent} />
       </div>
 
       {/* Celebration message */}
