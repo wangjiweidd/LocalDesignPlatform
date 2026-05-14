@@ -13,6 +13,10 @@
   },
   "dependencies": {
     "@remotion/cli": "^4.0.459",
+    "@remotion/google-fonts": "^4.0.461",
+    "@remotion/light-leaks": "^4.0.461",
+    "@remotion/lottie": "^4.0.461",
+    "@remotion/transitions": "^4.0.461",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "remotion": "^4.0.459"
@@ -20,6 +24,7 @@
   "devDependencies": {
     "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",
+    "tsx": "^4.21.0",
     "typescript": "5.9.3"
   }
 }
