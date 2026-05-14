@@ -2,6 +2,7 @@ import {AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig} from 'remoti
 import type {EducationShotData} from '../../data/types-v2';
 import type {YaoningTheme} from '../../themes';
 import {ThemeCaption} from '../../components/ThemeCaption';
+import {PngAsset} from '../../components/illustrations/PngAsset';
 import {clamp, snappyPop, staggerSpring} from '../../utils/springs';
 import {splitKeyword} from '../../utils/text';
 
@@ -44,7 +45,10 @@ export const ChallengeGame: React.FC<{shot: EducationShotData; theme: YaoningThe
             letterSpacing: 3,
           }}
         >
-          🎯 家庭挑战
+          家庭挑战
+        </div>
+        <div style={{position: 'absolute', right: 40, top: '50%', transform: 'translateY(-50%)'}}>
+          <PngAsset name="purpose-target.png" width={120} height={120} />
         </div>
       </div>
 

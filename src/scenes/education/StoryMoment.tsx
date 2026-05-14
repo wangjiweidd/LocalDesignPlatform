@@ -2,6 +2,7 @@ import {AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig} from 'remoti
 import type {EducationShotData} from '../../data/types-v2';
 import type {YaoningTheme} from '../../themes';
 import {ThemeCaption} from '../../components/ThemeCaption';
+import {PngAsset} from '../../components/illustrations/PngAsset';
 import {bouncyEnter, clamp, staggerSpring} from '../../utils/springs';
 import {splitKeyword} from '../../utils/text';
 
@@ -24,8 +25,8 @@ export const StoryMoment: React.FC<{shot: EducationShotData; theme: YaoningTheme
           position:       'absolute',
           left:           0,
           right:          0,
-          top:            120,
-          height:         420,
+          top:            100,
+          height:         460,
           display:        'flex',
           alignItems:     'center',
           justifyContent: 'center',
@@ -33,9 +34,7 @@ export const StoryMoment: React.FC<{shot: EducationShotData; theme: YaoningTheme
           transform:      `scale(${interpolate(sceneEnter, [0, 1], [0.85, 1], clamp)})`,
         }}
       >
-        <div style={{fontSize: 180}}>
-          {shot.characterName === 'child' ? '🧒' : shot.characterName === 'parent' ? '👨‍👩‍👧' : '✨'}
-        </div>
+        <PngAsset name="doudou-robot.png" width={280} height={420} />
       </div>
 
       {/* Dialog bubble */}
@@ -44,7 +43,7 @@ export const StoryMoment: React.FC<{shot: EducationShotData; theme: YaoningTheme
           position:     'absolute',
           left:         72,
           right:        72,
-          top:          580,
+          top:          608,
           background:   theme.colors.surface,
           borderRadius: 32,
           padding:      '36px 44px',

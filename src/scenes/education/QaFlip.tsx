@@ -3,6 +3,7 @@ import {Lottie} from '@remotion/lottie';
 import type {EducationShotData} from '../../data/types-v2';
 import type {YaoningTheme} from '../../themes';
 import {ThemeCaption} from '../../components/ThemeCaption';
+import {PngAsset} from '../../components/illustrations/PngAsset';
 import {bouncyEnter, clamp, staggerSpring} from '../../utils/springs';
 import {getLottie} from '../../utils/assetCatalog';
 import {splitKeyword} from '../../utils/text';
@@ -54,8 +55,10 @@ export const QaFlip: React.FC<{shot: EducationShotData; theme: YaoningTheme; sho
           <div style={{width: 200, height: 200}}>
             <Lottie animationData={lottieData} playbackRate={1} style={{width: '100%', height: '100%'}} />
           </div>
+        ) : isQuestion ? (
+          <div style={{fontSize: 140}}>❓</div>
         ) : (
-          <div style={{fontSize: 140}}>{icon}</div>
+          <PngAsset name="magnifier.png" width={200} height={200} />
         )}
       </div>
 

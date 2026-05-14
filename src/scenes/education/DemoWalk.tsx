@@ -2,6 +2,7 @@ import {AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig} from 'remoti
 import type {EducationShotData} from '../../data/types-v2';
 import type {YaoningTheme} from '../../themes';
 import {ThemeCaption} from '../../components/ThemeCaption';
+import {PngAsset} from '../../components/illustrations/PngAsset';
 import {clamp, smoothReveal, staggerSpring} from '../../utils/springs';
 import {splitKeyword} from '../../utils/text';
 
@@ -22,6 +23,19 @@ export const DemoWalk: React.FC<{shot: EducationShotData; theme: YaoningTheme; s
 
   return (
     <AbsoluteFill style={{background: theme.colors.bg}}>
+      {/* Doudou robot guide — bottom-left, peeking */}
+      <div
+        style={{
+          position:  'absolute',
+          left:      60,
+          top:       380,
+          opacity:   screenEnter,
+          transform: `scale(${interpolate(screenEnter, [0, 1], [0.7, 1], clamp)})`,
+        }}
+      >
+        <PngAsset name="doudou-robot.png" width={200} height={300} />
+      </div>
+
       {/* Simulated phone/screen */}
       <div
         style={{

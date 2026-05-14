@@ -2,7 +2,7 @@ import {AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig} from 'remoti
 import type {EducationShotData} from '../../data/types-v2';
 import type {YaoningTheme} from '../../themes';
 import {ThemeCaption} from '../../components/ThemeCaption';
-import {AiRobot} from '../../components/illustrations/AiRobot';
+import {PngAsset} from '../../components/illustrations/PngAsset';
 import {bouncyEnter, clamp, staggerSpring} from '../../utils/springs';
 import {splitKeyword} from '../../utils/text';
 
@@ -47,19 +47,20 @@ export const AiIntro: React.FC<{shot: EducationShotData; theme: YaoningTheme; sh
         }}
       />
 
-      {/* AiRobot illustration */}
+      {/* Doudou robot mascot */}
       <div
         style={{
           position:       'absolute',
-          top:            160,
+          top:            140,
           left:           0,
           right:          0,
           display:        'flex',
           justifyContent: 'center',
           opacity:        iconEnter,
+          transform:      `scale(${interpolate(iconEnter, [0, 1], [0.6, 1], clamp)}) translateY(${(1 - iconEnter) * -20}px)`,
         }}
       >
-        <AiRobot size={300} accentColor={theme.colors.accent} eyeColor={theme.colors.accentViolet} />
+        <PngAsset name="doudou-robot.png" width={320} height={480} />
       </div>
 
       {/* Concept text */}
