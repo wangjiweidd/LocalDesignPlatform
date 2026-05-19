@@ -5,6 +5,7 @@ import {VideoComposition, calculateVideoMetadata} from './VideoComposition';
 import {OdinCover}    from './covers/OdinCover';
 import {YaoningCover} from './covers/YaoningCover';
 import {script as currentScript} from './data/current-video';
+import {quickPreviewScript} from './data/quick-preview';
 import type {KnowledgeScriptData, EducationScriptData, ScriptDataV2} from './data/types-v2';
 
 const script = currentScript as ScriptDataV2;
@@ -23,6 +24,16 @@ export const RemotionRoot: React.FC = () => {
         width={1080}
         height={1920}
         durationInFrames={script.shots.length * script.shotDurationFrames}
+      />
+      <Composition
+        id="QuickPreview"
+        component={VideoComposition}
+        calculateMetadata={calculateVideoMetadata}
+        defaultProps={{script: quickPreviewScript}}
+        fps={30}
+        width={1080}
+        height={1920}
+        durationInFrames={quickPreviewScript.shotDurationFrames}
       />
       {isKnowledge && (
         <Composition
