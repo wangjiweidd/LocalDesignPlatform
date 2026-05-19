@@ -16,14 +16,14 @@
     "motion:review": "npx tsx scripts/review-motion-library.ts"
   },
   "dependencies": {
-    "@remotion/cli": "^4.0.459",
-    "@remotion/google-fonts": "^4.0.461",
-    "@remotion/light-leaks": "^4.0.461",
-    "@remotion/lottie": "^4.0.461",
-    "@remotion/transitions": "^4.0.461",
+    "@remotion/cli": "4.0.461",
+    "@remotion/google-fonts": "4.0.461",
+    "@remotion/light-leaks": "4.0.461",
+    "@remotion/lottie": "4.0.461",
+    "@remotion/transitions": "4.0.461",
     "react": "19.2.3",
     "react-dom": "19.2.3",
-    "remotion": "^4.0.459"
+    "remotion": "4.0.461"
   },
   "devDependencies": {
     "@types/react": "19.2.7",
