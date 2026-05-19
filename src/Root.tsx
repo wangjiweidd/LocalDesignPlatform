@@ -1,9 +1,6 @@
 import {Composition} from 'remotion';
 import './fonts';
 
-import {BranchCover, BranchVideo} from './BranchVideo';
-import {demoScript, totalDuration} from './data/demo';
-
 import {VideoComposition, calculateVideoMetadata} from './VideoComposition';
 import {OdinCover}    from './covers/OdinCover';
 import {YaoningCover} from './covers/YaoningCover';
@@ -17,25 +14,6 @@ export const RemotionRoot: React.FC = () => {
 
   return (
     <>
-      {/* ── Legacy compositions (keep working) ── */}
-      <Composition
-        id="BranchVideo"
-        component={BranchVideo}
-        durationInFrames={totalDuration}
-        fps={demoScript.fps}
-        width={demoScript.width}
-        height={demoScript.height}
-      />
-      <Composition
-        id="BranchCover"
-        component={BranchCover}
-        durationInFrames={90}
-        fps={demoScript.fps}
-        width={demoScript.width}
-        height={1440}
-      />
-
-      {/* ── New design system compositions ── */}
       <Composition
         id="VideoComposition"
         component={VideoComposition}
