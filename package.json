@@ -12,7 +12,8 @@
     "render": "remotion render src/index.ts BranchVideo public/output/branch-video.mp4 --codec=h264 --concurrency=1 --browser-executable=\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\"",
     "render:video": "remotion render src/index.ts VideoComposition public/output/video.mp4 --codec=h264 --concurrency=1 --browser-executable=\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\"",
     "render:full": "npm run render:video && npx tsx scripts/export-script.ts",
-    "export-script": "npx tsx scripts/export-script.ts"
+    "export-script": "npx tsx scripts/export-script.ts",
+    "motion:review": "npx tsx scripts/review-motion-library.ts"
   },
   "dependencies": {
     "@remotion/cli": "^4.0.459",
