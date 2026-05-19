@@ -1,0 +1,82 @@
+{
+  "track": "ai-education",
+  "contentType": "qa-reveal",
+  "title": "AI最怕孩子问这个问题",
+  "subtitle": "你知道是什么吗",
+  "fps": 30,
+  "width": 1080,
+  "height": 1920,
+  "colorScheme": "light",
+  "accentColor": "#6366F1",
+  "ageTarget": "7-10",
+  "shotDurationFrames": 90,
+  "cover": {
+    "title": "AI最怕孩子\n问这个问题",
+    "subtitle": "测测你知不知道",
+    "titleHighlight": "最怕",
+    "characterName": "豆豆"
+  },
+  "shots": [
+    {
+      "text": "AI最怕孩子问什么问题？",
+      "keyword": "最怕",
+      "caption": "不是难题，是一种特别的问法",
+      "captionKeyword": "问法",
+      "scene": "qa-flip",
+      "motionPreset": "question-wobble",
+      "animationStyle": "bouncy-enter",
+      "isQuestionShot": true,
+      "characterName": "豆豆"
+    },
+    {
+      "text": "AI怕被问：你怎么知道的？",
+      "keyword": "怎么知道的",
+      "caption": "追问来源，是最强的AI使用技巧",
+      "captionKeyword": "来源",
+      "scene": "qa-flip",
+      "motionPreset": "reveal-spring",
+      "animationStyle": "bouncy-enter",
+      "isAnswerShot": true,
+      "characterName": "豆豆"
+    },
+    {
+      "text": "AI有时候会编造答案",
+      "keyword": "编造",
+      "caption": "听起来对，但可能是假的——这叫幻觉",
+      "captionKeyword": "幻觉",
+      "scene": "ai-intro",
+      "motionPreset": "character-bounce",
+      "animationStyle": "smooth-reveal",
+      "characterName": "豆豆"
+    },
+    {
+      "text": "问来源，AI就没法继续编了",
+      "keyword": "来源",
+      "caption": "追问一句"你从哪里知道的"，答案更可靠",
+      "captionKeyword": "追问",
+      "scene": "ai-intro",
+      "motionPreset": "bubble-pop",
+      "animationStyle": "snappy-pop",
+      "characterName": "豆豆"
+    },
+    {
+      "text": "今天就和孩子试试这一句",
+      "keyword": "试试",
+      "caption": ""你怎么知道的？"——孩子一定问得出来",
+      "captionKeyword": "问得出来",
+      "scene": "challenge-game",
+      "motionPreset": "star-burst",
+      "animationStyle": "bouncy-enter"
+    },
+    {
+      "text": "会追问的孩子，最会用AI",
+      "keyword": "追问",
+      "caption": "不是天才，是习惯养成的",
+      "captionKeyword": "习惯",
+      "scene": "celebrate-win",
+      "motionPreset": "confetti-burst",
+      "animationStyle": "bouncy-enter",
+      "lottieUrl": "https://assets9.lottiefiles.com/packages/lf20_touohxv0.json"
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "track": "knowledge-sharing",
+  "contentType": "data-insight",
+  "title": "2026年AI工具使用报告",
+  "subtitle": "这个数据颠覆了我的判断",
+  "fps": 30,
+  "width": 1080,
+  "height": 1920,
+  "colorScheme": "dark",
+  "accentColor": "#F59E0B",
+  "shotDurationFrames": 90,
+  "cover": {
+    "title": "67%的家长\n用错了AI工具",
+    "subtitle": "不是工具的问题",
+    "titleHighlight": "用错了"
+  },
+  "shots": [
+    {
+      "text": "67% 的家长选错了AI工具",
+      "keyword": "选错了",
+      "caption": "不是工具贵不贵，是用法对不对",
+      "captionKeyword": "用法",
+      "scene": "data-reveal",
+      "motionPreset": "stat-slam",
+      "animationStyle": "dramatic-slam",
+      "dataValue": "67%"
+    },
+    {
+      "text": "他们买了工具，却没有场景",
+      "keyword": "场景",
+      "caption": "工具再好，没有任务就是摆设",
+      "captionKeyword": "任务",
+      "scene": "concept-card",
+      "motionPreset": "highlight-sweep",
+      "animationStyle": "smooth-reveal"
+    },
+    {
+      "text": "第一步：先定一个真实任务",
+      "keyword": "真实任务",
+      "caption": "不是"试试AI"，是"用AI解决这件事"",
+      "captionKeyword": "解决",
+      "scene": "step-list",
+      "motionPreset": "list-stagger",
+      "animationStyle": "snappy-pop",
+      "stepNumber": 1
+    },
+    {
+      "text": "第二步：用一周，不买会员",
+      "keyword": "不买会员",
+      "caption": "免费版够用就够，省下的钱买场景时间",
+      "captionKeyword": "场景时间",
+      "scene": "step-list",
+      "motionPreset": "list-stagger",
+      "animationStyle": "snappy-pop",
+      "stepNumber": 2
+    },
+    {
+      "text": "第三步：记录一次真正省时的体验",
+      "keyword": "省时",
+      "caption": "只有亲身体验，才能判断值不值",
+      "captionKeyword": "判断",
+      "scene": "step-list",
+      "motionPreset": "list-stagger",
+      "animationStyle": "snappy-pop",
+      "stepNumber": 3
+    },
+    {
+      "text": "会用AI的人，先问场景",
+      "keyword": "场景",
+      "caption": "工具不是终点，解决问题才是",
+      "captionKeyword": "解决问题",
+      "scene": "quote-hero",
+      "motionPreset": "stat-slam",
+      "animationStyle": "dramatic-slam"
+    }
+  ]
+}

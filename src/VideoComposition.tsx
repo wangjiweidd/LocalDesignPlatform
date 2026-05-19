@@ -44,7 +44,7 @@ const educationMap: Record<string, React.FC<EducationSceneProps>> = {
 
 export type VideoProps = {script: ScriptDataV2};
 
-export const calculateVideoMetadata: CalculateMetadataFunction<VideoProps> = ({props}) => ({
+export const calculateVideoMetadata: CalculateMetadataFunction<VideoProps> = async ({props}) => ({
   durationInFrames: props.script.shots.length * props.script.shotDurationFrames,
   fps:              props.script.fps,
   width:            props.script.width,

@@ -19,7 +19,7 @@ export const themeYaoning = {
 
   fonts: {
     body:    'Noto Sans SC',
-    display: 'ZCOOL KuaiLe',
+    display: 'Noto Serif SC',
     numbers: 'Nunito',
   },
 

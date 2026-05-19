@@ -2,6 +2,7 @@ import {AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig} from 'remoti
 import type {KnowledgeShotData} from '../../data/types-v2';
 import type {OdinTheme} from '../../themes';
 import {ThemeCaption} from '../../components/ThemeCaption';
+import {TechDots} from '../../components/illustrations/TechDots';
 import {clamp, staggerSpring} from '../../utils/springs';
 
 export const ComparisonSplit: React.FC<{shot: KnowledgeShotData; theme: OdinTheme; shotDuration: number}> = ({
@@ -24,6 +25,7 @@ export const ComparisonSplit: React.FC<{shot: KnowledgeShotData; theme: OdinThem
 
   return (
     <AbsoluteFill style={{background: theme.colors.bgDark, display: 'flex', flexDirection: 'row'}}>
+      <TechDots width={1080} height={1920} color="#ffffff" frame={frame} cols={8} rows={14} opacity={0.06} />
       {/* Left panel */}
       <div
         style={{

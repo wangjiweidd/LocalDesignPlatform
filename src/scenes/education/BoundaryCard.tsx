@@ -2,6 +2,7 @@ import {AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig} from 'remoti
 import type {EducationShotData} from '../../data/types-v2';
 import type {YaoningTheme} from '../../themes';
 import {ThemeCaption} from '../../components/ThemeCaption';
+import {PngAsset} from '../../components/illustrations/PngAsset';
 import {clamp, dramaticSlam, staggerSpring} from '../../utils/springs';
 import {splitKeyword} from '../../utils/text';
 
@@ -45,20 +46,20 @@ export const BoundaryCard: React.FC<{shot: EducationShotData; theme: YaoningThem
         }}
       />
 
-      {/* Warning icon */}
+      {/* Warning icon — rules-board prop */}
       <div
         style={{
           position:       'absolute',
           left:           0,
           right:          0,
-          top:            200,
+          top:            180,
           display:        'flex',
           justifyContent: 'center',
           opacity:        slamEnter * pulse,
           transform:      `scale(${interpolate(slamEnter, [0, 1], [0.4, 1], clamp)})`,
         }}
       >
-        <div style={{fontSize: 140}}>⚠️</div>
+        <PngAsset name="rules-board.png" width={280} height={280} shadow={false} />
       </div>
 
       {/* Safety rule card */}
