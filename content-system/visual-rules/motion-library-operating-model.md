@@ -28,6 +28,15 @@ Promote when the same expression repeats:
 
 Keep project-specific items local until they repeat.
 
+Use external sources only through the Yaoning style gate:
+
+```text
+external reference -> fit score -> candidate pattern -> local use -> repeated use -> formal catalog
+```
+
+External sources live in `content-system/reference-sources/external-motion-sources.md`.
+Promotion rules live in `content-system/visual-rules/yaoning-style-gate.md`.
+
 ## Long Term
 
 Let script data drive visual selection.

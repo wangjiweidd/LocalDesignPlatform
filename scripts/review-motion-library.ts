@@ -13,6 +13,8 @@ const GENERATED_ASSETS_DIR = join(ROOT, 'public/assets/generated');
 const TYPES_FILE = join(ROOT, 'src/data/types-v2.ts');
 const SCENE_CATALOG = join(ROOT, 'content-system/visual-rules/scenes.md');
 const MOTION_CATALOG = join(ROOT, 'content-system/visual-rules/motion-presets.md');
+const EXTERNAL_SOURCES = join(ROOT, 'content-system/reference-sources/external-motion-sources.md');
+const YAONING_STYLE_GATE = join(ROOT, 'content-system/visual-rules/yaoning-style-gate.md');
 
 const FORBIDDEN_GIT_SCOPE = ['public/output/', 'node_modules/', 'build/', 'tmp/', '.DS_Store'];
 
@@ -21,6 +23,8 @@ function main() {
   const typeText = readIfExists(TYPES_FILE);
   const sceneCatalogText = readIfExists(SCENE_CATALOG);
   const motionCatalogText = readIfExists(MOTION_CATALOG);
+  const externalSourceText = readIfExists(EXTERNAL_SOURCES);
+  const styleGateText = readIfExists(YAONING_STYLE_GATE);
 
   const usedScenes = countValues(extractObjectValues(dataTexts, 'scene'));
   const usedPresets = countValues(extractObjectValues(dataTexts, 'motionPreset'));
@@ -41,6 +45,8 @@ function main() {
   const componentFiles = listFiles(COMPONENTS_DIR, ['.tsx']).map((file) => relative(ROOT, file));
   const generatedAssets = listFiles(GENERATED_ASSETS_DIR, ['.png', '.jpg', '.jpeg', '.webp']).map((file) => relative(ASSETS_DIR, file));
   const lottieAssets = listFiles(join(ASSETS_DIR, 'lottie'), ['.json']).map((file) => relative(ASSETS_DIR, file));
+  const externalSources = parseExternalSources(externalSourceText);
+  const hardRejects = extractBulletsUnderHeading(styleGateText, 'Hard Reject');
   const gitScope = inspectGitScope();
 
   const lines = [
@@ -74,6 +80,14 @@ function main() {
     '',
     ...catalogGaps(typedScenes, catalogScenes, implementedScenes, 'scene'),
     ...catalogGaps(typedPresets, catalogPresets, [], 'motion preset'),
+    '',
+    '## External Reference Sources',
+    '',
+    ...externalSourceSummary(externalSources),
+    '',
+    '## Yaoning Fit Gate',
+    '',
+    ...styleGateSummary(hardRejects),
     '',
     '## Git Scope',
     '',
@@ -195,6 +209,64 @@ function nextAction(scenes: CountMap, presets: CountMap, gitScope: string[]) {
   if (topScene && topScene[1] >= 2) return `- Review \`${topScene[0]}\` as the next scene template candidate.`;
   if (topPreset && topPreset[1] >= 2) return `- Review \`${topPreset[0]}\` as the next motion preset candidate.`;
   return '- Keep collecting examples; no promotion pressure yet.';
+}
+
+type ExternalSource = {
+  id: string;
+  name: string;
+  url: string;
+  role: string;
+  bestFor: string;
+  risk: string;
+};
+
+function parseExternalSources(text: string): ExternalSource[] {
+  return text
+    .split('\n')
+    .filter((line) => line.startsWith('| `'))
+    .map((line) => line.split('|').slice(1, -1).map((cell) => cell.trim()))
+    .filter((cells) => cells.length >= 6)
+    .map(([id, name, url, role, bestFor, risk]) => ({
+      id: id.replace(/`/g, ''),
+      name,
+      url,
+      role,
+      bestFor,
+      risk,
+    }));
+}
+
+function externalSourceSummary(sources: ExternalSource[]) {
+  if (sources.length === 0) return ['- no external source catalog found'];
+  const roleCounts = countValues(sources.map((source) => source.role));
+  const priority = sources
+    .filter((source) => ['benchmark', 'implementation', 'pattern'].includes(source.role))
+    .slice(0, 8)
+    .map((source) => `  - \`${source.id}\`: ${source.bestFor} (${source.risk})`);
+  return [
+    `- cataloged sources: ${sources.length}`,
+    ...sectionList('sources by role', [...roleCounts.entries()].map(([role, count]) => `${role} (${count})`)),
+    '- review priority:',
+    ...priority,
+  ];
+}
+
+function extractBulletsUnderHeading(text: string, heading: string) {
+  const match = text.match(new RegExp(`## ${heading}\\n\\n([\\s\\S]*?)(\\n## |$)`));
+  if (!match) return [];
+  return match[1]
+    .split('\n')
+    .filter((line) => line.startsWith('- '))
+    .map((line) => line.slice(2).trim());
+}
+
+function styleGateSummary(hardRejects: string[]) {
+  return [
+    '- promote only if fit score is 8+ and no hard reject is hit',
+    '- score: audience fit, clarity, motion weight, reuse potential, production cost',
+    hardRejects.length > 0 ? `- hard reject checks: ${hardRejects.length}` : '- hard reject checks: missing',
+    '- next manual review format: source -> observed pattern -> fit score -> candidate type -> action',
+  ];
 }
 
 function kebabBaseName(file: string) {
