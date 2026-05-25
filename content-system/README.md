@@ -36,6 +36,7 @@ content-system JSON → src/data/ → Remotion composition → npm run render
 |------|---------|
 | `system-prompt.md` | Master generation instructions — AI reads this to produce JSON |
 | `tracks/knowledge-sharing.md` | Content types + visual routing for knowledge track |
+| `tracks/odin-video-pipeline-prep.md` | Odin video automation preparation notes |
 | `tracks/ai-education.md` | Content types + visual routing for education track |
 | `visual-rules/scenes.md` | All valid scene IDs with layout descriptions |
 | `visual-rules/motion-presets.md` | All valid motion preset IDs with behavior |
@@ -43,6 +44,9 @@ content-system JSON → src/data/ → Remotion composition → npm run render
 | `visual-rules/color-palettes.md` | Track-specific hex color systems |
 | `visual-rules/typography.md` | Font families, sizes, weights per track |
 | `visual-rules/schemas.md` | Exact JSON schema for both tracks |
+| `visual-rules/odin-style-gate.md` | Odin reference filtering and promotion rules |
+| `visual-rules/yaoning-style-gate.md` | Yaoning reference filtering and promotion rules |
+| `reference-sources/external-motion-sources.md` | External reference sources for motion review |
 | `examples/knowledge-example.json` | Complete working example — knowledge track |
 | `examples/education-example.json` | Complete working example — education track |
 
