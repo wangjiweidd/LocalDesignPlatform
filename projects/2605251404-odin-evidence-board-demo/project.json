@@ -1,0 +1,50 @@
+{
+  "id": "2605251404-odin-evidence-board-demo",
+  "name": "Odin 证据板模板 Demo",
+  "type": "video",
+  "skill": "templates/odin-video",
+  "relatedSkills": [
+    "odin-xiaohongshu-style",
+    "hyperframes"
+  ],
+  "workflow": [
+    "research",
+    "script",
+    "storyboard",
+    "copy",
+    "preview",
+    "confirmed-export"
+  ],
+  "videoAccount": "odin",
+  "brief": "基于已有 Odin 主题和参考视频拆解出的证据板模板 demo。目标是验证材料展示、批注、案例拆解能否自动化。",
+  "status": "html_preview_ready",
+  "createdAt": "2026-05-25T14:04:00.000+08:00",
+  "updatedAt": "2026-06-01T00:00:00.000+08:00",
+  "outputs": [
+    {
+      "type": "script",
+      "path": "work/script.md"
+    },
+    {
+      "type": "storyboard",
+      "path": "work/storyboard.md"
+    },
+    {
+      "type": "voiceover",
+      "path": "work/voiceover-minimax.txt"
+    },
+    {
+      "type": "html-preview",
+      "path": "work/html/index.html"
+    },
+    {
+      "type": "workspace-preview",
+      "path": "preview/index.html"
+    },
+    {
+      "type": "copy",
+      "path": "source/copy.md"
+    }
+  ],
+  "hasPreview": true
+}

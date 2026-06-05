@@ -1,0 +1,75 @@
+{
+  "id": "2606012235-odin-ai-self-intro-template",
+  "name": "设计面试 AI 自我介绍模板：这 3 段话术直接加分",
+  "type": "video",
+  "skill": "templates/odin-video",
+  "relatedSkills": [
+    "templates/odin-video",
+    "hyperframes",
+    "zh-writing-guardrails"
+  ],
+  "workflow": [
+    "topic",
+    "odin-video-spec",
+    "script",
+    "storyboard",
+    "html-preview",
+    "confirmed-export"
+  ],
+  "videoAccount": "odin",
+  "brief": "选题：设计面试AI自我介绍模板：这3段话术直接加分。目标是按 Odin HyperFrames 工作流生成 HTML 预览，展示 AI 自我介绍不应是万能话术，而应帮助设计师讲清楚判断力、项目证据和协作价值。",
+  "status": "html_preview_ready",
+  "createdAt": "2026-06-01T22:35:00.000+08:00",
+  "updatedAt": "2026-06-02T00:00:00.000+08:00",
+  "outputs": [
+    {
+      "type": "odin-video-spec",
+      "path": "work/odin-video-spec.md"
+    },
+    {
+      "type": "script",
+      "path": "work/script.md"
+    },
+    {
+      "type": "storyboard",
+      "path": "work/storyboard.md"
+    },
+    {
+      "type": "voiceover",
+      "path": "work/voiceover-minimax.txt"
+    },
+    {
+      "type": "html-preview",
+      "path": "work/html/index.html"
+    },
+    {
+      "type": "workspace-preview",
+      "path": "preview/index.html"
+    },
+    {
+      "type": "copy",
+      "path": "source/copy.md"
+    },
+    {
+      "type": "html-preview-branch",
+      "name": "freeform-calibration",
+      "path": "work/branches/freeform-calibration/index.html"
+    },
+    {
+      "type": "workspace-preview-branch",
+      "name": "freeform-calibration",
+      "path": "preview-freeform/index.html"
+    },
+    {
+      "type": "html-preview-branch",
+      "name": "editorial-reading",
+      "path": "work/branches/editorial-reading/index.html"
+    },
+    {
+      "type": "workspace-preview-branch",
+      "name": "editorial-reading",
+      "path": "preview-editorial/index.html"
+    }
+  ],
+  "hasPreview": true
+}

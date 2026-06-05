@@ -1,0 +1,1562 @@
+{
+  "script": {
+    "track": "ai-education",
+    "contentType": "story-scene",
+    "title": "孩子是不是读书的料，就看小学这3个关键期",
+    "subtitle": "",
+    "fps": 30,
+    "width": 1080,
+    "height": 1920,
+    "colorScheme": "light",
+    "accentColor": "#F97316",
+    "ageTarget": "7-10",
+    "shotDurationFrames": 162,
+    "cover": {
+      "title": "孩子是不是读书的料\n就看小学这3个关键期",
+      "subtitle": "",
+      "titleHighlight": "3个关键期",
+      "characterName": "豆豆"
+    },
+    "shots": [
+      {
+        "text": "小学6年有3个关键分水岭",
+        "keyword": "3个",
+        "caption": "小学这几年啊，节奏真别掉太远。",
+        "voiceoverText": "小学这几年啊，节奏真别掉太远。",
+        "captionKeyword": "节奏",
+        "scene": "ai-intro",
+        "motionPreset": "character-bounce",
+        "animationStyle": "bouncy-enter",
+        "durationFrames": 86,
+        "captionTiming": {
+          "startMs": 130,
+          "endMs": 2553,
+          "tokens": [
+            {
+              "text": "小",
+              "startMs": 130,
+              "endMs": 273,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "学",
+              "startMs": 273,
+              "endMs": 416,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "这",
+              "startMs": 416,
+              "endMs": 559,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "几",
+              "startMs": 559,
+              "endMs": 701,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "年",
+              "startMs": 701,
+              "endMs": 844,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "啊",
+              "startMs": 844,
+              "endMs": 987,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "，",
+              "startMs": 987,
+              "endMs": 1130,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "节",
+              "startMs": 1130,
+              "endMs": 1273,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "奏",
+              "startMs": 1273,
+              "endMs": 1416,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "真",
+              "startMs": 1416,
+              "endMs": 1559,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "别",
+              "startMs": 1559,
+              "endMs": 1702,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "掉",
+              "startMs": 1702,
+              "endMs": 1844,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "太",
+              "startMs": 1844,
+              "endMs": 1987,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "远",
+              "startMs": 1987,
+              "endMs": 2130,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "。",
+              "startMs": 2130,
+              "endMs": 2273,
+              "timestampMs": null,
+              "confidence": null
+            }
+          ]
+        },
+        "captionSegments": [
+          {
+            "text": "小学这几年啊",
+            "startMs": 130,
+            "endMs": 987
+          },
+          {
+            "text": "节奏真别掉太远",
+            "startMs": 1130,
+            "endMs": 2553,
+            "keyword": "节奏"
+          }
+        ]
+      },
+      {
+        "text": "1~2年级：拼的是家长勤快度",
+        "keyword": "家长",
+        "caption": "尤其一二年级，拼音、写字、计算这些事，爸妈还是得陪一陪。",
+        "voiceoverText": "尤其一二年级，拼音、写字、计算这些事，爸妈还是得陪一陪。",
+        "captionKeyword": "陪一陪",
+        "scene": "challenge-game",
+        "motionPreset": "star-burst",
+        "animationStyle": "bouncy-enter",
+        "stepNumber": 1,
+        "durationFrames": 162,
+        "captionTiming": {
+          "startMs": 80,
+          "endMs": 5079,
+          "tokens": [
+            {
+              "text": "尤",
+              "startMs": 80,
+              "endMs": 249,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "其",
+              "startMs": 249,
+              "endMs": 417,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "一",
+              "startMs": 417,
+              "endMs": 586,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "二",
+              "startMs": 586,
+              "endMs": 754,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "年",
+              "startMs": 754,
+              "endMs": 923,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "级",
+              "startMs": 923,
+              "endMs": 1091,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "，",
+              "startMs": 1091,
+              "endMs": 1260,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "拼",
+              "startMs": 1260,
+              "endMs": 1428,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "音",
+              "startMs": 1428,
+              "endMs": 1597,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "、",
+              "startMs": 1597,
+              "endMs": 1765,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "写",
+              "startMs": 1765,
+              "endMs": 1934,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "字",
+              "startMs": 1934,
+              "endMs": 2102,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "、",
+              "startMs": 2102,
+              "endMs": 2271,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "计",
+              "startMs": 2271,
+              "endMs": 2440,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "算",
+              "startMs": 2440,
+              "endMs": 2608,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "这",
+              "startMs": 2608,
+              "endMs": 2777,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "些",
+              "startMs": 2777,
+              "endMs": 2945,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "事",
+              "startMs": 2945,
+              "endMs": 3114,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "，",
+              "startMs": 3114,
+              "endMs": 3282,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "爸",
+              "startMs": 3282,
+              "endMs": 3451,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "妈",
+              "startMs": 3451,
+              "endMs": 3619,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "还",
+              "startMs": 3619,
+              "endMs": 3788,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "是",
+              "startMs": 3788,
+              "endMs": 3956,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "得",
+              "startMs": 3956,
+              "endMs": 4125,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "陪",
+              "startMs": 4125,
+              "endMs": 4293,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "一",
+              "startMs": 4293,
+              "endMs": 4462,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "陪",
+              "startMs": 4462,
+              "endMs": 4630,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "。",
+              "startMs": 4630,
+              "endMs": 4799,
+              "timestampMs": null,
+              "confidence": null
+            }
+          ]
+        },
+        "captionSegments": [
+          {
+            "text": "尤其一二年级",
+            "startMs": 80,
+            "endMs": 1091
+          },
+          {
+            "text": "拼音、写字、计算这些事",
+            "startMs": 1260,
+            "endMs": 3114
+          },
+          {
+            "text": "爸妈还是得陪一陪",
+            "startMs": 3282,
+            "endMs": 5079,
+            "keyword": "陪一陪"
+          }
+        ]
+      },
+      {
+        "text": "差距不是智商，是习惯和态度",
+        "keyword": "习惯",
+        "caption": "不是天天盯着他写，而是陪他把这件事慢慢做顺。",
+        "voiceoverText": "不是天天盯着他写，而是陪他把这件事慢慢做顺。",
+        "captionKeyword": "做顺",
+        "scene": "story-moment",
+        "motionPreset": "bubble-pop",
+        "animationStyle": "bouncy-enter",
+        "durationFrames": 105,
+        "captionTiming": {
+          "startMs": 80,
+          "endMs": 3156,
+          "tokens": [
+            {
+              "text": "不",
+              "startMs": 80,
+              "endMs": 207,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "是",
+              "startMs": 207,
+              "endMs": 334,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "天",
+              "startMs": 334,
+              "endMs": 461,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "天",
+              "startMs": 461,
+              "endMs": 588,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "盯",
+              "startMs": 588,
+              "endMs": 715,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "着",
+              "startMs": 715,
+              "endMs": 843,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "他",
+              "startMs": 843,
+              "endMs": 970,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "写",
+              "startMs": 970,
+              "endMs": 1097,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "，",
+              "startMs": 1097,
+              "endMs": 1224,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "而",
+              "startMs": 1224,
+              "endMs": 1351,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "是",
+              "startMs": 1351,
+              "endMs": 1478,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "陪",
+              "startMs": 1478,
+              "endMs": 1605,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "他",
+              "startMs": 1605,
+              "endMs": 1732,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "把",
+              "startMs": 1732,
+              "endMs": 1859,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "这",
+              "startMs": 1859,
+              "endMs": 1986,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "件",
+              "startMs": 1986,
+              "endMs": 2113,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "事",
+              "startMs": 2113,
+              "endMs": 2241,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "慢",
+              "startMs": 2241,
+              "endMs": 2368,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "慢",
+              "startMs": 2368,
+              "endMs": 2495,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "做",
+              "startMs": 2495,
+              "endMs": 2622,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "顺",
+              "startMs": 2622,
+              "endMs": 2749,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "。",
+              "startMs": 2749,
+              "endMs": 2876,
+              "timestampMs": null,
+              "confidence": null
+            }
+          ]
+        },
+        "captionSegments": [
+          {
+            "text": "不是天天盯着他写",
+            "startMs": 80,
+            "endMs": 1097
+          },
+          {
+            "text": "而是陪他把这件事",
+            "startMs": 1224,
+            "endMs": 2241
+          },
+          {
+            "text": "慢慢做顺",
+            "startMs": 2241,
+            "endMs": 3156,
+            "keyword": "做顺"
+          }
+        ]
+      },
+      {
+        "text": "3~4年级：后劲儿比分数更重要",
+        "keyword": "后劲儿",
+        "caption": "基础一旦没跟上，到了三年级，孩子自己都会明显吃力。",
+        "voiceoverText": "基础一旦没跟上，到了三年级，孩子自己都会明显吃力。",
+        "captionKeyword": "吃力",
+        "scene": "story-moment",
+        "motionPreset": "bubble-pop",
+        "animationStyle": "bouncy-enter",
+        "durationFrames": 120,
+        "captionTiming": {
+          "startMs": 80,
+          "endMs": 3649,
+          "tokens": [
+            {
+              "text": "基",
+              "startMs": 80,
+              "endMs": 212,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "础",
+              "startMs": 212,
+              "endMs": 343,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "一",
+              "startMs": 343,
+              "endMs": 475,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "旦",
+              "startMs": 475,
+              "endMs": 606,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "没",
+              "startMs": 606,
+              "endMs": 738,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "跟",
+              "startMs": 738,
+              "endMs": 869,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "上",
+              "startMs": 869,
+              "endMs": 1001,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "，",
+              "startMs": 1001,
+              "endMs": 1132,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "到",
+              "startMs": 1132,
+              "endMs": 1264,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "了",
+              "startMs": 1264,
+              "endMs": 1396,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "三",
+              "startMs": 1396,
+              "endMs": 1527,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "年",
+              "startMs": 1527,
+              "endMs": 1659,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "级",
+              "startMs": 1659,
+              "endMs": 1790,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "，",
+              "startMs": 1790,
+              "endMs": 1922,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "孩",
+              "startMs": 1922,
+              "endMs": 2053,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "子",
+              "startMs": 2053,
+              "endMs": 2185,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "自",
+              "startMs": 2185,
+              "endMs": 2317,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "己",
+              "startMs": 2317,
+              "endMs": 2448,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "都",
+              "startMs": 2448,
+              "endMs": 2580,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "会",
+              "startMs": 2580,
+              "endMs": 2711,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "明",
+              "startMs": 2711,
+              "endMs": 2843,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "显",
+              "startMs": 2843,
+              "endMs": 2974,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "吃",
+              "startMs": 2974,
+              "endMs": 3106,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "力",
+              "startMs": 3106,
+              "endMs": 3237,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "。",
+              "startMs": 3237,
+              "endMs": 3369,
+              "timestampMs": null,
+              "confidence": null
+            }
+          ]
+        },
+        "captionSegments": [
+          {
+            "text": "基础一旦没跟上",
+            "startMs": 80,
+            "endMs": 1001,
+            "keyword": "没跟上"
+          },
+          {
+            "text": "到了三年级",
+            "startMs": 1132,
+            "endMs": 1790
+          },
+          {
+            "text": "孩子自己都会明显吃力",
+            "startMs": 1922,
+            "endMs": 3649,
+            "keyword": "吃力"
+          }
+        ]
+      },
+      {
+        "text": "必养的4个学习习惯",
+        "keyword": "4个",
+        "caption": "三四年级就别只看分数了，要看他有没有后劲。",
+        "voiceoverText": "三四年级就别只看分数了，要看他有没有后劲。",
+        "captionKeyword": "后劲",
+        "scene": "challenge-game",
+        "motionPreset": "star-burst",
+        "animationStyle": "bouncy-enter",
+        "stepNumber": 2,
+        "durationFrames": 120,
+        "captionTiming": {
+          "startMs": 80,
+          "endMs": 3689,
+          "tokens": [
+            {
+              "text": "三",
+              "startMs": 80,
+              "endMs": 239,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "四",
+              "startMs": 239,
+              "endMs": 397,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "年",
+              "startMs": 397,
+              "endMs": 556,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "级",
+              "startMs": 556,
+              "endMs": 714,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "就",
+              "startMs": 714,
+              "endMs": 873,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "别",
+              "startMs": 873,
+              "endMs": 1031,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "只",
+              "startMs": 1031,
+              "endMs": 1190,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "看",
+              "startMs": 1190,
+              "endMs": 1348,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "分",
+              "startMs": 1348,
+              "endMs": 1507,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "数",
+              "startMs": 1507,
+              "endMs": 1665,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "了",
+              "startMs": 1665,
+              "endMs": 1824,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "，",
+              "startMs": 1824,
+              "endMs": 1982,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "要",
+              "startMs": 1982,
+              "endMs": 2141,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "看",
+              "startMs": 2141,
+              "endMs": 2299,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "他",
+              "startMs": 2299,
+              "endMs": 2458,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "有",
+              "startMs": 2458,
+              "endMs": 2616,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "没",
+              "startMs": 2616,
+              "endMs": 2775,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "有",
+              "startMs": 2775,
+              "endMs": 2933,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "后",
+              "startMs": 2933,
+              "endMs": 3092,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "劲",
+              "startMs": 3092,
+              "endMs": 3250,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "。",
+              "startMs": 3250,
+              "endMs": 3409,
+              "timestampMs": null,
+              "confidence": null
+            }
+          ]
+        },
+        "captionSegments": [
+          {
+            "text": "三四年级",
+            "startMs": 80,
+            "endMs": 714
+          },
+          {
+            "text": "别只看分数了",
+            "startMs": 873,
+            "endMs": 1824,
+            "keyword": "分数"
+          },
+          {
+            "text": "要看他有没有后劲",
+            "startMs": 1982,
+            "endMs": 3689,
+            "keyword": "后劲"
+          }
+        ]
+      },
+      {
+        "text": "5~6年级：直接决定中考高考",
+        "keyword": "中考高考",
+        "caption": "比如阅读、订正、专注，这些小习惯，得一点点养。",
+        "voiceoverText": "比如阅读、订正、专注，这些小习惯，得一点点养。",
+        "captionKeyword": "小习惯",
+        "scene": "story-moment",
+        "motionPreset": "bubble-pop",
+        "animationStyle": "bouncy-enter",
+        "durationFrames": 135,
+        "captionTiming": {
+          "startMs": 80,
+          "endMs": 4229,
+          "tokens": [
+            {
+              "text": "比",
+              "startMs": 80,
+              "endMs": 248,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "如",
+              "startMs": 248,
+              "endMs": 416,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "阅",
+              "startMs": 416,
+              "endMs": 585,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "读",
+              "startMs": 585,
+              "endMs": 753,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "、",
+              "startMs": 753,
+              "endMs": 921,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "订",
+              "startMs": 921,
+              "endMs": 1089,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "正",
+              "startMs": 1089,
+              "endMs": 1258,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "、",
+              "startMs": 1258,
+              "endMs": 1426,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "专",
+              "startMs": 1426,
+              "endMs": 1594,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "注",
+              "startMs": 1594,
+              "endMs": 1762,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "，",
+              "startMs": 1762,
+              "endMs": 1930,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "这",
+              "startMs": 1930,
+              "endMs": 2099,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "些",
+              "startMs": 2099,
+              "endMs": 2267,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "小",
+              "startMs": 2267,
+              "endMs": 2435,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "习",
+              "startMs": 2435,
+              "endMs": 2603,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "惯",
+              "startMs": 2603,
+              "endMs": 2771,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "，",
+              "startMs": 2771,
+              "endMs": 2940,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "得",
+              "startMs": 2940,
+              "endMs": 3108,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "一",
+              "startMs": 3108,
+              "endMs": 3276,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "点",
+              "startMs": 3276,
+              "endMs": 3444,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "点",
+              "startMs": 3444,
+              "endMs": 3613,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "养",
+              "startMs": 3613,
+              "endMs": 3781,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "。",
+              "startMs": 3781,
+              "endMs": 3949,
+              "timestampMs": null,
+              "confidence": null
+            }
+          ]
+        },
+        "captionSegments": [
+          {
+            "text": "比如阅读、订正、专注",
+            "startMs": 80,
+            "endMs": 1762,
+            "keyword": "专注"
+          },
+          {
+            "text": "这些小习惯",
+            "startMs": 1930,
+            "endMs": 2771,
+            "keyword": "习惯"
+          },
+          {
+            "text": "得一点点养",
+            "startMs": 2940,
+            "endMs": 4229,
+            "keyword": "养"
+          }
+        ]
+      },
+      {
+        "text": "普通孩子也能逆袭成学霸",
+        "keyword": "逆袭",
+        "caption": "五六年级再往后，数学要能自己学，英语也得早点攒。",
+        "voiceoverText": "五六年级再往后，数学要能自己学，英语也得早点攒。",
+        "captionKeyword": "早点攒",
+        "scene": "challenge-game",
+        "motionPreset": "star-burst",
+        "animationStyle": "bouncy-enter",
+        "stepNumber": 3,
+        "durationFrames": 117,
+        "captionTiming": {
+          "startMs": 80,
+          "endMs": 3612,
+          "tokens": [
+            {
+              "text": "五",
+              "startMs": 80,
+              "endMs": 216,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "六",
+              "startMs": 216,
+              "endMs": 351,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "年",
+              "startMs": 351,
+              "endMs": 487,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "级",
+              "startMs": 487,
+              "endMs": 622,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "再",
+              "startMs": 622,
+              "endMs": 758,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "往",
+              "startMs": 758,
+              "endMs": 893,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "后",
+              "startMs": 893,
+              "endMs": 1029,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "，",
+              "startMs": 1029,
+              "endMs": 1164,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "数",
+              "startMs": 1164,
+              "endMs": 1300,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "学",
+              "startMs": 1300,
+              "endMs": 1435,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "要",
+              "startMs": 1435,
+              "endMs": 1571,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "能",
+              "startMs": 1571,
+              "endMs": 1706,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "自",
+              "startMs": 1706,
+              "endMs": 1842,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "己",
+              "startMs": 1842,
+              "endMs": 1977,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "学",
+              "startMs": 1977,
+              "endMs": 2113,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "，",
+              "startMs": 2113,
+              "endMs": 2248,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "英",
+              "startMs": 2248,
+              "endMs": 2384,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "语",
+              "startMs": 2384,
+              "endMs": 2519,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "也",
+              "startMs": 2519,
+              "endMs": 2655,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "得",
+              "startMs": 2655,
+              "endMs": 2790,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "早",
+              "startMs": 2790,
+              "endMs": 2926,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "点",
+              "startMs": 2926,
+              "endMs": 3061,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "攒",
+              "startMs": 3061,
+              "endMs": 3197,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "。",
+              "startMs": 3197,
+              "endMs": 3332,
+              "timestampMs": null,
+              "confidence": null
+            }
+          ]
+        },
+        "captionSegments": [
+          {
+            "text": "五六年级再往后",
+            "startMs": 80,
+            "endMs": 1029
+          },
+          {
+            "text": "数学要能自己学",
+            "startMs": 1164,
+            "endMs": 2113,
+            "keyword": "数学"
+          },
+          {
+            "text": "英语也得早点攒",
+            "startMs": 2248,
+            "endMs": 3612,
+            "keyword": "英语"
+          }
+        ]
+      },
+      {
+        "text": "这不是逼孩子卷啊，是早点帮他把路走顺",
+        "keyword": "走顺",
+        "caption": "这不是逼孩子卷啊，是早点帮他把路走顺一点。",
+        "voiceoverText": "这不是逼孩子卷啊，是早点帮他把路走顺一点。",
+        "captionKeyword": "走顺",
+        "scene": "celebrate-win",
+        "motionPreset": "confetti-burst",
+        "animationStyle": "bouncy-enter",
+        "lottieId": "fx-confetti-warm",
+        "durationFrames": 93,
+        "captionTiming": {
+          "startMs": 80,
+          "endMs": 3002,
+          "tokens": [
+            {
+              "text": "这",
+              "startMs": 80,
+              "endMs": 207,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "不",
+              "startMs": 207,
+              "endMs": 334,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "是",
+              "startMs": 334,
+              "endMs": 462,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "逼",
+              "startMs": 462,
+              "endMs": 589,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "孩",
+              "startMs": 589,
+              "endMs": 716,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "子",
+              "startMs": 716,
+              "endMs": 843,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "卷",
+              "startMs": 843,
+              "endMs": 971,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "啊",
+              "startMs": 971,
+              "endMs": 1098,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "，",
+              "startMs": 1098,
+              "endMs": 1225,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "是",
+              "startMs": 1225,
+              "endMs": 1352,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "早",
+              "startMs": 1352,
+              "endMs": 1480,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "点",
+              "startMs": 1480,
+              "endMs": 1607,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "帮",
+              "startMs": 1607,
+              "endMs": 1734,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "他",
+              "startMs": 1734,
+              "endMs": 1861,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "把",
+              "startMs": 1861,
+              "endMs": 1989,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "路",
+              "startMs": 1989,
+              "endMs": 2116,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "走",
+              "startMs": 2116,
+              "endMs": 2243,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "顺",
+              "startMs": 2243,
+              "endMs": 2370,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "一",
+              "startMs": 2370,
+              "endMs": 2498,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "点",
+              "startMs": 2498,
+              "endMs": 2625,
+              "timestampMs": null,
+              "confidence": null
+            },
+            {
+              "text": "。",
+              "startMs": 2625,
+              "endMs": 2752,
+              "timestampMs": null,
+              "confidence": null
+            }
+          ]
+        },
+        "captionSegments": [
+          {
+            "text": "这不是逼孩子卷啊",
+            "startMs": 80,
+            "endMs": 1098,
+            "keyword": "不是"
+          },
+          {
+            "text": "是早点帮他",
+            "startMs": 1225,
+            "endMs": 1861
+          },
+          {
+            "text": "把路走顺一点",
+            "startMs": 1861,
+            "endMs": 3002,
+            "keyword": "走顺"
+          }
+        ]
+      }
+    ],
+    "audioPath": "output/voiceover.mp3"
+  }
+}

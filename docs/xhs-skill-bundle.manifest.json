@@ -1,0 +1,65 @@
+{
+  "bundleName": "xhs-content-production",
+  "version": 1,
+  "description": "Minimal and recommended skill bundle manifest for the Xiaohongshu content production workflow.",
+  "notes": [
+    "Use xhs-carousel-infographic as the true primary engine.",
+    "Treat odin-design-job-xhs-cards as the Odin design-job profile/compatibility layer.",
+    "Do not rely on the historical name odin-carousel-infographic when copying files."
+  ],
+  "minimal": [
+    {
+      "role": "carousel_workflow_entry",
+      "path": "/Users/jiweiwang/.codex/skills/xhs-carousel-infographic"
+    },
+    {
+      "role": "odin_design_job_profile",
+      "path": "/Users/jiweiwang/.codex/skills/odin-design-job-xhs-cards"
+    },
+    {
+      "role": "copy_capability",
+      "path": "/Users/jiweiwang/.codex/skills/odin-xiaohongshu-note-title"
+    },
+    {
+      "role": "shared_language_guardrails",
+      "path": "/Users/jiweiwang/.codex/skills/zh-writing-guardrails"
+    }
+  ],
+  "recommended": [
+    {
+      "role": "carousel_workflow_entry",
+      "path": "/Users/jiweiwang/.codex/skills/xhs-carousel-infographic"
+    },
+    {
+      "role": "odin_design_job_profile",
+      "path": "/Users/jiweiwang/.codex/skills/odin-design-job-xhs-cards"
+    },
+    {
+      "role": "copy_capability",
+      "path": "/Users/jiweiwang/.codex/skills/odin-xiaohongshu-note-title"
+    },
+    {
+      "role": "shared_language_guardrails",
+      "path": "/Users/jiweiwang/.codex/skills/zh-writing-guardrails"
+    },
+    {
+      "role": "extended_copy_knowledge",
+      "path": "/Users/jiweiwang/.codex/skills/odin-xhs-writer"
+    },
+    {
+      "role": "topic_research_capability",
+      "path": "/Users/jiweiwang/.codex/skills/odin-topic-pipeline"
+    },
+    {
+      "role": "legacy_html_reference",
+      "path": "/Users/jiweiwang/.codex/skills/article-to-carousel-html"
+    }
+  ],
+  "legacyNames": [
+    {
+      "name": "odin-carousel-infographic",
+      "actualPathToCopy": "/Users/jiweiwang/.codex/skills/xhs-carousel-infographic",
+      "status": "historical_alias"
+    }
+  ]
+}

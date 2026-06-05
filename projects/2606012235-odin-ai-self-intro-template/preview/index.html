@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1440, height=1920" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 1440px;
+        height: 1920px;
+        margin: 0;
+        overflow: hidden;
+        background: #effbd2;
+        color: #111;
+      }
+
+      body {
+        font-family: "STHeiti", "PingFang SC", "Noto Sans CJK SC", sans-serif;
+      }
+
+      [data-composition-id="odin-ai-self-intro"] {
+        position: relative;
+        width: 1440px;
+        height: 1920px;
+        overflow: hidden;
+        background:
+          linear-gradient(180deg, rgba(255,255,255,.64), rgba(255,255,255,0) 26%),
+          linear-gradient(135deg, #e8fac8 0%, #f7ffe6 55%, #ffffff 100%);
+      }
+
+      [data-composition-id="odin-ai-self-intro"]::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(0,0,0,.032) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(0,0,0,.026) 1px, transparent 1px);
+        background-size: 42px 42px;
+        opacity: .58;
+        pointer-events: none;
+      }
+
+      .scene {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        overflow: hidden;
+      }
+
+      .scene.is-active {
+        opacity: 1;
+      }
+
+      .heading {
+        position: absolute;
+        left: 92px;
+        top: 86px;
+        right: 92px;
+        z-index: 4;
+      }
+
+      .eyebrow {
+        display: inline-block;
+        padding: 13px 22px 15px;
+        border: 5px solid #111;
+        background: #111;
+        color: #ffe56b;
+        font-size: 30px;
+        font-weight: 900;
+        letter-spacing: 0;
+        box-shadow: 8px 8px 0 rgba(0,0,0,.14);
+      }
+
+      .title {
+        margin-top: 28px;
+        font-family: "Songti SC", "STSong", serif;
+        font-size: 94px;
+        font-weight: 900;
+        line-height: 1.12;
+        text-shadow: 4px 5px 0 #fff, 8px 9px 0 rgba(0,0,0,.13);
+      }
+
+      .title .mark {
+        background: linear-gradient(180deg, transparent 54%, #ffe56b 54%);
+      }
+
+      .rail {
+        position: absolute;
+        left: 64px;
+        top: 92px;
+        bottom: 280px;
+        width: 15px;
+        border: 4px solid #111;
+        background: #fff7df;
+        z-index: 5;
+        box-shadow: 6px 6px 0 rgba(0,0,0,.14);
+      }
+
+      .rail span {
+        display: block;
+        width: 100%;
+        height: 20%;
+        border-bottom: 3px solid rgba(0,0,0,.28);
+        background: #f6cf39;
+      }
+
+      .index {
+        position: absolute;
+        right: 86px;
+        top: 96px;
+        z-index: 5;
+        padding: 13px 18px 16px;
+        border: 5px solid #111;
+        background: #fff8e2;
+        font-size: 32px;
+        font-weight: 900;
+        line-height: 1;
+        box-shadow: 7px 7px 0 rgba(0,0,0,.15);
+      }
+
+      .index strong {
+        color: #d81718;
+      }
+
+      .board {
+        position: absolute;
+        left: 132px;
+        right: 132px;
+        top: 410px;
+        min-height: 840px;
+        padding: 58px 64px;
+        border: 8px solid #111;
+        background: #fff6df;
+        box-shadow: 18px 20px 0 rgba(0,0,0,.16);
+        z-index: 3;
+      }
+
+      .board::after {
+        content: "";
+        position: absolute;
+        inset: 22px;
+        border: 2px dashed rgba(0,0,0,.22);
+        pointer-events: none;
+      }
+
+      .bad-line {
+        position: relative;
+        margin-top: 128px;
+        padding: 38px 42px 44px;
+        border: 5px solid #111;
+        background: #fff;
+        font-size: 54px;
+        font-weight: 900;
+        line-height: 1.22;
+      }
+
+      .bad-line .label,
+      .good-line .label,
+      .row .label {
+        display: inline-block;
+        margin-bottom: 20px;
+        padding: 9px 16px 12px;
+        background: #111;
+        color: #ffe56b;
+        font-size: 28px;
+        font-weight: 900;
+      }
+
+      .cross {
+        position: absolute;
+        left: 40px;
+        right: 40px;
+        top: 114px;
+        height: 130px;
+        pointer-events: none;
+      }
+
+      .cross::before,
+      .cross::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 56px;
+        width: 100%;
+        height: 12px;
+        background: #d81718;
+        border-radius: 999px;
+      }
+
+      .cross::before {
+        transform: rotate(7deg);
+      }
+
+      .cross::after {
+        transform: rotate(-7deg);
+      }
+
+      .keyword-stack {
+        position: absolute;
+        left: 150px;
+        right: 150px;
+        top: 440px;
+        z-index: 3;
+      }
+
+      .keyword {
+        position: relative;
+        margin-bottom: 34px;
+        padding: 31px 42px 37px;
+        border: 6px solid #111;
+        background: #111;
+        color: #fff;
+        font-size: 58px;
+        font-weight: 900;
+        line-height: 1.1;
+        box-shadow: 12px 13px 0 rgba(0,0,0,.16);
+      }
+
+      .keyword small {
+        display: block;
+        margin-bottom: 12px;
+        color: #ffe56b;
+        font-size: 28px;
+      }
+
+      .keyword.active {
+        background: #fff7df;
+        color: #111;
+      }
+
+      .keyword.final {
+        background: #f0642f;
+        color: #111;
+      }
+
+      .good-line {
+        margin-top: 42px;
+        padding: 32px 38px 38px;
+        border: 5px solid #111;
+        background: #fff;
+        font-size: 47px;
+        font-weight: 900;
+        line-height: 1.28;
+      }
+
+      .row {
+        margin-bottom: 32px;
+        padding: 30px 34px 36px;
+        border: 5px solid #111;
+        background: #fff;
+        font-size: 43px;
+        font-weight: 900;
+        line-height: 1.24;
+      }
+
+      .row.bad {
+        color: #777;
+        background: #f2f2ed;
+      }
+
+      .circle-target {
+        position: relative;
+        display: inline-block;
+        padding: 0 10px;
+      }
+
+      .circle-target::after {
+        content: "";
+        position: absolute;
+        left: -12px;
+        right: -12px;
+        top: -8px;
+        bottom: -10px;
+        border: 7px solid #d81718;
+        border-radius: 50%;
+        transform: rotate(-3deg);
+      }
+
+      .stamp {
+        position: absolute;
+        right: 98px;
+        bottom: 268px;
+        z-index: 7;
+        padding: 22px 28px 28px;
+        border: 8px solid #d81718;
+        color: #d81718;
+        background: rgba(255,255,255,.72);
+        font-size: 62px;
+        font-weight: 900;
+        transform: rotate(-9deg);
+      }
+
+      .checks {
+        display: grid;
+        gap: 28px;
+        margin-top: 72px;
+      }
+
+      .check {
+        display: grid;
+        grid-template-columns: 72px 1fr;
+        align-items: start;
+        gap: 24px;
+        padding: 28px 34px 34px;
+        border: 5px solid #111;
+        background: #fff;
+        font-size: 45px;
+        font-weight: 900;
+        line-height: 1.22;
+      }
+
+      .check b {
+        display: grid;
+        place-items: center;
+        width: 64px;
+        height: 64px;
+        background: #111;
+        color: #ffe56b;
+        font-size: 34px;
+      }
+
+      .arrow {
+        position: absolute;
+        right: 164px;
+        top: 1040px;
+        z-index: 8;
+        width: 250px;
+        height: 120px;
+        transform: rotate(-8deg);
+      }
+
+      .arrow::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 56px;
+        width: 210px;
+        height: 12px;
+        background: #d81718;
+        border-radius: 999px;
+      }
+
+      .arrow::after {
+        content: "";
+        position: absolute;
+        right: 12px;
+        top: 25px;
+        width: 58px;
+        height: 58px;
+        border-right: 12px solid #d81718;
+        border-top: 12px solid #d81718;
+        transform: rotate(45deg);
+      }
+
+      .caption {
+        position: absolute;
+        left: 76px;
+        right: 76px;
+        bottom: 72px;
+        z-index: 12;
+        min-height: 220px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 30px 48px 38px;
+        border: 6px solid #111;
+        background: #111;
+        color: #fff;
+        font-size: 50px;
+        font-weight: 900;
+        line-height: 1.25;
+        text-align: center;
+        box-shadow: 12px 13px 0 rgba(0,0,0,.18);
+      }
+
+      .caption em {
+        color: #ffe56b;
+        font-style: normal;
+      }
+    </style>
+  </head>
+  <body>
+    <main
+      data-composition-id="odin-ai-self-intro"
+      data-width="1440"
+      data-height="1920"
+      data-duration="45"
+      data-track-index="0"
+    >
+      <div class="rail" aria-hidden="true"><span></span></div>
+
+      <section class="scene is-active" id="scene-1" data-scene="1">
+        <div class="index"><strong>01</strong>/05</div>
+        <div class="heading">
+          <div class="eyebrow">ODIN 面试证据板</div>
+          <div class="title">自我介绍<br /><span class="mark">不是复述简历</span></div>
+        </div>
+        <div class="board">
+          <div class="bad-line">
+            <span class="label">AI 常见废话</span><br />
+            我熟练使用 Figma 和 AI 工具，参与过多个项目，具备良好的沟通能力。
+            <div class="cross"></div>
+          </div>
+        </div>
+        <div class="caption">设计面试里，自我介绍不是让你复述简历，而是让面试官快速判断：你是不是能讲清楚自己的设计价值。</div>
+      </section>
+
+      <section class="scene" id="scene-2" data-scene="2">
+        <div class="index"><strong>02</strong>/05</div>
+        <div class="heading">
+          <div class="eyebrow">第一段加分</div>
+          <div class="title">先讲<br /><span class="mark">你解决什么问题</span></div>
+        </div>
+        <div class="keyword-stack">
+          <div class="keyword active"><small>不要停在工具</small>我主要解决的是</div>
+          <div class="keyword"><small>设计师价值</small>从需求不清</div>
+          <div class="keyword"><small>到方案可落地</small>之间的判断问题</div>
+        </div>
+        <div class="caption">第一段，不要说“我熟练使用 Figma 和 AI 工具”。要说：“我主要解决的是从需求不清到方案可落地之间的判断问题。”</div>
+      </section>
+
+      <section class="scene" id="scene-3" data-scene="3">
+        <div class="index"><strong>03</strong>/05</div>
+        <div class="heading">
+          <div class="eyebrow">第二段加分</div>
+          <div class="title">别堆项目名<br /><span class="mark">讲判断过程</span></div>
+        </div>
+        <div class="board">
+          <div class="row bad">
+            <span class="label">普通说法</span><br />
+            我做过电商、B 端、活动页，也用 AI 做过很多探索。
+          </div>
+          <div class="row">
+            <span class="label">加分说法</span><br />
+            我会先拆<span class="circle-target">目标、约束和用户行为</span>，再用 AI 扩展方案，最后保留我能解释的判断。
+          </div>
+        </div>
+        <div class="caption">第二段，不要堆项目名。要说：“我会先拆目标、约束和用户行为，再用 AI 帮我扩展方案，但最后保留的是我自己能解释的判断。”</div>
+      </section>
+
+      <section class="scene" id="scene-4" data-scene="4">
+        <div class="index"><strong>04</strong>/05</div>
+        <div class="heading">
+          <div class="eyebrow">第三段加分</div>
+          <div class="title">把设计讲到<br /><span class="mark">团队能继续推进</span></div>
+        </div>
+        <div class="keyword-stack">
+          <div class="keyword"><small>不是</small>我很会配合团队</div>
+          <div class="keyword"><small>而是</small>产品听得懂取舍</div>
+          <div class="keyword final"><small>结果</small>研发和业务都能继续推进</div>
+        </div>
+        <div class="stamp">可追问</div>
+        <div class="caption">第三段，不要只说我配合团队。要说：“我的价值是把设计方案讲到产品、研发和业务都能继续推进。”</div>
+      </section>
+
+      <section class="scene" id="scene-5" data-scene="5">
+        <div class="index"><strong>05</strong>/05</div>
+        <div class="heading">
+          <div class="eyebrow">最后检查</div>
+          <div class="title">AI 负责整理<br /><span class="mark">证据负责加分</span></div>
+        </div>
+        <div class="board">
+          <div class="checks">
+            <div class="check"><b>1</b><span>这句话能不能指向作品集里的真实项目？</span></div>
+            <div class="check"><b>2</b><span>这句话有没有讲出你的设计判断？</span></div>
+            <div class="check"><b>3</b><span>面试官追问时，你能不能接住细节？</span></div>
+          </div>
+        </div>
+        <div class="arrow"></div>
+        <div class="caption">AI 可以帮你整理表达，但不能替你制造经历。真正加分的自我介绍，最后一定能回到你的作品集证据。</div>
+      </section>
+    </main>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+
+      const scenes = Array.from(document.querySelectorAll(".scene"));
+      const duration = 9;
+
+      function activateScene(index) {
+        scenes.forEach((scene, sceneIndex) => {
+          scene.classList.toggle("is-active", sceneIndex === index);
+        });
+      }
+
+      const master = gsap.timeline({ paused: true });
+
+      scenes.forEach((scene, index) => {
+        const offset = index * duration;
+        master.call(() => activateScene(index), [], offset);
+        master.fromTo(scene, { opacity: 0 }, { opacity: 1, duration: 0.35, ease: "power2.out" }, offset);
+        master.fromTo(scene.querySelectorAll(".heading, .index"), { y: -34, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, stagger: 0.08, ease: "back.out(1.4)" }, offset + 0.1);
+        master.fromTo(scene.querySelectorAll(".board, .keyword"), { y: 64, opacity: 0, rotate: -1.5 }, { y: 0, opacity: 1, rotate: 0, duration: 0.68, stagger: 0.14, ease: "back.out(1.25)" }, offset + 0.45);
+        master.fromTo(scene.querySelectorAll(".row, .check"), { x: -44, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, stagger: 0.16, ease: "power3.out" }, offset + 1.05);
+        master.fromTo(scene.querySelectorAll(".cross, .circle-target, .stamp, .arrow"), { scale: 0.7, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.42, ease: "back.out(2)" }, offset + 1.45);
+        master.fromTo(scene.querySelector(".caption"), { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.56, ease: "power3.out" }, offset + 1.75);
+        master.to(scene, { opacity: index === scenes.length - 1 ? 1 : 0, duration: 0.28, ease: "power2.in" }, offset + duration - 0.3);
+        window.__timelines[`scene-${index + 1}`] = { start: offset, duration };
+      });
+
+      window.__timelines.master = master;
+
+      master.play(0);
+    </script>
+  </body>
+</html>

@@ -9,6 +9,7 @@ export default defineConfig({
       '/api': 'http://127.0.0.1:8787',
       '/projects': 'http://127.0.0.1:8787',
       '/yaoning-output': 'http://127.0.0.1:8787',
+      '/remotion-output': 'http://127.0.0.1:8787',
     },
   },
 })

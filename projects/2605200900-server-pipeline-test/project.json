@@ -1,0 +1,25 @@
+{
+  "id": "2605200900-server-pipeline-test",
+  "name": "Server pipeline test — 小学3关键期",
+  "type": "video",
+  "videoAccount": "yaoning",
+  "skill": "remotion-video-creator",
+  "status": "rendered",
+  "hasPreview": true,
+  "createdAt": "2026-05-20T09:00:00.000Z",
+  "updatedAt": "2026-05-22T12:31:01.721Z",
+  "outputs": [
+    {
+      "type": "cover",
+      "path": "public/output/cover.png"
+    },
+    {
+      "type": "frame",
+      "path": "public/output/frame.png"
+    },
+    {
+      "type": "video",
+      "path": "public/output/video.mp4"
+    }
+  ]
+}

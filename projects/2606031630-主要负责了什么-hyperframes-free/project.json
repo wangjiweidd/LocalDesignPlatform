@@ -1,0 +1,16 @@
+{
+  "id": "2606031630-主要负责了什么-hyperframes-free",
+  "title": "你在这个项目里主要负责了什么？HyperFrames Freeform",
+  "account": "Odin",
+  "type": "hyperframes-freeform-demo",
+  "source": "projects/2606031600-主要负责了什么-demo/source/copy.md",
+  "canvas": {
+    "width": 1440,
+    "height": 1920,
+    "ratio": "3:4"
+  },
+  "output": {
+    "html": "work/html/index.html",
+    "preview": "preview/index.html"
+  }
+}

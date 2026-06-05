@@ -1,0 +1,13 @@
+{
+  "name": "Odin HyperFrames Video",
+  "outputs": ["work/odin-video-spec.md", "work/script.md", "work/voiceover-minimax.txt", "work/html/index.html", "final.mp4"],
+  "sections": ["topic", "odin-video-spec", "script", "material-markup", "html-preview", "confirmation", "final-export"],
+  "defaultStop": "html-preview",
+  "renderer": "hyperframes",
+  "namedTemplates": {
+    "answer-signal-machine": {
+      "path": "hyperframes/answer-signal-machine/",
+      "useWhen": "Odin interview or portfolio answer videos need a dark, fluid, 7-scene reasoning-machine style with filmstrip focus windows."
+    }
+  }
+}

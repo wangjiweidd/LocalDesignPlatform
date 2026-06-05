@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1440, height=1920" />
+    <style>
+      :root {
+        --paper: #f7f1e6;
+        --ink: #171713;
+        --muted: #746f64;
+        --soft: #ece2d2;
+        --moss: #486b53;
+        --moss-soft: #dce7d8;
+        --verm: #c9402d;
+        --line: rgba(23, 23, 19, 0.18);
+        --font-serif: "Songti SC", "STSong", "Noto Serif CJK SC", serif;
+        --font-sans: "Avenir Next", "PingFang SC", "Noto Sans CJK SC", sans-serif;
+        --font-mono: "SF Mono", "Menlo", "Monaco", monospace;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 1440px;
+        height: 1920px;
+        margin: 0;
+        overflow: hidden;
+        background: var(--paper);
+        color: var(--ink);
+      }
+
+      body {
+        font-family: var(--font-sans);
+      }
+
+      .page {
+        position: relative;
+        width: 1440px;
+        height: 1920px;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at 18% 9%, rgba(72, 107, 83, 0.12), transparent 27%),
+          linear-gradient(180deg, #fbf7ef 0%, #f2eadf 100%);
+      }
+
+      .page::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(90deg, transparent 0 119px, rgba(23, 23, 19, 0.045) 120px),
+          linear-gradient(rgba(23, 23, 19, 0.035) 1px, transparent 1px);
+        background-size: 120px 120px;
+        opacity: 0.7;
+        pointer-events: none;
+      }
+
+      .topline {
+        position: absolute;
+        left: 88px;
+        right: 88px;
+        top: 68px;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        font-family: var(--font-mono);
+        font-size: 24px;
+        color: var(--muted);
+        letter-spacing: 0;
+      }
+
+      .issue {
+        color: var(--ink);
+        font-weight: 800;
+      }
+
+      .masthead {
+        position: absolute;
+        left: 88px;
+        right: 88px;
+        top: 138px;
+        display: grid;
+        grid-template-columns: 0.86fr 0.56fr;
+        gap: 64px;
+        align-items: end;
+      }
+
+      h1 {
+        margin: 0;
+        font-family: var(--font-serif);
+        font-size: 126px;
+        font-weight: 900;
+        line-height: 1.02;
+        letter-spacing: 0;
+      }
+
+      h1 span {
+        display: inline;
+        background: linear-gradient(180deg, transparent 64%, var(--moss-soft) 64%);
+      }
+
+      .deck {
+        padding-bottom: 12px;
+        border-bottom: 2px solid var(--ink);
+        color: var(--muted);
+        font-size: 34px;
+        font-weight: 700;
+        line-height: 1.35;
+      }
+
+      .deck b {
+        color: var(--verm);
+      }
+
+      .reading-flow {
+        position: absolute;
+        left: 88px;
+        right: 88px;
+        top: 500px;
+        bottom: 244px;
+        display: grid;
+        grid-template-columns: 0.78fr 1fr;
+        gap: 44px;
+      }
+
+      .left-column {
+        display: grid;
+        grid-template-rows: auto 1fr;
+        gap: 36px;
+      }
+
+      .thesis {
+        padding: 36px 40px 40px;
+        background: var(--ink);
+        color: #fff8ed;
+      }
+
+      .thesis .label,
+      .module .label,
+      .formula .label {
+        margin-bottom: 28px;
+        font-family: var(--font-mono);
+        font-size: 22px;
+        font-weight: 850;
+        color: var(--moss-soft);
+      }
+
+      .thesis p {
+        margin: 0;
+        font-family: var(--font-serif);
+        font-size: 52px;
+        font-weight: 900;
+        line-height: 1.16;
+      }
+
+      .thesis em {
+        color: #f2c85d;
+        font-style: normal;
+      }
+
+      .formula {
+        position: relative;
+        min-height: 666px;
+        padding: 36px 40px;
+        border: 2px solid var(--ink);
+        background: rgba(255, 252, 245, 0.68);
+      }
+
+      .formula-title {
+        margin: 0 0 26px;
+        font-family: var(--font-serif);
+        font-size: 54px;
+        font-weight: 900;
+        line-height: 1.08;
+      }
+
+      .formula-line {
+        display: grid;
+        grid-template-columns: 50px 1fr;
+        gap: 20px;
+        align-items: start;
+        padding: 20px 0;
+        border-top: 2px solid var(--line);
+        font-size: 29px;
+        font-weight: 780;
+        line-height: 1.3;
+      }
+
+      .formula-line:last-child {
+        border-bottom: 2px solid var(--line);
+      }
+
+      .formula-line strong {
+        display: grid;
+        place-items: center;
+        width: 50px;
+        height: 50px;
+        background: var(--moss);
+        color: #fff;
+        font-family: var(--font-mono);
+        font-size: 22px;
+      }
+
+      .right-column {
+        display: grid;
+        grid-template-rows: auto 1fr;
+        gap: 32px;
+      }
+
+      .module {
+        padding: 32px 40px 34px;
+        border: 2px solid var(--ink);
+        background: #fffaf0;
+      }
+
+      .module p {
+        margin: 0;
+        font-size: 36px;
+        font-weight: 780;
+        line-height: 1.32;
+      }
+
+      .module mark {
+        background: var(--moss-soft);
+        color: var(--ink);
+        padding: 0 8px 4px;
+      }
+
+      .sentences {
+        display: grid;
+        gap: 24px;
+      }
+
+      .sentence {
+        position: relative;
+        min-height: 202px;
+        padding: 28px 34px 30px;
+        border: 2px solid var(--ink);
+        background: #fffaf0;
+        overflow: hidden;
+      }
+
+      .sentence::before {
+        content: attr(data-no);
+        position: absolute;
+        right: 30px;
+        top: 18px;
+        font-family: var(--font-mono);
+        font-size: 68px;
+        font-weight: 900;
+        color: rgba(72, 107, 83, 0.16);
+      }
+
+      .sentence small {
+        display: inline-block;
+        margin-bottom: 18px;
+        padding: 8px 12px 10px;
+        background: var(--soft);
+        font-family: var(--font-mono);
+        font-size: 20px;
+        font-weight: 850;
+        color: var(--muted);
+      }
+
+      .sentence p {
+        position: relative;
+        margin: 0;
+        max-width: 760px;
+        font-size: 32px;
+        font-weight: 850;
+        line-height: 1.28;
+      }
+
+      .sentence b {
+        color: var(--moss);
+      }
+
+      .close-note {
+        position: absolute;
+        left: 88px;
+        right: 88px;
+        bottom: 54px;
+        width: auto;
+        display: grid;
+        grid-template-columns: 72px 1fr;
+        gap: 24px;
+        align-items: center;
+        padding-top: 22px;
+        border-top: 2px solid var(--ink);
+        color: var(--muted);
+        font-size: 27px;
+        font-weight: 750;
+        line-height: 1.3;
+      }
+
+      .close-note span {
+        display: grid;
+        place-items: center;
+        width: 64px;
+        height: 64px;
+        border: 2px solid var(--ink);
+        color: var(--verm);
+        font-family: var(--font-mono);
+        font-size: 28px;
+        font-weight: 900;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(28px);
+        animation: reveal 0.72s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+      }
+
+      .delay-1 { animation-delay: 0.12s; }
+      .delay-2 { animation-delay: 0.24s; }
+      .delay-3 { animation-delay: 0.36s; }
+      .delay-4 { animation-delay: 0.48s; }
+      .delay-5 { animation-delay: 0.6s; }
+      .delay-6 { animation-delay: 0.72s; }
+
+      @keyframes reveal {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <div class="topline reveal">
+        <div><span class="issue">ODIN INTERVIEW NOTE</span> / AI SELF INTRO</div>
+        <div>READING VERSION · 3:4</div>
+      </div>
+
+      <section class="masthead">
+        <h1 class="reveal delay-1">别让 AI<br /><span>替你上场</span></h1>
+        <div class="deck reveal delay-2">
+          设计面试的自我介绍，不是把经历修饰得更顺。它要让面试官立刻判断：<b>你是不是一个能做判断的设计师。</b>
+        </div>
+      </section>
+
+      <section class="reading-flow">
+        <div class="left-column">
+          <article class="thesis reveal delay-3">
+            <div class="label">01 / 核心判断</div>
+            <p>模板只负责顺口。<br />真正加分的是：<em>每一句都能回到真实作品。</em></p>
+          </article>
+
+          <article class="formula reveal delay-4">
+            <div class="label">02 / 一句话结构</div>
+            <h2 class="formula-title">把“我是谁”换成“我怎么创造设计价值”。</h2>
+            <div class="formula-line"><strong>A</strong><div>我主要解决的设计问题是什么。</div></div>
+            <div class="formula-line"><strong>B</strong><div>我做判断时会看哪些目标、约束和用户行为。</div></div>
+            <div class="formula-line"><strong>C</strong><div>我怎样让产品、研发、业务继续往前走。</div></div>
+          </article>
+        </div>
+
+        <div class="right-column">
+          <article class="module reveal delay-3">
+            <div class="label">03 / AI 的正确位置</div>
+            <p>AI 可以帮你压缩语言、调整顺序、去掉废话。但它不能替你生成经历，也不能替你解释 <mark>为什么这个设计判断成立</mark>。</p>
+          </article>
+
+          <section class="sentences">
+            <article class="sentence reveal delay-4" data-no="01">
+              <small>设计价值</small>
+              <p>我主要解决的是：<b>从需求不清，到方案可落地之间的判断问题。</b></p>
+            </article>
+
+            <article class="sentence reveal delay-5" data-no="02">
+              <small>判断过程</small>
+              <p>我会先拆目标、约束和用户行为，再用 AI 扩展方案；最后只保留我自己能解释的判断。</p>
+            </article>
+
+            <article class="sentence reveal delay-6" data-no="03">
+              <small>协作结果</small>
+              <p>我的价值是把设计方案讲到产品、研发和业务都能继续推进。</p>
+            </article>
+          </section>
+        </div>
+      </section>
+
+      <aside class="close-note reveal delay-6">
+        <span>!</span>
+        <div>面试官真正会追问的，不是你用了什么 AI，而是这些话背后有没有可验证的项目证据。</div>
+      </aside>
+    </main>
+  </body>
+</html>

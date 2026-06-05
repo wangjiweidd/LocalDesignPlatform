@@ -1,0 +1,50 @@
+{
+  "id": "2605251110-ai-项目别再只写会用工具",
+  "name": "AI 项目别再只写会用工具",
+  "type": "video",
+  "skill": "remotion-video-creator",
+  "relatedSkills": [
+    "odin-xiaohongshu-style",
+    "remotion-best-practices"
+  ],
+  "workflow": [
+    "research",
+    "script",
+    "outline",
+    "copy",
+    "preview",
+    "render-data"
+  ],
+  "videoAccount": "odin",
+  "brief": "Odin Remotion demo. 目标是验证知识干货视频能否使用更自然、不像 AI 模板的中文脚本。",
+  "status": "script_ready",
+  "createdAt": "2026-05-25T11:10:00.000+08:00",
+  "updatedAt": "2026-05-25T11:10:00.000+08:00",
+  "outputs": [
+    {
+      "type": "research",
+      "path": "source/research.md"
+    },
+    {
+      "type": "script",
+      "path": "source/script.md"
+    },
+    {
+      "type": "outline",
+      "path": "source/outline.md"
+    },
+    {
+      "type": "copy",
+      "path": "source/copy.md"
+    },
+    {
+      "type": "render-data",
+      "path": "source/render-data.json"
+    },
+    {
+      "type": "html-preview",
+      "path": "preview/index.html"
+    }
+  ],
+  "hasPreview": true
+}

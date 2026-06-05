@@ -1,0 +1,150 @@
+{
+  "track": "knowledge-sharing",
+  "contentType": "comparison",
+  "title": "Odin 证据板模板 Demo",
+  "subtitle": "材料讲解型视频",
+  "fps": 30,
+  "width": 1440,
+  "height": 1920,
+  "colorScheme": "light",
+  "accentColor": "#E85D04",
+  "shotDurationFrames": 90,
+  "cover": {
+    "title": "Odin 证据板\n模板 Demo",
+    "subtitle": "材料讲解型视频",
+    "titleHighlight": "证据板"
+  },
+  "shots": [
+    {
+      "text": "材料先出现",
+      "keyword": "材料",
+      "caption": "AI 项目只放工具截图，很难看出你做了什么",
+      "voiceoverText": "如果 AI 项目只放工具截图，面试官很难判断你到底做了什么。",
+      "captionKeyword": "工具截图",
+      "scene": "material-board",
+      "motionPreset": "list-stagger",
+      "animationStyle": "smooth-reveal",
+      "evidenceTitle": "材料先摆出来",
+      "evidenceSubtitle": "作品集第一页常见写法",
+      "evidenceLines": [
+        "只写工具过程",
+        "看不出你的判断",
+        "面试官只能猜你做了什么"
+      ],
+      "evidenceHighlights": [
+        "工具过程",
+        "判断"
+      ],
+      "tagItems": [
+        "工具截图",
+        "生成过程",
+        "结果展示"
+      ]
+    },
+    {
+      "text": "圈出问题",
+      "keyword": "问题",
+      "caption": "面试官要看的，是你的判断依据",
+      "voiceoverText": "这类项目要先把材料摆出来：目标是什么，限制在哪里，哪些方案被你放弃了。",
+      "captionKeyword": "判断依据",
+      "scene": "annotated-proof",
+      "motionPreset": "highlight-sweep",
+      "animationStyle": "smooth-reveal",
+      "evidenceTitle": "普通写法的问题",
+      "evidenceSubtitle": "AI 项目回答草稿",
+      "evidenceLines": [
+        "我用 Midjourney 和 ChatGPT 辅助完成了方案，生成了多个方向，最后选出视觉效果最好的一版。",
+        "这句话最大的问题，不是工具不高级，而是没有交代目标、限制和筛选标准。",
+        "面试官看不到你的判断，只能把它当成一次工具操作记录。"
+      ],
+      "evidenceHighlights": [
+        "没有说明目标、限制和筛选标准"
+      ],
+      "proofLabels": [
+        "目标不清",
+        "限制不明"
+      ],
+      "callout": "这里才是扣分点"
+    },
+    {
+      "text": "三段拆解",
+      "keyword": "三段",
+      "caption": "作品集可以按这三段来讲",
+      "voiceoverText": "真正能加分的，不是工具过程本身，而是你能不能解释清楚判断依据。",
+      "captionKeyword": "三段",
+      "scene": "case-breakdown",
+      "motionPreset": "list-stagger",
+      "animationStyle": "snappy-pop",
+      "evidenceTitle": "因果链",
+      "evidenceSubtitle": "从工具记录改成设计判断",
+      "caseBefore": "先说旧问题",
+      "caseDecision": "再说判断依据",
+      "caseResult": "最后讲结果变化",
+      "proofLabels": [
+        "点赞",
+        "关注",
+        "收藏"
+      ],
+      "evidenceHighlights": [
+        "旧问题",
+        "判断",
+        "结果"
+      ]
+    },
+    {
+      "text": "标出改法",
+      "keyword": "改法",
+      "caption": "目标、限制、取舍，要比工具截图更有用",
+      "voiceoverText": "所以作品集里可以按三段来讲：旧问题、你的判断、最后的结果。",
+      "captionKeyword": "取舍",
+      "scene": "annotated-proof",
+      "motionPreset": "highlight-sweep",
+      "animationStyle": "smooth-reveal",
+      "evidenceTitle": "改写后的材料",
+      "evidenceSubtitle": "面试回答版本",
+      "evidenceLines": [
+        "目标：让招聘方快速看懂 AI 在项目里的作用，而不是只看几张生成图。",
+        "限制：不能把所有过程都堆上去，要留下能支撑判断的关键材料。",
+        "取舍：保留能说明品牌调性的方案，放弃只是好看、但讲不出理由的方案。"
+      ],
+      "evidenceHighlights": [
+        "目标",
+        "限制",
+        "取舍"
+      ],
+      "proofLabels": [
+        "什么目标",
+        "什么限制",
+        "什么取舍"
+      ],
+      "callout": "这才是能讲的材料"
+    },
+    {
+      "text": "模板方向",
+      "keyword": "模板",
+      "caption": "画面负责指证据，字幕负责讲判断",
+      "voiceoverText": "以后每期视频都可以围绕一份材料展开，画面负责指证据，字幕负责讲判断。",
+      "captionKeyword": "指证据",
+      "scene": "material-board",
+      "motionPreset": "list-stagger",
+      "animationStyle": "smooth-reveal",
+      "evidenceTitle": "以后就按这个拍",
+      "evidenceSubtitle": "每期只需要换材料包",
+      "evidenceLines": [
+        "先放原始材料",
+        "再标判断依据",
+        "最后给可复用说法"
+      ],
+      "evidenceHighlights": [
+        "brief",
+        "截图",
+        "材料板"
+      ],
+      "tagItems": [
+        "材料",
+        "批注",
+        "判断"
+      ]
+    }
+  ]
+}

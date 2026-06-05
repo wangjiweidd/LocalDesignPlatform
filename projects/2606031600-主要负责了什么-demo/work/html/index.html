@@ -1,0 +1,1040 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1440, height=1920" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * { box-sizing: border-box; }
+      :root {
+        --font-main: "PingFang SC", "Heiti SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+      }
+      html, body {
+        width: 1440px;
+        height: 1920px;
+        margin: 0;
+        overflow: hidden;
+        background: #f4f1e6;
+        color: #141414;
+      }
+      body { font-family: var(--font-main); }
+
+      [data-composition-id="odin-role-answer"] {
+        position: relative;
+        width: 1440px;
+        height: 1920px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+        padding: 86px 112px 154px;
+        background:
+          radial-gradient(110% 80% at 100% 0%, rgba(203,224,176,.58) 0%, rgba(203,224,176,0) 48%),
+          linear-gradient(168deg, #f7f4ea 0%, #f3f0e2 62%, #eef2df 100%);
+      }
+      [data-composition-id="odin-role-answer"]::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(20,20,20,.045) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(20,20,20,.038) 1px, transparent 1px);
+        background-size: 48px 48px;
+        pointer-events: none;
+      }
+      .edge-frame {
+        position: absolute;
+        inset: 34px 38px;
+        border: 2px solid rgba(20,20,20,.42);
+        pointer-events: none;
+        z-index: 1;
+      }
+      .edge-frame::after {
+        content: "";
+        position: absolute;
+        inset: 8px;
+        border: 1px solid rgba(20,20,20,.12);
+      }
+
+      .top-chrome {
+        flex: 0 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 10;
+      }
+      .brand {
+        font-family: var(--font-main);
+        font-size: 25px;
+        font-weight: 800;
+        letter-spacing: .13em;
+        color: #57564c;
+      }
+      .brand b { color: #141414; }
+      .mode-tag {
+        padding: 11px 18px 13px;
+        border: 2px solid #141414;
+        background: rgba(255,255,255,.64);
+        font-size: 23px;
+        font-weight: 900;
+      }
+      .mode-tag em { font-style: normal; color: #d8392b; }
+
+      .title-stage {
+        flex: 0 0 auto;
+        position: relative;
+        min-height: 248px;
+        z-index: 8;
+      }
+      .title-card {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+      }
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 9px 18px 11px;
+        background: #141414;
+        color: #fff;
+        font-family: var(--font-main);
+        font-size: 23px;
+        font-weight: 800;
+        letter-spacing: .12em;
+      }
+      .eyebrow .dot { width: 12px; height: 12px; border-radius: 999px; background: #cbe0b0; }
+      .eyebrow .cn { font-family: var(--font-main); letter-spacing: .04em; }
+      .kicker {
+        margin-top: 17px;
+        font-family: var(--font-main);
+        font-size: 25px;
+        font-weight: 900;
+        color: #8c8a7e;
+        letter-spacing: .13em;
+        text-transform: uppercase;
+      }
+      .title {
+        margin-top: 8px;
+        max-width: none;
+        font-family: var(--font-main);
+        font-size: 74px;
+        line-height: 1;
+        font-weight: 900;
+        text-shadow: 3px 3px 0 rgba(255,255,255,.72);
+        white-space: nowrap;
+        overflow: hidden;
+      }
+      .title.small { font-size: 64px; }
+      .title.tight { font-size: 68px; }
+      .gold {
+        background: linear-gradient(180deg, transparent 60%, #f2c14a 60%, #f2c14a 94%, transparent 94%);
+        padding: 0 4px;
+      }
+
+      .board-wrap {
+        flex: 1 1 auto;
+        position: relative;
+        min-height: 0;
+        z-index: 5;
+      }
+      .board {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        border: 3px solid #141414;
+        background: #fbf8ec;
+        box-shadow: 12px 12px 0 rgba(20,20,20,.13);
+      }
+      .board-header {
+        flex: 0 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 30px 20px;
+        background: #141414;
+        color: #fff;
+      }
+      .board-header .h-label {
+        font-family: var(--font-main);
+        font-size: 26px;
+        font-weight: 800;
+        letter-spacing: .11em;
+      }
+      .board-header .h-cn { color: #f2c14a; font-family: var(--font-main); letter-spacing: 0; }
+      .board-header .h-mark {
+        font-family: var(--font-main);
+        font-size: 22px;
+        color: #cbe0b0;
+        letter-spacing: .1em;
+      }
+      .content-stage { position: relative; flex: 1 1 auto; overflow: hidden; }
+      .content-panel {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        padding: 58px 58px 54px;
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+      }
+
+      .question-layout {
+        display: grid;
+        grid-template-columns: .95fr 1.05fr;
+        gap: 34px;
+        height: 100%;
+      }
+      .question-card,
+      .paper-card,
+      .logic-card,
+      .answer-doc,
+      .error-card {
+        border: 2px solid #141414;
+        background: #fff;
+        position: relative;
+      }
+      .question-card {
+        padding: 38px 42px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 28px;
+      }
+      .question-main {
+        font-family: var(--font-main);
+        font-size: 68px;
+        line-height: 1.12;
+        font-weight: 900;
+      }
+      .bad-answer {
+        position: relative;
+        padding: 24px 28px;
+        background: #efeee6;
+        color: #646258;
+        border: 2px solid #b9b7a9;
+        font-size: 43px;
+        line-height: 1.2;
+        font-weight: 900;
+      }
+      .strike {
+        position: absolute;
+        left: 20px;
+        right: 20px;
+        top: 50%;
+        height: 58px;
+        transform: translateY(-50%);
+        pointer-events: none;
+      }
+      .formula-card {
+        padding: 34px;
+        background: #fbf8ec;
+        border: 2px solid #141414;
+      }
+      .formula-title {
+        display: inline-block;
+        padding: 9px 17px 11px;
+        background: #141414;
+        color: #f2c14a;
+        border-radius: 999px;
+        font-size: 25px;
+        font-weight: 900;
+      }
+      .formula-grid {
+        margin-top: 28px;
+        display: grid;
+        gap: 22px;
+      }
+      .formula-item {
+        display: grid;
+        grid-template-columns: 58px 1fr;
+        align-items: center;
+        gap: 18px;
+        padding: 22px 24px;
+        border: 2px solid #141414;
+        background: #fff;
+      }
+      .formula-i {
+        display: grid;
+        place-items: center;
+        width: 54px;
+        height: 54px;
+        border-radius: 999px;
+        background: #141414;
+        color: #cbe0b0;
+        font-family: var(--font-main);
+        font-size: 28px;
+        font-weight: 900;
+      }
+      .formula-copy { font-size: 43px; line-height: 1.14; font-weight: 900; }
+
+      .logic-layout {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 24px;
+        height: 100%;
+      }
+      .logic-ribbon {
+        align-self: flex-start;
+        margin-left: 104px;
+        margin-bottom: 2px;
+        padding: 13px 22px 15px;
+        border: 2px solid #141414;
+        background: #141414;
+        color: #f2c14a;
+        font-size: 30px;
+        line-height: 1;
+        font-weight: 900;
+      }
+      .logic-card {
+        min-height: 168px;
+        padding: 26px 32px;
+        display: grid;
+        grid-template-columns: 76px 260px 1fr;
+        align-items: center;
+        gap: 28px;
+      }
+      .logic-num {
+        width: 58px;
+        height: 58px;
+        display: grid;
+        place-items: center;
+        border-radius: 999px;
+        background: #141414;
+        color: #cbe0b0;
+        font-family: var(--font-main);
+        font-size: 27px;
+        font-weight: 900;
+      }
+      .logic-title {
+        font-family: var(--font-main);
+        font-size: 52px;
+        line-height: 1.08;
+        font-weight: 900;
+      }
+      .logic-copy {
+        font-size: 38px;
+        line-height: 1.18;
+        font-weight: 850;
+      }
+      .logic-card.key {
+        background: #f2c14a;
+        box-shadow: 10px 10px 0 rgba(20,20,20,.13);
+      }
+      .logic-layout::before {
+        content: "";
+        position: absolute;
+        left: 66px;
+        top: 270px;
+        bottom: 214px;
+        width: 5px;
+        background: #d8392b;
+        opacity: .9;
+      }
+
+      .template-layout {
+        height: 100%;
+        display: grid;
+        grid-template-columns: 1.22fr .78fr;
+        gap: 24px;
+        align-items: flex-start;
+      }
+      .answer-doc {
+        height: 790px;
+        padding: 26px 30px;
+        overflow: hidden;
+      }
+      .doc-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 18px;
+      }
+      .doc-title {
+        display: inline-block;
+        padding: 9px 17px 11px;
+        border-radius: 999px;
+        background: #141414;
+        color: #f2c14a;
+        font-size: 25px;
+        font-weight: 900;
+      }
+      .doc-sub {
+        font-family: var(--font-main);
+        color: #7b796d;
+        font-size: 20px;
+        font-weight: 900;
+        letter-spacing: .1em;
+      }
+      .doc-body {
+        position: relative;
+        display: grid;
+        gap: 18px;
+      }
+      .doc-block {
+        position: relative;
+        padding: 22px 22px 24px 82px;
+        min-height: 142px;
+        border: 2px solid #141414;
+        background: #fbf8ec;
+        font-size: 31px;
+        line-height: 1.18;
+        font-weight: 850;
+      }
+      .doc-block strong {
+        color: #141414;
+        background: #cbe0b0;
+        padding: 0 4px;
+      }
+      .doc-block .idx {
+        position: absolute;
+        left: 18px;
+        top: 22px;
+        width: 46px;
+        height: 46px;
+        display: grid;
+        place-items: center;
+        border-radius: 999px;
+        background: #141414;
+        color: #cbe0b0;
+        font-family: var(--font-main);
+        font-size: 23px;
+        font-weight: 900;
+      }
+      .side-panel {
+        height: 790px;
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+      }
+      .replace-card,
+      .coach-note,
+      .mini-board {
+        border: 2px solid #141414;
+        background: #fff;
+        padding: 28px 30px;
+      }
+      .replace-card {
+        flex: 0 0 auto;
+        background: #141414;
+        color: #fff;
+      }
+      .replace-title {
+        color: #f2c14a;
+        font-size: 28px;
+        font-weight: 900;
+      }
+      .chips {
+        margin-top: 18px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .chip {
+        padding: 10px 15px 12px;
+        border: 2px solid #f2c14a;
+        color: #f2c14a;
+        font-size: 23px;
+        font-weight: 900;
+      }
+      .coach-note {
+        position: relative;
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+      }
+      .coach-note .label {
+        display: inline-block;
+        padding: 9px 16px 11px;
+        border-radius: 999px;
+        background: #141414;
+        color: #f2c14a;
+        font-size: 24px;
+        font-weight: 900;
+      }
+      .coach-note p {
+        margin: 22px 0 0;
+        font-size: 37px;
+        line-height: 1.18;
+        font-weight: 900;
+      }
+      .red-note {
+        position: relative;
+        align-self: flex-end;
+        margin-top: auto;
+        width: 330px;
+        padding: 18px 22px 20px;
+        border: 3px solid #d8392b;
+        color: #d8392b;
+        background: rgba(255,255,255,.96);
+        font-size: 32px;
+        line-height: 1.1;
+        font-weight: 900;
+        transform: rotate(-3deg);
+        box-shadow: 6px 6px 0 rgba(20,20,20,.12);
+      }
+
+      .error-layout {
+        height: 100%;
+        display: grid;
+        grid-template-columns: .88fr 1.12fr;
+        gap: 30px;
+        align-items: stretch;
+      }
+      .error-card {
+        padding: 38px 40px;
+        background: #efeee6;
+        color: #626056;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 24px;
+      }
+      .error-card .tag {
+        align-self: flex-start;
+        padding: 8px 16px 10px;
+        border-radius: 999px;
+        background: #b9b7a9;
+        color: #fff;
+        font-size: 26px;
+        font-weight: 900;
+      }
+      .error-text {
+        position: relative;
+        font-size: 50px;
+        line-height: 1.2;
+        font-weight: 900;
+      }
+      .mini-board {
+        display: grid;
+        grid-template-rows: auto 1fr;
+        gap: 22px;
+        border: 2px solid #141414;
+        background: #fff;
+        padding: 30px;
+      }
+      .mini-board-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 18px;
+        border-bottom: 3px solid #141414;
+      }
+      .mini-board-title span:first-child {
+        padding: 9px 17px 11px;
+        border-radius: 999px;
+        background: #141414;
+        color: #f2c14a;
+        font-size: 25px;
+        font-weight: 900;
+      }
+      .mini-board-title span:last-child {
+        font-family: var(--font-main);
+        color: #7b796d;
+        font-size: 20px;
+        font-weight: 900;
+        letter-spacing: .1em;
+      }
+      .mini-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 18px;
+      }
+      .mini-row {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 16px;
+        padding: 24px;
+        border: 2px solid #141414;
+        background: #fbf8ec;
+      }
+      .mini-row .m-label {
+        display: inline-flex;
+        align-self: flex-start;
+        align-items: center;
+        min-height: 50px;
+        padding: 0 18px;
+        border-radius: 999px;
+        background: #141414;
+        color: #f2c14a;
+        font-size: 25px;
+        font-weight: 900;
+      }
+      .mini-row .m-copy {
+        font-size: 33px;
+        line-height: 1.15;
+        font-weight: 900;
+      }
+
+      .final-layout {
+        height: 100%;
+        display: grid;
+        grid-template-columns: .92fr 1.08fr;
+        gap: 32px;
+      }
+      .stamp-card {
+        position: relative;
+        border: 3px solid #141414;
+        background: #f2c14a;
+        padding: 42px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .stamp-title {
+        font-family: var(--font-main);
+        font-size: 76px;
+        line-height: 1.08;
+        font-weight: 900;
+      }
+      .stamp-sub {
+        margin-top: 28px;
+        font-size: 40px;
+        line-height: 1.2;
+        font-weight: 900;
+      }
+      .final-checks {
+        display: grid;
+        gap: 22px;
+      }
+      .final-row {
+        display: grid;
+        grid-template-columns: 64px 1fr;
+        gap: 22px;
+        align-items: center;
+        padding: 26px 30px;
+        border: 2px solid #141414;
+        background: #fff;
+      }
+      .final-row .ok {
+        display: grid;
+        place-items: center;
+        width: 58px;
+        height: 58px;
+        border-radius: 999px;
+        background: #141414;
+        color: #cbe0b0;
+        font-family: var(--font-main);
+        font-size: 28px;
+        font-weight: 900;
+      }
+      .final-row .f-copy {
+        font-size: 41px;
+        line-height: 1.18;
+        font-weight: 900;
+      }
+
+      .caption-bar {
+        flex: 0 0 auto;
+        position: relative;
+        min-height: 142px;
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        padding: 22px 34px 24px;
+        background: #141414;
+        box-shadow: 10px 10px 0 rgba(20,20,20,.14);
+        z-index: 14;
+      }
+      .vo-tag {
+        flex: 0 0 auto;
+        align-self: flex-start;
+        margin-top: 4px;
+        padding: 6px 12px 8px;
+        border: 2px solid #f2c14a;
+        color: #f2c14a;
+        font-family: var(--font-main);
+        font-size: 22px;
+        font-weight: 900;
+        letter-spacing: .14em;
+      }
+      .caption-flow { position: relative; flex: 1 1 auto; min-height: 98px; }
+      .caption-line {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        color: #fff;
+        font-size: 35px;
+        line-height: 1.26;
+        font-weight: 900;
+        opacity: 0;
+      }
+
+      .draw { fill: none; stroke: #d8392b; stroke-width: 9; stroke-linecap: round; stroke-linejoin: round; }
+      .draw.thin { stroke-width: 6; }
+      .ring {
+        position: absolute;
+        border: 5px solid #d8392b;
+        border-radius: 18px;
+        opacity: 0;
+        pointer-events: none;
+        transform: rotate(-2deg) scale(.8);
+      }
+      .block-ring {
+        inset: -8px -10px;
+        border-radius: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <main
+      data-composition-id="odin-role-answer"
+      data-width="1440"
+      data-height="1920"
+      data-duration="70"
+      data-track-index="0"
+    >
+      <div class="edge-frame"></div>
+
+      <div class="top-chrome">
+        <div class="brand"><b>ODIN</b> / 面试高频题 · 视觉设计师</div>
+        <div class="mode-tag"><em>问题拆解</em> ｜ 负责了什么</div>
+      </div>
+
+      <div class="title-stage">
+        <div class="title-card" data-scene-title="1">
+          <div class="eyebrow"><span class="dot"></span>QUESTION<span class="cn">高频问题</span></div>
+          <div class="kicker">ni zhu yao fu ze le shen me</div>
+          <div class="title tight">主要负责什么？<span class="gold">别讲流水账</span></div>
+        </div>
+        <div class="title-card" data-scene-title="2">
+          <div class="eyebrow"><span class="dot"></span>LOGIC<span class="cn">答题骨架</span></div>
+          <div class="kicker">fan wei · pan duan · jie guo</div>
+          <div class="title">关键不在细节，在<span class="gold">完整逻辑</span></div>
+        </div>
+        <div class="title-card" data-scene-title="3">
+          <div class="eyebrow"><span class="dot"></span>TEMPLATE 01<span class="cn">活动主视觉</span></div>
+          <div class="kicker">yun ying huo dong / da cu kv</div>
+          <div class="title">活动项目，要讲<span class="gold">方向和转化</span></div>
+        </div>
+        <div class="title-card" data-scene-title="4">
+          <div class="eyebrow"><span class="dot"></span>HOW TO USE<span class="cn">怎么套用</span></div>
+          <div class="kicker">ti huan bian liang</div>
+          <div class="title small">替换主题、风格、渠道、结果，<span class="gold">直接开口</span></div>
+        </div>
+        <div class="title-card" data-scene-title="5">
+          <div class="eyebrow"><span class="dot"></span>WRONG ANSWER<span class="cn">错误视角</span></div>
+          <div class="kicker">shi jiao tai di</div>
+          <div class="title">只讲做了什么，<span class="gold">太偏执行</span></div>
+        </div>
+        <div class="title-card" data-scene-title="6">
+          <div class="eyebrow"><span class="dot"></span>TEMPLATE 02<span class="cn">品牌升级</span></div>
+          <div class="kicker">pin pai shi jue sheng ji</div>
+          <div class="title">品牌升级，要讲<span class="gold">体系推导</span></div>
+        </div>
+        <div class="title-card" data-scene-title="7">
+          <div class="eyebrow"><span class="dot"></span>TAKEAWAY<span class="cn">最终判断</span></div>
+          <div class="kicker">you jue ce neng li</div>
+          <div class="title">好回答，会让你像<span class="gold">决策者</span></div>
+        </div>
+      </div>
+
+      <div class="board-wrap">
+        <div class="board">
+          <div class="board-header">
+            <span class="h-label">INTERVIEW BOARD <span class="h-cn" data-header="cn">错误回答 → 答题逻辑</span></span>
+            <span class="h-mark" data-header="mark">01 / 07</span>
+          </div>
+          <div class="content-stage">
+            <section class="content-panel" data-scene-panel="1">
+              <div class="question-layout">
+                <div class="question-card">
+                  <div class="formula-title">面试官真正问的是</div>
+                  <div class="question-main">你在项目里，做过哪些<span class="gold">关键判断</span>？</div>
+                  <div class="bad-answer">
+                    我负责海报、Banner、落地页、延展物料。
+                    <svg class="strike" viewBox="0 0 900 60" preserveAspectRatio="none">
+                      <path class="draw" data-draw="1" d="M8 38 C220 18 420 48 892 22" />
+                    </svg>
+                  </div>
+                </div>
+                <div class="formula-card">
+                  <span class="formula-title">别背清单，要讲结构</span>
+                  <div class="formula-grid">
+                    <div class="formula-item"><span class="formula-i">01</span><span class="formula-copy">设计范围是什么</span></div>
+                    <div class="formula-item"><span class="formula-i">02</span><span class="formula-copy">你做过哪些关键判断</span></div>
+                    <div class="formula-item"><span class="formula-i">03</span><span class="formula-copy">这些判断带来了什么结果</span></div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="content-panel" data-scene-panel="2">
+              <div class="logic-layout">
+                <div class="logic-ribbon">不要讲清单，要讲一条判断链</div>
+                <div class="logic-card">
+                  <div class="logic-num">01</div>
+                  <div class="logic-title">负责范围</div>
+                  <div class="logic-copy">先让面试官知道你不是只接任务，而是负责一段完整设计范围。</div>
+                </div>
+                <div class="logic-card key">
+                  <div class="logic-num">02</div>
+                  <div class="logic-title">关键判断</div>
+                  <div class="logic-copy">讲目标人群、渠道、信息节奏、视觉语言这些判断是怎么来的。</div>
+                </div>
+                <div class="logic-card">
+                  <div class="logic-num">03</div>
+                  <div class="logic-title">结果证据</div>
+                  <div class="logic-copy">最后落到点击、转化、识别度、效率、专业感这些能被追问的结果。</div>
+                </div>
+              </div>
+            </section>
+
+            <section class="content-panel" data-scene-panel="3">
+              <div class="template-layout">
+                <div class="answer-doc">
+                  <div class="doc-head">
+                    <span class="doc-title">模板一：运营活动 / 大促主视觉项目</span>
+                    <span class="doc-sub">FULL ANSWER</span>
+                  </div>
+                  <div class="doc-body">
+                    <div class="doc-block"><span class="idx">01</span>在这次 XX 活动里，我主要负责<strong>整体视觉方向的制定</strong>，以及主 KV 和核心投放物料的视觉节奏。</div>
+                    <div class="doc-block"><span class="idx">02</span>活动开始前，我根据目标人群和投放渠道，确定偏 XX 风格的视觉语言，把色彩、光影和构图统一到一套体系里。<i class="ring block-ring" data-ring="3a"></i></div>
+                    <div class="doc-block"><span class="idx">03</span>在主 KV 上，我重点处理<strong>信息节奏</strong>，把活动主题、核心权益和 CTA 放在第一视觉动线上。</div>
+                    <div class="doc-block"><span class="idx">04</span>同时，我搭建延展规范和模板，从标题层级、版式比例，到切图规格和留白规则，支持团队快速生产多端物料。</div>
+                    <div class="doc-block"><span class="idx">05</span>上线后，这套视觉在 App 首页、官网和信息流广告多渠道复用，整体<strong>点击和参与表现</strong>相比上一期明显提升。<i class="ring block-ring" data-ring="3b"></i></div>
+                  </div>
+                </div>
+                <div class="side-panel">
+                  <div class="replace-card">
+                    <div class="replace-title">面试官想听的三个点</div>
+                    <div class="chips">
+                      <span class="chip">核心工作</span>
+                      <span class="chip">视觉语言</span>
+                      <span class="chip">信息节奏</span>
+                      <span class="chip">点击转化</span>
+                    </div>
+                  </div>
+                  <div class="coach-note">
+                    <span class="label">Odin 批注</span>
+                    <p>活动项目不要只讲“做了很多物料”，要讲你怎么把视觉方向变成可复用的投放系统。</p>
+                    <div class="red-note" data-note="3">结果一定要能回到渠道表现</div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="content-panel" data-scene-panel="4">
+              <div class="logic-layout">
+                <div class="logic-card key">
+                  <div class="logic-num">XX</div>
+                  <div class="logic-title">活动主题</div>
+                  <div class="logic-copy">大促、节日营销、周年庆、运营活动主视觉都可以套。</div>
+                </div>
+                <div class="logic-card">
+                  <div class="logic-num">Style</div>
+                  <div class="logic-title">风格关键词</div>
+                  <div class="logic-copy">把风格说成目标人群和投放渠道共同推出来的选择。</div>
+                </div>
+                <div class="logic-card">
+                  <div class="logic-num">Result</div>
+                  <div class="logic-title">上线结果</div>
+                  <div class="logic-copy">没有精确数字，也至少要说清复用渠道、效率提升和表现变化。</div>
+                </div>
+              </div>
+            </section>
+
+            <section class="content-panel" data-scene-panel="5">
+              <div class="error-layout">
+                <div class="error-card">
+                  <span class="tag">常见错误</span>
+                  <div class="error-text">
+                    我做了新 Logo，还做了官网、海报、周边这些应用物料。
+                    <svg class="strike" viewBox="0 0 900 60" preserveAspectRatio="none">
+                      <path class="draw" data-draw="5" d="M8 34 C220 12 486 54 892 20" />
+                    </svg>
+                  </div>
+                </div>
+                <div class="mini-board">
+                  <div class="mini-board-title">
+                    <span>正确回答要覆盖</span>
+                    <span>BRAND UPGRADE LOGIC</span>
+                  </div>
+                  <div class="mini-grid">
+                    <div class="mini-row"><span class="m-label">旧问题</span><span class="m-copy">识别度不高，风格割裂，小尺寸容易丢特征。</span></div>
+                    <div class="mini-row"><span class="m-label">推导</span><span class="m-copy">从品牌定位和关键词，推新视觉语言。</span></div>
+                    <div class="mini-row"><span class="m-label">触点</span><span class="m-copy">官网、社媒、线下物料形成统一识别。</span></div>
+                    <div class="mini-row"><span class="m-label">反馈</span><span class="m-copy">识别度和专业感，被市场或团队验证。</span></div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="content-panel" data-scene-panel="6">
+              <div class="template-layout">
+                <div class="answer-doc">
+                  <div class="doc-head">
+                    <span class="doc-title">模板二：品牌 / 子品牌视觉升级项目</span>
+                    <span class="doc-sub">FULL ANSWER</span>
+                  </div>
+                  <div class="doc-body">
+                    <div class="doc-block"><span class="idx">01</span>在这次品牌视觉升级项目中，我主要负责<strong>新的品牌视觉语言设计</strong>，以及关键触点的应用落地。</div>
+                    <div class="doc-block"><span class="idx">02</span>项目开始时，我先梳理原有品牌的几个问题，比如标志识别度不高、线上线下风格割裂，小尺寸容易丢失特征。<i class="ring block-ring" data-ring="6a"></i></div>
+                    <div class="doc-block"><span class="idx">03</span>基于品牌定位和核心关键词，我重新设计标志和字标结构，提炼更有记忆点的图形语言，并配套色彩和排版系统。</div>
+                    <div class="doc-block"><span class="idx">04</span>在应用层面，我重点负责官网首页关键模块、社媒模板和线下物料，通过统一版式规则和视觉锚点，让用户一眼认出品牌。</div>
+                    <div class="doc-block"><span class="idx">05</span>最后我整理品牌视觉使用手册。升级之后，新视觉持续用于活动和线上内容，品牌识别度和整体专业感都有明显提升。<i class="ring block-ring" data-ring="6b"></i></div>
+                  </div>
+                </div>
+                <div class="side-panel">
+                  <div class="replace-card">
+                    <div class="replace-title">品牌升级要换成这些信息</div>
+                    <div class="chips">
+                      <span class="chip">旧问题</span>
+                      <span class="chip">定位关键词</span>
+                      <span class="chip">关键触点</span>
+                      <span class="chip">市场反馈</span>
+                    </div>
+                  </div>
+                  <div class="coach-note">
+                    <span class="label">Odin 批注</span>
+                    <p>品牌项目最怕讲成物料清单。你要让面试官听到体系、推导和落地。</p>
+                    <div class="red-note" data-note="6">不是做了 Logo，是升级了一套系统</div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="content-panel" data-scene-panel="7">
+              <div class="final-layout">
+                <div class="stamp-card">
+                  <div class="stamp-title">一个有决策能力的视觉设计师</div>
+                  <div class="stamp-sub">不是把每个执行细节背出来，而是把项目讲成一条能被追问的判断链路。</div>
+                </div>
+                <div class="final-checks">
+                  <div class="final-row"><span class="ok">01</span><span class="f-copy">我负责的范围是什么？</span></div>
+                  <div class="final-row"><span class="ok">02</span><span class="f-copy">我做过哪些关键判断？</span></div>
+                  <div class="final-row"><span class="ok">03</span><span class="f-copy">判断带来了什么结果？</span></div>
+                  <div class="final-row"><span class="ok">04</span><span class="f-copy">这件事为什么证明我有设计决策能力？</span></div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+
+      <div class="caption-bar">
+        <div class="vo-tag">VO</div>
+        <div class="caption-flow">
+          <div class="caption-line" data-caption="1">“你在这个项目里主要负责了什么？”面试讲得越认真，反而越容易被刷掉。90% 的视觉设计师回答都是错的。</div>
+          <div class="caption-line" data-caption="2">这道题的关键，根本不在于“细节”，而在于“逻辑”。面试官想听的是一套完整叙事。</div>
+          <div class="caption-line" data-caption="3">先看活动设计项目。面试官真正想听的是核心工作、视觉语言、信息节奏，以及多渠道上线后的点击和转化表现。</div>
+          <div class="caption-line" data-caption="4">这段话术只需要替换活动主题、风格关键词、渠道和结果，就能直接用在面试里。</div>
+          <div class="caption-line" data-caption="5">再看品牌升级类项目。只说“我做了新 Logo、官网、海报、周边”，视角太低，太偏执行。</div>
+          <div class="caption-line" data-caption="6">你的回复需要涵盖旧版本问题、新视觉体系的探索、关键触点，以及识别度和专业感上的市场反馈。</div>
+          <div class="caption-line" data-caption="7">只要你能基于这套逻辑回答，你就是一个有决策能力的视觉设计师。如果还能讲出叙事感，offer 就真的一步之遥了。</div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const COMPOSITION_ID = "odin-role-answer";
+      const SCENE = 10;
+      const TOTAL = 7;
+      const TOTAL_TIME = SCENE * TOTAL;
+
+      const titleCards = gsap.utils.toArray("[data-scene-title]");
+      const panels = gsap.utils.toArray("[data-scene-panel]");
+      const captions = gsap.utils.toArray("[data-caption]");
+      const headerCn = document.querySelector('[data-header="cn"]');
+      const headerMark = document.querySelector('[data-header="mark"]');
+      const HEADERS = [
+        "错误回答 → 答题逻辑",
+        "三段式答题骨架",
+        "活动项目话术模板",
+        "可替换变量",
+        "品牌升级错误视角",
+        "品牌升级话术模板",
+        "最终判断",
+      ];
+
+      gsap.utils.toArray(".draw").forEach((el) => {
+        const len = el.getTotalLength();
+        el.style.strokeDasharray = len;
+        el.style.strokeDashoffset = len;
+      });
+
+      gsap.set(titleCards, { autoAlpha: 0, y: 20 });
+      gsap.set(panels, { autoAlpha: 0, scale: 0.994 });
+      gsap.set(captions, { autoAlpha: 0, y: 18 });
+      gsap.set(".ring", { autoAlpha: 0, scale: 0.82, rotate: -2 });
+      gsap.set(".red-note", { autoAlpha: 0, y: 12, rotate: -8 });
+
+      const tl = gsap.timeline({ paused: true });
+
+      const drawFor = (n) => gsap.utils.toArray(`.draw[data-draw="${n}"]`);
+      const panelItems = (panel) =>
+        gsap.utils.toArray(panel.querySelectorAll(".question-card, .formula-card, .logic-card, .answer-doc, .side-panel > *, .error-card, .mini-row, .stamp-card, .final-row"));
+
+      for (let i = 0; i < TOTAL; i += 1) {
+        const at = i * SCENE;
+        const sceneNo = i + 1;
+        const isLast = i === TOTAL - 1;
+        const title = titleCards[i];
+        const panel = panels[i];
+        const caption = captions[i];
+        const items = panelItems(panel);
+        const dEls = drawFor(sceneNo);
+
+        tl.call(() => {
+          if (headerCn) headerCn.textContent = HEADERS[i];
+          if (headerMark) headerMark.textContent = `0${sceneNo} / 07`;
+        }, null, at);
+
+        tl.fromTo(title, { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: 0.55, ease: "power3.out" }, at + 0.05);
+        tl.fromTo(panel, { autoAlpha: 0, scale: 0.994 }, { autoAlpha: 1, scale: 1, duration: 0.55, ease: "power2.out" }, at + 0.22);
+        tl.fromTo(items, { autoAlpha: 0, y: 28 }, { autoAlpha: 1, y: 0, duration: 0.54, stagger: 0.12, ease: "power3.out" }, at + 0.52);
+        tl.fromTo(caption, { autoAlpha: 0, y: 18 }, { autoAlpha: 1, y: 0, duration: 0.46, ease: "power2.out" }, at + 1.0);
+
+        if (dEls.length) {
+          tl.to(dEls, { strokeDashoffset: 0, duration: 0.7, stagger: 0.08, ease: "power1.inOut" }, at + 2.2);
+        }
+
+        if (sceneNo === 3) {
+          tl.set('[data-scene-panel="3"] .doc-body', { y: 0 }, at + 0.2);
+          tl.fromTo('[data-ring="3a"]', { autoAlpha: 0, scale: 0.82, rotate: -3 }, { autoAlpha: 1, scale: 1, rotate: -1.5, duration: 0.5, ease: "back.out(1.8)" }, at + 3.1);
+          tl.to('[data-ring="3a"]', { autoAlpha: 0.3, duration: 0.3, ease: "power1.out" }, at + 4.35);
+          tl.to('[data-scene-panel="3"] .doc-body', { y: -420, duration: 1.0, ease: "power2.inOut" }, at + 4.45);
+          tl.fromTo('[data-ring="3b"]', { autoAlpha: 0, scale: 0.82, rotate: 2 }, { autoAlpha: 1, scale: 1, rotate: 1, duration: 0.5, ease: "back.out(1.8)" }, at + 5.75);
+          tl.fromTo('[data-note="3"]', { autoAlpha: 0, y: 12, rotate: -8 }, { autoAlpha: 1, y: 0, rotate: -3, duration: 0.5, ease: "back.out(1.8)" }, at + 6.35);
+        }
+
+        if (sceneNo === 6) {
+          tl.set('[data-scene-panel="6"] .doc-body', { y: 0 }, at + 0.2);
+          tl.fromTo('[data-ring="6a"]', { autoAlpha: 0, scale: 0.82, rotate: -3 }, { autoAlpha: 1, scale: 1, rotate: -1.5, duration: 0.5, ease: "back.out(1.8)" }, at + 3.0);
+          tl.to('[data-ring="6a"]', { autoAlpha: 0.3, duration: 0.3, ease: "power1.out" }, at + 4.35);
+          tl.to('[data-scene-panel="6"] .doc-body', { y: -420, duration: 1.0, ease: "power2.inOut" }, at + 4.45);
+          tl.fromTo('[data-ring="6b"]', { autoAlpha: 0, scale: 0.82, rotate: 2 }, { autoAlpha: 1, scale: 1, rotate: 1, duration: 0.5, ease: "back.out(1.8)" }, at + 5.75);
+          tl.fromTo('[data-note="6"]', { autoAlpha: 0, y: 12, rotate: -8 }, { autoAlpha: 1, y: 0, rotate: -3, duration: 0.5, ease: "back.out(1.8)" }, at + 6.35);
+        }
+
+        const hero = items[items.length - 1] || panel;
+        tl.fromTo(hero, { scale: 1 }, { scale: 1.025, duration: 4.2, ease: "sine.inOut" }, at + 2.4);
+
+        if (!isLast) {
+          const out = at + SCENE - 0.5;
+          tl.to([title, panel, caption], { autoAlpha: 0, duration: 0.5, ease: "power1.inOut" }, out);
+          const fades = [
+            ...dEls,
+            ...gsap.utils.toArray(panel.querySelectorAll(".ring, .red-note")),
+          ];
+          if (fades.length) tl.to(fades, { autoAlpha: 0, duration: 0.38, ease: "power1.inOut" }, out);
+        }
+
+        window.__timelines[`scene-${sceneNo}`] = { start: at, duration: SCENE };
+      }
+
+      tl.to('[data-scene-panel="7"] .stamp-card', { scale: 1.035, duration: 3.4, ease: "sine.inOut" }, TOTAL_TIME - 3.4);
+
+      window.__timelines[COMPOSITION_ID] = tl;
+      window.__timelines.master = tl;
+      tl.play(0);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "id": "2606031600-主要负责了什么-demo",
+  "title": "你在这个项目里主要负责了什么？",
+  "account": "Odin",
+  "type": "odin-hyperframes-demo",
+  "source": "01_Odin/04_已发布与复盘/04_历史文案/面试高频题问答/你在这个项目里主要负责了什么？.md",
+  "canvas": {
+    "width": 1440,
+    "height": 1920,
+    "ratio": "3:4"
+  },
+  "output": {
+    "html": "work/html/index.html",
+    "preview": "preview/index.html"
+  }
+}

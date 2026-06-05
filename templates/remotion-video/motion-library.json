@@ -1,0 +1,114 @@
+{
+  "version": 1,
+  "purpose": "Reusable motion catalog for the Remotion video pipeline. Agents must choose from these presets instead of inventing one-off animation styles.",
+  "beatContract": {
+    "requiredLegacyFields": ["frame", "target", "action"],
+    "recommendedFields": ["preset", "anchor", "offsetFrames", "durationFrames", "intensity", "label"],
+    "anchors": ["shot-start", "caption-start", "keyword", "caption-end", "shot-end"],
+    "intensities": ["low", "medium", "high"],
+    "rule": "Keep frame/action for the current renderer. Use preset/anchor so the next renderer can bind motion to caption timing."
+  },
+  "presets": [
+    {
+      "id": "robot-breathe",
+      "legacyAction": "pulse",
+      "durationFrames": 36,
+      "defaultIntensity": "low",
+      "description": "Small breathing scale and screen glow for DouDou robot. Use as background life, not as the main emphasis."
+    },
+    {
+      "id": "soft-pop",
+      "legacyAction": "pop",
+      "durationFrames": 14,
+      "defaultIntensity": "medium",
+      "description": "Gentle scale-in for one object or label. Use once per shot for the main idea."
+    },
+    {
+      "id": "gentle-slide",
+      "legacyAction": "slide",
+      "durationFrames": 18,
+      "defaultIntensity": "medium",
+      "description": "Short slide with opacity for cards, tablets, or rules. Keep travel under 48px."
+    },
+    {
+      "id": "attention-flash",
+      "legacyAction": "flash",
+      "durationFrames": 12,
+      "defaultIntensity": "medium",
+      "description": "A restrained highlight flash on a tablet, badge, or warning item. Avoid full-screen flashes."
+    },
+    {
+      "id": "hand-drawn-check",
+      "legacyAction": "draw",
+      "durationFrames": 18,
+      "defaultIntensity": "medium",
+      "description": "Draws a check, underline, or rule line. Good for rules-board and verification scenes."
+    },
+    {
+      "id": "scan-sweep",
+      "legacyAction": "slide",
+      "durationFrames": 24,
+      "defaultIntensity": "medium",
+      "description": "Magnifier or scan line moves across answer/source content. Use for verify-answer only."
+    },
+    {
+      "id": "boundary-pulse",
+      "legacyAction": "pulse",
+      "durationFrames": 20,
+      "defaultIntensity": "medium",
+      "description": "Subtle outline pulse around a boundary, rule, or safe area. Stronger than robot-breathe."
+    },
+    {
+      "id": "question-bob",
+      "legacyAction": "pop",
+      "durationFrames": 16,
+      "defaultIntensity": "low",
+      "description": "Question bubble appears with a tiny vertical bob. Use for ask-the-purpose scenes."
+    },
+    {
+      "id": "lightbulb-glow",
+      "legacyAction": "flash",
+      "durationFrames": 20,
+      "defaultIntensity": "medium",
+      "description": "Warm glow around a bulb or idea card. Use to mark a useful parent action."
+    },
+    {
+      "id": "timer-tick",
+      "legacyAction": "shake",
+      "durationFrames": 16,
+      "defaultIntensity": "low",
+      "description": "Tiny timer tick or hourglass nudge. Use once when talking about limits or enough."
+    },
+    {
+      "id": "warning-nudge",
+      "legacyAction": "shake",
+      "durationFrames": 12,
+      "defaultIntensity": "medium",
+      "description": "A short warning-card nudge. Use sparingly for risk, wrong answer, or trap."
+    },
+    {
+      "id": "keyword-underline",
+      "legacyAction": "draw",
+      "durationFrames": 16,
+      "defaultIntensity": "medium",
+      "description": "Draws an orange underline or wave under the active keyword. Bind to anchor=keyword."
+    }
+  ],
+  "sceneTargets": {
+    "kid-meets-ai": ["robot", "tablet", "bubble", "badge", "keyword", "illustration"],
+    "family-rules-board": ["rules", "rules-list", "boundary", "parent", "checklist", "keyword"],
+    "ask-the-purpose": ["lightbulb", "question", "prompt", "bubble", "keyword"],
+    "verify-answer": ["magnifier", "check", "cross", "source", "tablet", "answer", "keyword"],
+    "kid-explains": ["speech", "board", "kid", "bubble", "keyword"],
+    "time-limit": ["hourglass", "tablet", "timer", "progress", "keyword"],
+    "kid-vs-trap": ["tablet", "warning", "boundary", "trap", "keyword"]
+  },
+  "shotRules": [
+    "Use 2-3 visualBeats per shot.",
+    "Use at most one medium/high emphasis per shot.",
+    "Bind keyword-underline or the strongest preset to anchor=keyword.",
+    "Keep motion durations between 8 and 36 frames.",
+    "Prefer low or medium intensity. High intensity is only for the hook or final warning.",
+    "Do not animate every object at the same time."
+  ]
+}

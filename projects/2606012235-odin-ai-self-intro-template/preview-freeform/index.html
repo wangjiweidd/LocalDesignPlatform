@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1440, height=1920" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      :root {
+        --canvas: #f6f2e8;
+        --paper: #fffcf2;
+        --ink: #161616;
+        --muted: #6d6a63;
+        --graphite: #202124;
+        --line: rgba(22, 22, 22, 0.16);
+        --signal: #1f8b62;
+        --amber: #e3ad31;
+        --danger: #e6542b;
+        --blue: #2d5f95;
+        --shadow: 0 24px 70px rgba(22, 22, 22, 0.14);
+        --font-display: "Songti SC", "STSong", "Noto Serif CJK SC", serif;
+        --font-body: "Avenir Next", "PingFang SC", "Noto Sans CJK SC", sans-serif;
+        --font-mono: "SF Mono", "Menlo", "Monaco", monospace;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 1440px;
+        height: 1920px;
+        margin: 0;
+        overflow: hidden;
+        background: var(--canvas);
+        color: var(--ink);
+      }
+
+      body {
+        font-family: var(--font-body);
+      }
+
+      [data-composition-id="odin-freeform-calibration"] {
+        position: relative;
+        width: 1440px;
+        height: 1920px;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at 12% 16%, rgba(227, 173, 49, 0.22), transparent 28%),
+          radial-gradient(circle at 92% 12%, rgba(31, 139, 98, 0.16), transparent 26%),
+          linear-gradient(180deg, #fbf7ed 0%, #efe8dc 100%);
+      }
+
+      [data-composition-id="odin-freeform-calibration"]::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(90deg, var(--line) 1px, transparent 1px),
+          linear-gradient(var(--line) 1px, transparent 1px);
+        background-size: 80px 80px;
+        opacity: 0.35;
+        pointer-events: none;
+      }
+
+      .frame {
+        position: absolute;
+        inset: 54px;
+        border: 2px solid rgba(22, 22, 22, 0.42);
+        pointer-events: none;
+      }
+
+      .scene {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        overflow: hidden;
+      }
+
+      .scene.is-active {
+        opacity: 1;
+      }
+
+      .system-top {
+        position: absolute;
+        left: 88px;
+        right: 88px;
+        top: 72px;
+        z-index: 10;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: start;
+        gap: 48px;
+        font-family: var(--font-mono);
+        font-size: 22px;
+        line-height: 1.35;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+
+      .system-top span {
+        display: inline-block;
+        margin-right: 22px;
+        color: var(--muted);
+      }
+
+      .counter {
+        padding: 12px 16px 15px;
+        border: 2px solid var(--ink);
+        background: var(--paper);
+        font-family: var(--font-mono);
+        font-size: 30px;
+        font-weight: 800;
+        box-shadow: 7px 7px 0 rgba(22, 22, 22, 0.12);
+      }
+
+      .counter b {
+        color: var(--danger);
+      }
+
+      .rail {
+        position: absolute;
+        left: 90px;
+        top: 188px;
+        bottom: 246px;
+        z-index: 8;
+        width: 28px;
+        border-left: 3px solid var(--ink);
+      }
+
+      .rail-dot {
+        width: 20px;
+        height: 20px;
+        margin-left: -11px;
+        margin-bottom: 274px;
+        border: 3px solid var(--ink);
+        border-radius: 50%;
+        background: var(--canvas);
+      }
+
+      .rail-dot.active {
+        background: var(--signal);
+        box-shadow: 0 0 0 10px rgba(31, 139, 98, 0.14);
+      }
+
+      .hero-type {
+        position: absolute;
+        left: 150px;
+        top: 190px;
+        width: 1040px;
+        z-index: 4;
+      }
+
+      .kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 32px;
+        padding: 10px 16px 13px;
+        background: var(--graphite);
+        color: var(--paper);
+        font-family: var(--font-mono);
+        font-size: 24px;
+        font-weight: 800;
+      }
+
+      .kicker::before {
+        content: "";
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--signal);
+      }
+
+      .display {
+        margin: 0;
+        font-family: var(--font-display);
+        font-size: 118px;
+        font-weight: 900;
+        line-height: 1.04;
+        letter-spacing: 0;
+      }
+
+      .display .thin {
+        display: block;
+        color: var(--muted);
+        font-family: var(--font-body);
+        font-size: 54px;
+        font-weight: 800;
+        line-height: 1.2;
+        margin-bottom: 20px;
+      }
+
+      .signal-word {
+        position: relative;
+        display: inline-block;
+      }
+
+      .signal-word::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 8px;
+        height: 18px;
+        background: var(--amber);
+        z-index: -1;
+      }
+
+      .stage {
+        position: absolute;
+        left: 150px;
+        right: 88px;
+        top: 640px;
+        height: 840px;
+        z-index: 3;
+      }
+
+      .scan-panel {
+        position: absolute;
+        inset: 0;
+        border: 3px solid var(--ink);
+        background: rgba(255, 252, 242, 0.92);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      .scan-panel::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        height: 82px;
+        background: var(--graphite);
+      }
+
+      .panel-label {
+        position: absolute;
+        left: 34px;
+        top: 24px;
+        z-index: 2;
+        color: var(--paper);
+        font-family: var(--font-mono);
+        font-size: 24px;
+        font-weight: 800;
+      }
+
+      .bad-transcript,
+      .good-transcript,
+      .signal-card {
+        position: absolute;
+        left: 56px;
+        right: 56px;
+        padding: 36px 42px 42px;
+        border: 2px solid var(--ink);
+        background: #fff;
+        font-size: 48px;
+        font-weight: 850;
+        line-height: 1.28;
+      }
+
+      .bad-transcript {
+        top: 170px;
+        color: #88837a;
+      }
+
+      .bad-transcript::after {
+        content: "";
+        position: absolute;
+        left: 34px;
+        right: 34px;
+        top: 50%;
+        height: 6px;
+        background: var(--danger);
+        transform: rotate(-2deg);
+      }
+
+      .good-transcript {
+        bottom: 68px;
+        min-height: 238px;
+        background:
+          linear-gradient(90deg, rgba(31, 139, 98, 0.12), transparent 42%),
+          #fff;
+      }
+
+      .good-transcript b,
+      .signal-card b {
+        color: var(--signal);
+      }
+
+      .scan-line {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 112px;
+        height: 5px;
+        background: var(--signal);
+        box-shadow: 0 0 28px rgba(31, 139, 98, 0.55);
+      }
+
+      .score-ring {
+        position: absolute;
+        right: 74px;
+        top: 148px;
+        width: 270px;
+        height: 270px;
+        border: 3px solid var(--ink);
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background:
+          conic-gradient(var(--signal) 0deg 250deg, rgba(22, 22, 22, 0.12) 250deg 360deg),
+          var(--paper);
+        box-shadow: 12px 14px 0 rgba(22, 22, 22, 0.11);
+      }
+
+      .score-ring::before {
+        content: "";
+        position: absolute;
+        inset: 26px;
+        border-radius: 50%;
+        background: var(--paper);
+        border: 2px solid var(--ink);
+      }
+
+      .score-ring span {
+        position: relative;
+        z-index: 2;
+        font-family: var(--font-mono);
+        font-size: 54px;
+        font-weight: 900;
+      }
+
+      .good-transcript.with-ring {
+        right: 356px;
+        font-size: 43px;
+      }
+
+      .signal-grid {
+        position: absolute;
+        inset: 126px 56px 70px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+
+      .signal-card {
+        position: relative;
+        left: auto;
+        right: auto;
+        min-height: 550px;
+        padding: 32px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        font-size: 44px;
+      }
+
+      .signal-card small {
+        display: block;
+        color: var(--muted);
+        font-family: var(--font-mono);
+        font-size: 22px;
+        font-weight: 800;
+        margin-bottom: 26px;
+      }
+
+      .signal-card strong {
+        display: block;
+        margin-top: 28px;
+        padding-top: 24px;
+        border-top: 2px solid var(--ink);
+        color: var(--danger);
+        font-size: 30px;
+        line-height: 1.25;
+      }
+
+      .final-list {
+        position: absolute;
+        left: 56px;
+        right: 56px;
+        top: 132px;
+        display: grid;
+        gap: 28px;
+      }
+
+      .final-item {
+        display: grid;
+        grid-template-columns: 86px 1fr;
+        gap: 28px;
+        align-items: center;
+        min-height: 130px;
+        padding: 30px 36px;
+        border: 2px solid var(--ink);
+        background: #fff;
+        font-size: 43px;
+        font-weight: 850;
+        line-height: 1.22;
+      }
+
+      .final-item span {
+        display: grid;
+        place-items: center;
+        width: 72px;
+        height: 72px;
+        background: var(--ink);
+        color: var(--paper);
+        font-family: var(--font-mono);
+        font-size: 30px;
+      }
+
+      .caption {
+        position: absolute;
+        left: 150px;
+        right: 88px;
+        bottom: 70px;
+        z-index: 12;
+        min-height: 216px;
+        display: flex;
+        align-items: center;
+        padding: 34px 44px 40px;
+        background: var(--graphite);
+        color: var(--paper);
+        font-size: 48px;
+        font-weight: 850;
+        line-height: 1.26;
+        box-shadow: 18px 20px 0 rgba(22, 22, 22, 0.16);
+      }
+
+      .caption::before {
+        content: "VOICE";
+        flex: 0 0 auto;
+        align-self: stretch;
+        display: grid;
+        place-items: center;
+        margin-right: 34px;
+        padding-right: 34px;
+        border-right: 2px solid rgba(255, 252, 242, 0.22);
+        color: var(--amber);
+        font-family: var(--font-mono);
+        font-size: 22px;
+      }
+
+      .caption b {
+        color: var(--amber);
+      }
+    </style>
+  </head>
+  <body>
+    <main
+      data-composition-id="odin-freeform-calibration"
+      data-width="1440"
+      data-height="1920"
+      data-duration="45"
+      data-track-index="1"
+    >
+      <div class="frame"></div>
+      <div class="rail" aria-hidden="true">
+        <div class="rail-dot active"></div>
+        <div class="rail-dot"></div>
+        <div class="rail-dot"></div>
+        <div class="rail-dot"></div>
+        <div class="rail-dot"></div>
+      </div>
+
+      <section class="scene is-active" id="scene-1" data-scene="1">
+        <div class="system-top">
+          <div><span>interview calibration</span><span>template risk detected</span></div>
+          <div class="counter"><b>01</b>/05</div>
+        </div>
+        <div class="hero-type">
+          <div class="kicker">OPENING FILTER</div>
+          <h1 class="display"><span class="thin">自我介绍不是背稿</span>它是面试官的<br /><span class="signal-word">第一轮判断</span></h1>
+        </div>
+        <div class="stage">
+          <div class="scan-panel">
+            <div class="panel-label">GENERIC ANSWER SCAN</div>
+            <div class="scan-line"></div>
+            <div class="bad-transcript">我熟练使用 Figma 和 AI 工具，参与过多个项目，具备良好的沟通能力。</div>
+            <div class="score-ring"><span>LOW</span></div>
+            <div class="good-transcript">面试官真正想听的是：<b>你能不能讲清楚自己的设计价值。</b></div>
+          </div>
+        </div>
+        <div class="caption">设计面试里，自我介绍不是让你复述简历，而是让面试官快速判断：你是不是能讲清楚自己的设计价值。</div>
+      </section>
+
+      <section class="scene" id="scene-2" data-scene="2">
+        <div class="system-top">
+          <div><span>signal 01</span><span>design value</span></div>
+          <div class="counter"><b>02</b>/05</div>
+        </div>
+        <div class="hero-type">
+          <div class="kicker">LINE 01</div>
+          <h2 class="display"><span class="thin">不要停在工具</span>先讲你<br /><span class="signal-word">解决什么问题</span></h2>
+        </div>
+        <div class="stage">
+          <div class="scan-panel">
+            <div class="panel-label">REWRITE LOCKED</div>
+            <div class="scan-line"></div>
+            <div class="good-transcript with-ring" style="top: 180px; bottom: auto;">我主要解决的是：<br /><b>从需求不清，到方案可落地之间的判断问题。</b></div>
+            <div class="score-ring"><span>01</span></div>
+          </div>
+        </div>
+        <div class="caption">第一段，不要说“我熟练使用 Figma 和 AI 工具”。要说：“我主要解决的是从需求不清到方案可落地之间的判断问题。”</div>
+      </section>
+
+      <section class="scene" id="scene-3" data-scene="3">
+        <div class="system-top">
+          <div><span>signal 02</span><span>decision trace</span></div>
+          <div class="counter"><b>03</b>/05</div>
+        </div>
+        <div class="hero-type">
+          <div class="kicker">LINE 02</div>
+          <h2 class="display"><span class="thin">项目名不是证据</span>讲出你<br /><span class="signal-word">怎么做判断</span></h2>
+        </div>
+        <div class="stage">
+          <div class="scan-panel">
+            <div class="panel-label">PROCESS SIGNAL</div>
+            <div class="scan-line"></div>
+            <div class="signal-grid">
+              <div class="signal-card"><small>01 / TARGET</small><b>拆目标</b><strong>这不是任务复述</strong></div>
+              <div class="signal-card"><small>02 / CONSTRAINT</small><b>拆约束</b><strong>说明你看得见边界</strong></div>
+              <div class="signal-card"><small>03 / BEHAVIOR</small><b>拆用户行为</b><strong>让 AI 只做扩展，不做替身</strong></div>
+            </div>
+          </div>
+        </div>
+        <div class="caption">第二段，不要堆项目名。要说：“我会先拆目标、约束和用户行为，再用 AI 帮我扩展方案，但最后保留的是我自己能解释的判断。”</div>
+      </section>
+
+      <section class="scene" id="scene-4" data-scene="4">
+        <div class="system-top">
+          <div><span>signal 03</span><span>team impact</span></div>
+          <div class="counter"><b>04</b>/05</div>
+        </div>
+        <div class="hero-type">
+          <div class="kicker">LINE 03</div>
+          <h2 class="display"><span class="thin">协作不是性格描述</span>是让方案<br /><span class="signal-word">继续推进</span></h2>
+        </div>
+        <div class="stage">
+          <div class="scan-panel">
+            <div class="panel-label">CROSS-FUNCTION FIT</div>
+            <div class="scan-line"></div>
+            <div class="signal-grid">
+              <div class="signal-card"><small>PRODUCT</small><b>听得懂取舍</b><strong>知道为什么这样做</strong></div>
+              <div class="signal-card"><small>ENGINEERING</small><b>接得住限制</b><strong>知道怎么落地</strong></div>
+              <div class="signal-card"><small>BUSINESS</small><b>看得见结果</b><strong>知道方案服务谁</strong></div>
+            </div>
+          </div>
+        </div>
+        <div class="caption">第三段，不要只说我配合团队。要说：“我的价值是把设计方案讲到产品、研发和业务都能继续推进。”</div>
+      </section>
+
+      <section class="scene" id="scene-5" data-scene="5">
+        <div class="system-top">
+          <div><span>final gate</span><span>evidence required</span></div>
+          <div class="counter"><b>05</b>/05</div>
+        </div>
+        <div class="hero-type">
+          <div class="kicker">FINAL CHECK</div>
+          <h2 class="display"><span class="thin">AI 可以整理语言</span>但加分来自<br /><span class="signal-word">真实证据</span></h2>
+        </div>
+        <div class="stage">
+          <div class="scan-panel">
+            <div class="panel-label">PORTFOLIO BACKTRACE</div>
+            <div class="final-list">
+              <div class="final-item"><span>01</span><b>这句话能不能回到作品集里的真实项目？</b></div>
+              <div class="final-item"><span>02</span><b>这句话有没有讲出你的设计判断？</b></div>
+              <div class="final-item"><span>03</span><b>面试官追问时，你能不能接住细节？</b></div>
+            </div>
+          </div>
+        </div>
+        <div class="caption">AI 可以帮你整理表达，但不能替你制造经历。真正加分的自我介绍，最后一定能回到你的作品集证据。</div>
+      </section>
+    </main>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+
+      const scenes = Array.from(document.querySelectorAll(".scene"));
+      const dots = Array.from(document.querySelectorAll(".rail-dot"));
+      const duration = 9;
+
+      function activateScene(index) {
+        scenes.forEach((scene, sceneIndex) => {
+          scene.classList.toggle("is-active", sceneIndex === index);
+        });
+        dots.forEach((dot, dotIndex) => {
+          dot.classList.toggle("active", dotIndex === index);
+        });
+      }
+
+      const master = gsap.timeline({ paused: true });
+
+      scenes.forEach((scene, index) => {
+        const offset = index * duration;
+        const title = scene.querySelector(".display");
+        const stage = scene.querySelector(".stage");
+        const panel = scene.querySelector(".scan-panel");
+        const scanLine = scene.querySelector(".scan-line");
+        const cards = scene.querySelectorAll(".signal-card, .final-item, .bad-transcript, .good-transcript, .score-ring");
+        const caption = scene.querySelector(".caption");
+
+        master.call(() => activateScene(index), [], offset);
+        master.fromTo(scene, { opacity: 0 }, { opacity: 1, duration: 0.28, ease: "power2.out" }, offset);
+        master.fromTo(scene.querySelectorAll(".system-top, .kicker"), { y: -24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, stagger: 0.08, ease: "power3.out" }, offset + 0.08);
+        master.fromTo(title, { y: 52, opacity: 0, clipPath: "inset(0 0 100% 0)" }, { y: 0, opacity: 1, clipPath: "inset(0 0 0% 0)", duration: 0.75, ease: "expo.out" }, offset + 0.28);
+        master.fromTo(stage, { y: 70, opacity: 0 }, { y: 0, opacity: 1, duration: 0.72, ease: "expo.out" }, offset + 0.72);
+        master.fromTo(panel, { scaleX: 0.94, transformOrigin: "left center" }, { scaleX: 1, duration: 0.7, ease: "power3.out" }, offset + 0.78);
+        master.fromTo(scanLine, { y: 0, opacity: 0 }, { y: 520, opacity: 1, duration: 1.45, ease: "power2.inOut" }, offset + 1.05);
+        master.fromTo(cards, { y: 42, opacity: 0 }, { y: 0, opacity: 1, duration: 0.56, stagger: 0.16, ease: "power3.out" }, offset + 1.45);
+        master.fromTo(caption, { y: 64, opacity: 0 }, { y: 0, opacity: 1, duration: 0.58, ease: "power3.out" }, offset + 1.9);
+        master.to(scene, { opacity: index === scenes.length - 1 ? 1 : 0, duration: 0.28, ease: "power2.in" }, offset + duration - 0.28);
+        window.__timelines[`freeform-scene-${index + 1}`] = { start: offset, duration };
+      });
+
+      window.__timelines.freeformMaster = master;
+      master.play(0);
+    </script>
+  </body>
+</html>

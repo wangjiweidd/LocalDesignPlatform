@@ -1,0 +1,1198 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1440, height=1920" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * { box-sizing: border-box; }
+      :root {
+        --font: "PingFang SC", "Heiti SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+        --bg: #080b12;
+        --ink: #111827;
+        --paper: #f5efe2;
+        --gold: #f4c95d;
+        --cyan: #72d8ff;
+        --red: #ff615c;
+        --green: #9be28f;
+        --muted: #8b93a4;
+      }
+      html, body {
+        width: 1440px;
+        height: 1920px;
+        margin: 0;
+        overflow: hidden;
+        background: var(--bg);
+        color: white;
+        font-family: var(--font);
+      }
+      [data-composition-id="answer-signal-machine"] {
+        position: relative;
+        width: 1440px;
+        height: 1920px;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at 18% 10%, rgba(114,216,255,.2), transparent 30%),
+          radial-gradient(circle at 80% 18%, rgba(244,201,93,.18), transparent 28%),
+          linear-gradient(180deg, #101624 0%, #080b12 64%, #04060a 100%);
+      }
+      [data-composition-id="answer-signal-machine"]::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+        background-size: 72px 72px;
+        mask-image: radial-gradient(circle at 50% 42%, black 0%, transparent 76%);
+        pointer-events: none;
+      }
+      .topbar {
+        position: absolute;
+        top: 42px;
+        left: 54px;
+        right: 54px;
+        z-index: 20;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: rgba(255,255,255,.5);
+        font-size: 18px;
+        font-weight: 850;
+        letter-spacing: .08em;
+        pointer-events: none;
+      }
+      .topbar b { color: #fff; }
+      .topbar .tag {
+        padding: 8px 0 10px;
+        border: 0;
+        color: var(--cyan);
+      }
+      .scene {
+        position: absolute;
+        inset: 0;
+        padding: 128px 88px 220px;
+        opacity: 0;
+        overflow: hidden;
+        transform-origin: 50% 44%;
+        will-change: transform, opacity;
+      }
+      .scene:not([data-scene="1"]):not([data-scene="7"]) > .scene-label,
+      .scene:not([data-scene="1"]):not([data-scene="7"]) > .headline,
+      .scene:not([data-scene="1"]):not([data-scene="7"]) > .subline {
+        display: none;
+      }
+      .scene-label {
+        display: inline-flex;
+        gap: 12px;
+        align-items: center;
+        padding: 10px 16px 12px;
+        border: 1px solid rgba(255,255,255,.24);
+        color: var(--cyan);
+        font-size: 26px;
+        line-height: 1;
+        font-weight: 900;
+        letter-spacing: .08em;
+      }
+      .scene-label::before {
+        content: "";
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        background: var(--gold);
+      }
+      .headline {
+        margin: 22px 0 0;
+        max-width: 1160px;
+        font-size: 82px;
+        line-height: 1.02;
+        font-weight: 950;
+        letter-spacing: 0;
+      }
+      .headline .gold { color: var(--gold); }
+      .subline {
+        margin-top: 22px;
+        max-width: 980px;
+        color: rgba(255,255,255,.68);
+        font-size: 38px;
+        line-height: 1.25;
+        font-weight: 780;
+      }
+      .machine-core {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 720px;
+        height: 720px;
+        transform: translate(-50%, -42%);
+        border-radius: 999px;
+        border: 1px solid rgba(114,216,255,.18);
+        background: radial-gradient(circle, rgba(114,216,255,.15), rgba(255,255,255,.02) 48%, transparent 70%);
+      }
+      .machine-core::before,
+      .machine-core::after {
+        content: "";
+        position: absolute;
+        inset: 84px;
+        border-radius: 999px;
+        border: 1px dashed rgba(255,255,255,.24);
+      }
+      .machine-core::after {
+        inset: 188px;
+        border-color: rgba(244,201,93,.42);
+      }
+      .question-burst {
+        position: absolute;
+        left: 120px;
+        right: 120px;
+        top: 520px;
+        display: grid;
+        gap: 22px;
+      }
+      .question-line {
+        display: inline-flex;
+        align-items: center;
+        width: fit-content;
+        max-width: 100%;
+        padding: 22px 30px 26px;
+        background: rgba(245,239,226,.96);
+        color: var(--ink);
+        font-size: 58px;
+        line-height: 1.1;
+        font-weight: 950;
+      }
+      .bad-tokens {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+      .bad-token {
+        padding: 16px 22px 19px;
+        border: 1px solid rgba(255,97,92,.42);
+        background: rgba(255,97,92,.12);
+        color: #ffd7d5;
+        font-size: 40px;
+        font-weight: 900;
+      }
+      .bad-note {
+        display: inline-flex;
+        align-items: center;
+        padding: 16px 22px 19px;
+        border: 2px solid var(--red);
+        border-radius: 999px;
+        background: rgba(8,11,18,.9);
+        color: var(--red);
+        box-shadow: 8px 8px 0 rgba(0,0,0,.28);
+        font-size: 36px;
+        line-height: 1;
+        font-weight: 950;
+        opacity: 0;
+      }
+      .signal-pillars {
+        position: absolute;
+        left: 122px;
+        right: 122px;
+        bottom: 356px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+      .pillar {
+        min-height: 190px;
+        padding: 26px;
+        background: rgba(114,216,255,.12);
+        border: 1px solid rgba(114,216,255,.28);
+      }
+      .pillar b {
+        color: var(--cyan);
+        font-size: 32px;
+        font-weight: 950;
+      }
+      .pillar span {
+        display: block;
+        margin-top: 18px;
+        color: #fff;
+        font-size: 44px;
+        line-height: 1.05;
+        font-weight: 950;
+      }
+      .sticker {
+        position: absolute;
+        z-index: 30;
+        padding: 16px 22px 19px;
+        border: 2px solid currentColor;
+        background: rgba(8,11,18,.9);
+        border-radius: 999px;
+        box-shadow: 8px 8px 0 rgba(0,0,0,.28);
+        font-size: 36px;
+        line-height: 1;
+        font-weight: 950;
+        opacity: 0;
+      }
+      .sticker.large {
+        padding: 22px 30px 26px;
+        border-width: 3px;
+        font-size: 48px;
+        box-shadow: 10px 10px 0 rgba(0,0,0,.3);
+      }
+      .sticker.chain-badge {
+        left: 498px;
+        top: 1262px;
+        padding: 24px 42px 28px;
+        background: var(--gold);
+        color: var(--ink);
+        border: 3px solid rgba(255,255,255,.74);
+        border-radius: 999px;
+        font-size: 58px;
+        line-height: 1;
+        letter-spacing: 0;
+        box-shadow:
+          0 0 0 10px rgba(240,195,90,.16),
+          12px 14px 0 rgba(0,0,0,.32);
+      }
+      .sticker.chain-badge::before,
+      .sticker.chain-badge::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        width: 74px;
+        height: 7px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, transparent, var(--gold));
+        transform: translateY(-50%);
+      }
+      .sticker.chain-badge::before {
+        right: calc(100% + 18px);
+      }
+      .sticker.chain-badge::after {
+        left: calc(100% + 18px);
+        background: linear-gradient(90deg, var(--gold), transparent);
+      }
+      .sticker.gold { color: var(--gold); }
+      .sticker.cyan { color: var(--cyan); }
+      .sticker.red { color: var(--red); }
+      .sticker.paper {
+        background: var(--paper);
+        color: var(--ink);
+        border-color: var(--ink);
+      }
+      .burst {
+        position: absolute;
+        z-index: 26;
+        width: 180px;
+        height: 180px;
+        opacity: 0;
+        pointer-events: none;
+      }
+      .burst i {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 6px;
+        height: 76px;
+        background: var(--gold);
+        transform-origin: 50% 0%;
+      }
+      .burst i:nth-child(1) { transform: rotate(0deg); }
+      .burst i:nth-child(2) { transform: rotate(45deg); background: var(--cyan); }
+      .burst i:nth-child(3) { transform: rotate(90deg); }
+      .burst i:nth-child(4) { transform: rotate(135deg); background: var(--cyan); }
+      .burst i:nth-child(5) { transform: rotate(180deg); }
+      .burst i:nth-child(6) { transform: rotate(225deg); background: var(--cyan); }
+      .burst i:nth-child(7) { transform: rotate(270deg); }
+      .burst i:nth-child(8) { transform: rotate(315deg); background: var(--cyan); }
+
+      .logic-orbit {
+        position: absolute;
+        left: 90px;
+        right: 90px;
+        top: 255px;
+        height: 1030px;
+      }
+      .logic-beam {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+      }
+      .logic-beam path {
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .logic-beam .glow {
+        stroke: rgba(114,216,255,.26);
+        stroke-width: 30;
+        filter: blur(5px);
+      }
+      .logic-beam .core {
+        stroke: url(#logicGradient);
+        stroke-width: 9;
+        filter: drop-shadow(0 0 20px rgba(114,216,255,.42));
+      }
+      .logic-port {
+        position: absolute;
+        z-index: 6;
+        width: 34px;
+        height: 34px;
+        border-radius: 999px;
+        border: 5px solid var(--ink);
+        background: var(--gold);
+        box-shadow: 0 0 34px rgba(244,201,93,.7);
+        opacity: 0;
+      }
+      .logic-port.p1 { left: 609px; top: 141px; }
+      .logic-port.p2 { left: 641px; top: 481px; }
+      .logic-port.p3 { left: 609px; top: 815px; }
+      .logic-node {
+        position: absolute;
+        z-index: 5;
+        width: 560px;
+        min-height: 224px;
+        padding: 30px 34px;
+        border-radius: 46px 88px 52px 78px;
+        background: rgba(245,239,226,.94);
+        color: var(--ink);
+        box-shadow: 0 22px 70px rgba(0,0,0,.3);
+      }
+      .logic-node::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        width: 54px;
+        height: 9px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, rgba(114,216,255,.88), rgba(244,201,93,.86));
+        transform: translateY(-50%);
+        box-shadow: 0 0 26px rgba(114,216,255,.28);
+      }
+      .logic-node.left::after { right: -6px; }
+      .logic-node.right::after {
+        left: -6px;
+        background: linear-gradient(90deg, rgba(244,201,93,.86), rgba(114,216,255,.88));
+      }
+      .logic-node.left { left: 0; }
+      .logic-node.right { right: 0; }
+      .logic-node.n1 { top: 46px; left: 66px; }
+      .logic-node.n2 { top: 386px; right: 42px; }
+      .logic-node.n3 { top: 720px; left: 66px; }
+      .logic-node b {
+        display: inline-grid;
+        place-items: center;
+        width: 48px;
+        height: 48px;
+        border-radius: 999px;
+        background: var(--ink);
+        color: var(--cyan);
+        font-size: 24px;
+      }
+      .logic-node strong {
+        display: block;
+        margin-top: 16px;
+        font-size: 50px;
+        line-height: 1;
+        font-weight: 950;
+      }
+      .logic-node span {
+        display: block;
+        margin-top: 14px;
+        font-size: 34px;
+        line-height: 1.2;
+        font-weight: 800;
+      }
+      .connector {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        width: 260px;
+        height: 260px;
+        border-top: 4px solid rgba(114,216,255,.7);
+        transform-origin: left top;
+      }
+
+      .filmstrip-wrap {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 236px;
+        height: 1010px;
+        overflow: hidden;
+      }
+      .scan-slit {
+        position: absolute;
+        z-index: 12;
+        top: 46px;
+        left: 408px;
+        width: 720px;
+        height: 690px;
+        border-radius: 64px;
+        border: 4px solid var(--cyan);
+        box-shadow:
+          inset 0 0 40px rgba(114,216,255,.15),
+          0 0 46px rgba(114,216,255,.25);
+        opacity: 0;
+        pointer-events: none;
+      }
+      .scan-slit::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        height: 5px;
+        background: var(--cyan);
+        box-shadow: 0 0 24px var(--cyan);
+      }
+      .focus-shade {
+        position: absolute;
+        z-index: 10;
+        pointer-events: none;
+        opacity: 0;
+        background: rgba(8,11,18,.66);
+        backdrop-filter: saturate(.68) blur(1px);
+      }
+      .focus-shade.top,
+      .focus-shade.bottom {
+        left: 0;
+        right: 0;
+      }
+      .focus-shade.top {
+        top: 0;
+        height: 46px;
+      }
+      .focus-shade.bottom {
+        top: 736px;
+        bottom: 0;
+      }
+      .focus-shade.left,
+      .focus-shade.right {
+        top: 46px;
+        height: 690px;
+      }
+      .focus-shade.left {
+        left: 0;
+        width: 408px;
+        background: linear-gradient(90deg, rgba(8,11,18,.76), rgba(8,11,18,.52));
+      }
+      .focus-shade.right {
+        left: 1128px;
+        right: 0;
+        background: linear-gradient(90deg, rgba(8,11,18,.52), rgba(8,11,18,.76));
+      }
+      .read-cursor {
+        position: absolute;
+        z-index: 18;
+        width: 240px;
+        height: 8px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        box-shadow: 0 0 28px rgba(244,201,93,.56);
+        opacity: 0;
+        pointer-events: none;
+      }
+      .read-cursor::before {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 50%;
+        width: 18px;
+        height: 18px;
+        border-radius: 999px;
+        background: var(--gold);
+        transform: translate(50%, -50%);
+      }
+      .filmstrip {
+        position: absolute;
+        left: 116px;
+        top: 46px;
+        display: flex;
+        gap: 28px;
+        will-change: transform;
+      }
+      .frame {
+        position: relative;
+        flex: 0 0 720px;
+        min-height: 690px;
+        padding: 48px;
+        border-radius: 64px;
+        background: var(--paper);
+        color: var(--ink);
+        box-shadow: 0 28px 80px rgba(0,0,0,.35);
+      }
+      .frame .idx {
+        color: var(--cyan);
+        background: var(--ink);
+        display: inline-grid;
+        place-items: center;
+        width: 62px;
+        height: 62px;
+        border-radius: 999px;
+        font-size: 30px;
+        font-weight: 950;
+      }
+      .frame p {
+        margin: 38px 0 0;
+        font-size: 52px;
+        line-height: 1.2;
+        font-weight: 850;
+      }
+      .frame p b { background: rgba(114,216,255,.32); padding: 0 4px; }
+      .callout {
+        position: absolute;
+        left: 164px;
+        top: 1048px;
+        width: 640px;
+        min-height: 132px;
+        padding: 24px 30px 26px 34px;
+        border-radius: 34px;
+        background: rgba(8,11,18,.82);
+        border: 2px solid rgba(244,201,93,.88);
+        color: #fff;
+        font-size: 38px;
+        line-height: 1.16;
+        font-weight: 900;
+        opacity: 0;
+        box-shadow: 0 22px 70px rgba(0,0,0,.28);
+      }
+      .callout::before {
+        content: "";
+        position: absolute;
+        left: 78px;
+        top: -72px;
+        width: 4px;
+        height: 72px;
+        border-radius: 999px;
+        background: linear-gradient(180deg, transparent, var(--gold));
+      }
+      .callout b {
+        display: block;
+        margin-bottom: 10px;
+        color: var(--gold);
+        font-size: 28px;
+        line-height: 1;
+        letter-spacing: .06em;
+      }
+      .callout span {
+        display: block;
+      }
+      .slot-lab {
+        position: absolute;
+        left: 96px;
+        right: 96px;
+        top: 520px;
+        height: 510px;
+        display: block;
+      }
+      .assembly-hero {
+        position: absolute;
+        left: 96px;
+        right: 96px;
+        top: 250px;
+        min-height: 210px;
+        padding: 28px 34px 32px;
+        border-radius: 54px;
+        background:
+          linear-gradient(135deg, rgba(255,255,255,.12), rgba(255,255,255,.035)),
+          rgba(8,11,18,.66);
+        border: 1px solid rgba(255,255,255,.18);
+        box-shadow: 0 28px 80px rgba(0,0,0,.28);
+      }
+      .assembly-kicker {
+        color: var(--cyan);
+        font-size: 28px;
+        line-height: 1;
+        font-weight: 950;
+        letter-spacing: .08em;
+      }
+      .assembly-line {
+        margin-top: 24px;
+        color: #fff;
+        font-size: 52px;
+        line-height: 1.16;
+        font-weight: 950;
+      }
+      .assembly-chip {
+        display: inline-block;
+        margin: 0 6px;
+        padding: 4px 12px 8px;
+        border-radius: 999px;
+        background: rgba(244,201,93,.16);
+        color: var(--gold);
+        border: 1px solid rgba(244,201,93,.45);
+        white-space: nowrap;
+      }
+      .slot-beam {
+        position: absolute;
+        left: 160px;
+        right: 160px;
+        top: 1052px;
+        height: 5px;
+        background: linear-gradient(90deg, var(--cyan), var(--gold), var(--green));
+        transform-origin: 0 50%;
+        opacity: 0;
+      }
+      .slot {
+        position: absolute;
+        width: 352px;
+        min-height: 204px;
+        padding: 24px 26px;
+        border-radius: 46px;
+        background: rgba(255,255,255,.08);
+        border: 1px solid rgba(255,255,255,.22);
+        box-shadow: 0 30px 80px rgba(0,0,0,.24);
+      }
+      .slot:nth-child(1) { left: 26px; top: 22px; border-radius: 999px 56px 80px 999px; }
+      .slot:nth-child(2) { right: 178px; top: 0; border-radius: 60px 999px 999px 62px; }
+      .slot:nth-child(3) { left: 214px; top: 286px; border-radius: 52px 86px 999px 999px; }
+      .slot:nth-child(4) { right: 38px; top: 266px; border-radius: 999px 999px 58px 74px; }
+      .slot b {
+        color: var(--gold);
+        font-size: 31px;
+        font-weight: 950;
+      }
+      .slot span {
+        display: block;
+        margin-top: 18px;
+        font-size: 38px;
+        line-height: 1.1;
+        font-weight: 950;
+      }
+      .sentence-build {
+        position: absolute;
+        left: 96px;
+        right: 96px;
+        top: 1120px;
+        min-height: 236px;
+        padding: 34px 38px;
+        border-radius: 54px;
+        background: var(--paper);
+        color: var(--ink);
+        font-size: 44px;
+        line-height: 1.25;
+        font-weight: 900;
+      }
+      .sentence-build i {
+        font-style: normal;
+        color: var(--red);
+        background: rgba(255,97,92,.14);
+        padding: 0 6px;
+      }
+      .brand-breaker {
+        position: absolute;
+        left: 96px;
+        right: 96px;
+        top: 250px;
+        display: grid;
+        grid-template-columns: .72fr 1.28fr;
+        gap: 30px;
+      }
+      .low-answer {
+        position: relative;
+        min-height: 760px;
+        padding: 38px;
+        border-radius: 66px 34px 80px 42px;
+        clip-path: polygon(3% 0, 100% 5%, 94% 100%, 0 93%);
+        background: rgba(255,97,92,.13);
+        border: 1px solid rgba(255,97,92,.45);
+      }
+      .low-answer h2 {
+        color: #ffd7d5;
+        font-size: 38px;
+      }
+      .low-answer p {
+        position: relative;
+        margin-top: 80px;
+        font-size: 48px;
+        line-height: 1.18;
+        font-weight: 950;
+      }
+      .logic-map {
+        min-height: 760px;
+        padding: 34px;
+        border-radius: 42px 78px 56px 92px;
+        background: var(--paper);
+        color: var(--ink);
+      }
+      .impact-lines {
+        position: absolute;
+        left: 30px;
+        right: 30px;
+        top: 82px;
+        height: 390px;
+        pointer-events: none;
+        opacity: 0;
+      }
+      .impact-lines span {
+        position: absolute;
+        width: 220px;
+        height: 6px;
+        background: var(--red);
+        transform-origin: 0 50%;
+      }
+      .impact-lines span:nth-child(1) { left: 40px; top: 40px; transform: rotate(18deg); }
+      .impact-lines span:nth-child(2) { right: 40px; top: 120px; transform: rotate(155deg); }
+      .impact-lines span:nth-child(3) { left: 90px; bottom: 70px; transform: rotate(-22deg); }
+      .map-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: 1fr;
+        gap: 22px;
+        height: 100%;
+      }
+      .map-node {
+        min-height: 342px;
+        padding: 30px;
+        border-radius: 34px;
+        background: #fffaf0;
+        border: 1px solid rgba(17,24,39,.18);
+      }
+      .map-node b {
+        display: inline-block;
+        padding: 8px 13px 10px;
+        background: var(--ink);
+        color: var(--cyan);
+        font-size: 38px;
+      }
+      .map-node span {
+        display: block;
+        margin-top: 24px;
+        font-size: 48px;
+        line-height: 1.12;
+        font-weight: 850;
+      }
+      .final-radar {
+        position: absolute;
+        left: 120px;
+        top: 430px;
+        width: 620px;
+        height: 620px;
+        border-radius: 999px;
+        border: 1px solid rgba(114,216,255,.35);
+        background: radial-gradient(circle, rgba(114,216,255,.12), transparent 67%);
+      }
+      .radar-ring {
+        position: absolute;
+        border-radius: 999px;
+        border: 1px solid rgba(255,255,255,.18);
+      }
+      .r1 { inset: 90px; }
+      .r2 { inset: 180px; }
+      .radar-sweep {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 280px;
+        height: 4px;
+        transform-origin: left center;
+        background: linear-gradient(90deg, var(--cyan), transparent);
+      }
+      .decision {
+        position: absolute;
+        left: 735px;
+        right: 86px;
+        top: 625px;
+        display: grid;
+        gap: 20px;
+      }
+      .decision-card {
+        min-height: 116px;
+        padding: 28px 34px;
+        border-radius: 34px;
+        background: rgba(255,255,255,.08);
+        border: 1px solid rgba(255,255,255,.22);
+        font-size: 40px;
+        line-height: 1.18;
+        font-weight: 900;
+        display: flex;
+        align-items: center;
+        box-shadow: 0 18px 54px rgba(0,0,0,.18);
+      }
+      .decision-card.gold {
+        background: var(--gold);
+        color: var(--ink);
+      }
+      .caption {
+        position: absolute;
+        left: 118px;
+        right: 118px;
+        bottom: 320px;
+        height: 150px;
+        z-index: 50;
+        pointer-events: none;
+      }
+      .sub-line {
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        max-width: 100%;
+        padding: 20px 34px 24px;
+        border-radius: 999px;
+        background: rgba(0,0,0,.82);
+        border: 1px solid rgba(255,255,255,.18);
+        color: #fff;
+        font-size: 50px;
+        line-height: 1.12;
+        font-weight: 900;
+        text-align: center;
+        white-space: nowrap;
+        opacity: 0;
+        box-shadow: 0 18px 60px rgba(0,0,0,.28);
+      }
+      .sub-line.long {
+        border-radius: 40px;
+        white-space: normal;
+        max-width: 1120px;
+      }
+      .sub-key {
+        color: #fff;
+        background-image: linear-gradient(transparent 56%, rgba(244,201,93,.72) 56%);
+        background-repeat: no-repeat;
+        background-position: 0 0;
+        background-size: 0% 100%;
+        padding: 0 4px;
+      }
+      .draw {
+        fill: none;
+        stroke: var(--red);
+        stroke-width: 8;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .lens-wipe {
+        position: absolute;
+        z-index: 48;
+        top: -120px;
+        bottom: -120px;
+        left: 0;
+        width: 260px;
+        transform: skewX(-13deg);
+        background:
+          linear-gradient(90deg, transparent, rgba(125,211,252,.46), rgba(240,195,90,.32), transparent);
+        mix-blend-mode: screen;
+        opacity: 0;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <main data-composition-id="answer-signal-machine" data-width="1440" data-height="1920" data-duration="72" data-track-index="0">
+      <div class="topbar"><div><b>ANSWER SIGNAL MACHINE</b> / DESIGN INTERVIEW</div><div class="tag">HYPERFRAMES FREEFORM</div></div>
+
+      <section class="scene" data-scene="1">
+        <div class="scene-label">OPENING / 问题拆解</div>
+        <h1 class="headline">这题不是问你做了多少，<span class="gold">是在测判断力</span></h1>
+        <p class="subline">错误答案会被拆成低信号词块，真正的回答结构会从机器里生成出来。</p>
+        <div class="machine-core"></div>
+        <div class="burst" data-burst="1" style="left: 630px; top: 705px;"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="sticker cyan" data-sticker="1b" style="left: 132px; top: 982px; transform: rotate(-5deg);">低信号词块</div>
+        <div class="question-burst">
+          <div class="question-line">“你在这个项目里主要负责了什么？”</div>
+          <div class="bad-tokens">
+            <span class="bad-token">海报</span><span class="bad-token">Banner</span><span class="bad-token">官网</span><span class="bad-token">周边</span><span class="bad-token">落地页</span>
+            <span class="bad-note" data-sticker="1a">别报菜名</span>
+          </div>
+        </div>
+        <div class="signal-pillars">
+          <div class="pillar"><b>SIGNAL 01</b><span>范围</span></div>
+          <div class="pillar"><b>SIGNAL 02</b><span>判断</span></div>
+          <div class="pillar"><b>SIGNAL 03</b><span>结果</span></div>
+        </div>
+      </section>
+
+      <section class="scene" data-scene="2">
+        <div class="scene-label">LOGIC / 逻辑链生成</div>
+        <h1 class="headline">完整回答，是一条<span class="gold">信号链</span></h1>
+        <p class="subline">它不是静态卡片，而是一条从职责范围流向结果证据的判断路径。</p>
+        <div class="logic-orbit">
+          <svg class="logic-beam" viewBox="0 0 1260 1030" aria-hidden="true">
+            <defs>
+              <linearGradient id="logicGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#72d8ff" />
+                <stop offset="52%" stop-color="#f4c95d" />
+                <stop offset="100%" stop-color="#9be28f" />
+              </linearGradient>
+            </defs>
+            <path class="glow" d="M626 158 C628 286 658 350 658 498 C658 642 628 704 626 832" />
+            <path class="core" d="M626 158 C628 286 658 350 658 498 C658 642 628 704 626 832" />
+          </svg>
+          <div class="logic-port p1"></div>
+          <div class="logic-port p2"></div>
+          <div class="logic-port p3"></div>
+          <div class="logic-node left n1"><b>01</b><strong>负责范围</strong><span>负责一段完整设计范围。</span></div>
+          <div class="logic-node right n2"><b>02</b><strong>关键判断</strong><span>目标、人群、渠道、节奏怎么判断。</span></div>
+          <div class="logic-node left n3"><b>03</b><strong>结果证据</strong><span>点击、转化、识别度如何变化。</span></div>
+        </div>
+        <div class="sticker chain-badge" data-sticker="2">一条判断链</div>
+      </section>
+
+      <section class="scene" data-scene="3">
+        <div class="scene-label">TEMPLATE 01 / 活动主视觉</div>
+        <h1 class="headline">活动项目，镜头跟着<span class="gold">关键句</span>移动</h1>
+        <p class="subline">不是把完整模板铺满，而是让句段像影片胶片一样滑过焦点区。</p>
+        <div class="filmstrip-wrap">
+          <div class="scan-slit" data-slit="activity"></div>
+          <div class="filmstrip" data-strip="activity">
+            <div class="frame"><span class="idx">01</span><p>我主要负责<b>整体视觉方向的制定</b>，以及主 KV 和核心投放物料的视觉节奏。</p></div>
+            <div class="frame"><span class="idx">02</span><p>根据目标人群和投放渠道，确定偏 XX 风格的视觉语言，把色彩、光影和构图统一到一套体系里。</p></div>
+            <div class="frame"><span class="idx">03</span><p>在主 KV 上，我重点处理<b>信息节奏</b>，把主题、权益和 CTA 放在第一视觉动线上。</p></div>
+            <div class="frame"><span class="idx">04</span><p>搭建延展规范和模板，支持团队快速生产多端 Banner、信息流和推文封面。</p></div>
+            <div class="frame"><span class="idx">05</span><p>上线后，多渠道复用，整体<b>点击和参与表现</b>相比上一期明显提升。</p></div>
+          </div>
+          <div class="focus-shade top" data-shade="activity"></div>
+          <div class="focus-shade bottom" data-shade="activity"></div>
+          <div class="focus-shade left" data-shade="activity"></div>
+          <div class="focus-shade right" data-shade="activity"></div>
+        </div>
+        <div class="read-cursor" data-cursor="activity" style="left: 690px; top: 682px;"></div>
+        <div class="callout" data-callout="activity"><b>判断提示</b><span>视觉方向不是风格偏好，而是目标人群和渠道推出来的选择。</span></div>
+        <div class="sticker paper" data-sticker="3" style="left: 940px; top: 205px; transform: rotate(-4deg);">镜头跟句子走</div>
+      </section>
+
+      <section class="scene" data-scene="4">
+        <div class="scene-label">SLOTS / 变量装配</div>
+        <h1 class="headline">模板不是用来背，<span class="gold">是用来替换变量</span></h1>
+        <p class="subline">把你的项目证据装进这四个槽位，回答就会从空话变成可追问的叙事。</p>
+        <div class="assembly-hero">
+          <div class="assembly-kicker">ANSWER BUILDER / 把空话改成证据句</div>
+          <div class="assembly-line">我负责 <span class="assembly-chip">活动主题</span>，用 <span class="assembly-chip">风格关键词</span> 统一 <span class="assembly-chip">渠道触点</span>，最后拿 <span class="assembly-chip">结果变化</span> 证明判断。</div>
+        </div>
+        <div class="slot-lab">
+          <div class="slot"><b>01 / 活动主题</b><span>大促、节日、周年庆</span></div>
+          <div class="slot"><b>02 / 风格关键词</b><span>人群和渠道推导</span></div>
+          <div class="slot"><b>03 / 渠道触点</b><span>App、官网、信息流</span></div>
+          <div class="slot"><b>04 / 结果变化</b><span>点击、参与、效率</span></div>
+        </div>
+        <div class="slot-beam" data-slot-beam></div>
+        <div class="burst" data-burst="4" style="left: 625px; top: 1065px;"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="sentence-build">在这次 <i>XX 活动</i> 里，我根据 <i>目标人群和渠道</i>，确定 <i>XX 风格</i>，并在 <i>多渠道表现</i> 上得到验证。</div>
+      </section>
+
+      <section class="scene" data-scene="5">
+        <div class="scene-label">BRAND / 错误视角拆解</div>
+        <h1 class="headline">品牌升级不能讲成<span class="gold">物料清单</span></h1>
+        <p class="subline">低视角答案被切开后，右侧生成真正该讲的系统推导图。</p>
+        <div class="brand-breaker">
+          <div class="low-answer">
+            <h2>LOW SIGNAL</h2>
+            <div class="impact-lines" data-impact><span></span><span></span><span></span></div>
+            <p>我做了新 Logo，还做了官网、海报、周边这些应用物料。
+              <svg class="strike-svg" viewBox="0 0 900 70" preserveAspectRatio="none"><path class="draw" data-draw="5" d="M8 42 C210 18 520 58 892 24" /></svg>
+            </p>
+          </div>
+          <div class="logic-map">
+            <div class="map-grid">
+              <div class="map-node"><b>旧问题</b><span>识别度不高，风格割裂。</span></div>
+              <div class="map-node"><b>推导</b><span>从品牌定位生成视觉语言。</span></div>
+              <div class="map-node"><b>触点</b><span>官网、社媒、线下物料统一识别。</span></div>
+              <div class="map-node"><b>反馈</b><span>识别度和专业感被验证。</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="sticker red" data-sticker="5" style="left: 150px; top: 1135px; transform: rotate(-7deg);">执行视角太低</div>
+      </section>
+
+      <section class="scene" data-scene="6">
+        <div class="scene-label">TEMPLATE 02 / 品牌升级</div>
+        <h1 class="headline">品牌项目，镜头追踪<span class="gold">体系推导</span></h1>
+        <p class="subline">先聚焦旧问题，再滑到落地和反馈，让“升级系统”而不是“做物料”成为主线。</p>
+        <div class="filmstrip-wrap">
+          <div class="scan-slit" data-slit="brand"></div>
+          <div class="filmstrip" data-strip="brand">
+            <div class="frame"><span class="idx">01</span><p>我主要负责<b>新的品牌视觉语言设计</b>，以及关键触点的应用落地。</p></div>
+            <div class="frame"><span class="idx">02</span><p>先梳理原有品牌的问题，比如标志识别度不高、线上线下风格割裂，小尺寸容易丢失特征。</p></div>
+            <div class="frame"><span class="idx">03</span><p>基于品牌定位和核心关键词，重新设计标志结构，提炼更有记忆点的图形语言。</p></div>
+            <div class="frame"><span class="idx">04</span><p>官网首页、社媒模板和线下物料，通过统一版式规则和视觉锚点形成识别。</p></div>
+            <div class="frame"><span class="idx">05</span><p>升级后，新视觉持续用于活动和线上内容，品牌识别度和整体专业感明显提升。</p></div>
+          </div>
+          <div class="focus-shade top" data-shade="brand"></div>
+          <div class="focus-shade bottom" data-shade="brand"></div>
+          <div class="focus-shade left" data-shade="brand"></div>
+          <div class="focus-shade right" data-shade="brand"></div>
+        </div>
+        <div class="read-cursor" data-cursor="brand" style="left: 690px; top: 682px;"></div>
+        <div class="callout" data-callout="brand"><b>判断提示</b><span>不是做了 Logo，而是把旧问题推导成一套新视觉系统。</span></div>
+        <div class="sticker cyan" data-sticker="6" style="right: 170px; top: 205px; transform: rotate(4deg);">系统推导</div>
+      </section>
+
+      <section class="scene" data-scene="7">
+        <div class="scene-label">TAKEAWAY / 信号校准</div>
+        <h1 class="headline">好回答，会让你像<span class="gold">决策者</span></h1>
+        <p class="subline">最终不是问你做了哪些执行，而是看你的项目叙事能不能经得起追问。</p>
+        <div class="final-radar">
+          <div class="radar-ring r1"></div>
+          <div class="radar-ring r2"></div>
+          <div class="radar-sweep"></div>
+        </div>
+        <div class="burst" data-burst="7" style="left: 342px; top: 745px;"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="decision">
+          <div class="decision-card gold">我负责的范围是什么？</div>
+          <div class="decision-card">我做过哪些关键判断？</div>
+          <div class="decision-card">判断带来了什么结果？</div>
+          <div class="decision-card">如何证明我的决策能力？</div>
+        </div>
+      </section>
+
+      <div class="lens-wipe" data-wipe></div>
+      <div class="caption">
+        <div class="sub-line" data-subtitle data-start="0.8" data-end="2.7">面试问：<span class="sub-key">主要负责了什么？</span></div>
+        <div class="sub-line" data-subtitle data-start="2.8" data-end="4.8">别急着报<span class="sub-key">任务清单</span></div>
+        <div class="sub-line" data-subtitle data-start="4.9" data-end="8.7">这题真正测的是<span class="sub-key">判断力</span></div>
+
+        <div class="sub-line" data-subtitle data-start="10.8" data-end="12.8">先说<span class="sub-key">负责范围</span></div>
+        <div class="sub-line" data-subtitle data-start="12.9" data-end="15.3">再说<span class="sub-key">关键判断</span></div>
+        <div class="sub-line" data-subtitle data-start="15.4" data-end="18.4">最后给<span class="sub-key">结果证据</span></div>
+
+        <div class="sub-line" data-subtitle data-start="20.8" data-end="23.0">活动项目别只讲物料</div>
+        <div class="sub-line" data-subtitle data-start="23.1" data-end="25.7">重点是<span class="sub-key">视觉语言</span>和<span class="sub-key">信息节奏</span></div>
+        <div class="sub-line" data-subtitle data-start="25.8" data-end="28.4">还要讲上线后的<span class="sub-key">表现</span></div>
+
+        <div class="sub-line" data-subtitle data-start="30.8" data-end="33.0">模板不是背诵稿</div>
+        <div class="sub-line" data-subtitle data-start="33.1" data-end="36.5">把你的项目变量放进去</div>
+        <div class="sub-line" data-subtitle data-start="36.6" data-end="38.7">回答就有了<span class="sub-key">证据感</span></div>
+
+        <div class="sub-line" data-subtitle data-start="40.8" data-end="43.5">品牌升级别讲成清单</div>
+        <div class="sub-line" data-subtitle data-start="43.6" data-end="46.8">要从<span class="sub-key">旧问题</span>推导<span class="sub-key">新系统</span></div>
+        <div class="sub-line" data-subtitle data-start="46.9" data-end="48.8">这才是设计视角</div>
+
+        <div class="sub-line" data-subtitle data-start="50.8" data-end="53.6">先讲旧版本哪里不清楚</div>
+        <div class="sub-line" data-subtitle data-start="53.7" data-end="56.8">再讲视觉体系怎么长出来</div>
+        <div class="sub-line" data-subtitle data-start="56.9" data-end="59.1">最后讲触点和反馈</div>
+
+        <div class="sub-line" data-subtitle data-start="60.8" data-end="63.5">好回答会让你像<span class="sub-key">决策者</span></div>
+        <div class="sub-line" data-subtitle data-start="63.6" data-end="66.8">不是执行多，而是判断清楚</div>
+        <div class="sub-line" data-subtitle data-start="66.9" data-end="69.6">讲出叙事感，更接近 offer</div>
+      </div>
+    </main>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const COMPOSITION_ID = "answer-signal-machine";
+      const SCENE = 10;
+      const TOTAL = 7;
+      const scenes = gsap.utils.toArray(".scene");
+      const subtitles = gsap.utils.toArray("[data-subtitle]");
+      gsap.utils.toArray(".draw").forEach((el) => {
+        const len = el.getTotalLength();
+        el.style.strokeDasharray = len;
+        el.style.strokeDashoffset = len;
+      });
+      gsap.set(scenes, { autoAlpha: 0 });
+      gsap.set(subtitles, { autoAlpha: 0, y: 18, scale: .98, xPercent: -50 });
+      gsap.set(".sub-key", { backgroundSize: "0% 100%" });
+      gsap.set(".bad-token, .pillar, .logic-node, .frame, .slot, .map-node, .decision-card", { autoAlpha: 0 });
+      gsap.set(".callout, .sticker, .bad-note, .burst, .scan-slit, .focus-shade, .read-cursor, .slot-beam, .impact-lines, .logic-port, [data-wipe]", { autoAlpha: 0 });
+      gsap.set(".logic-beam", { scaleY: 0, transformOrigin: "50% 0%" });
+      gsap.set(".slot-beam", { scaleX: 0, transformOrigin: "0% 50%" });
+      gsap.set('[data-strip="activity"], [data-strip="brand"]', { x: 292 });
+      gsap.set(".sentence-build", { autoAlpha: 0, clipPath: "inset(0 100% 0 0)" });
+      gsap.set(".radar-sweep", { rotation: -30 });
+
+      const tl = gsap.timeline({ paused: true });
+      const baseItems = (scene) => gsap.utils.toArray(scene.querySelectorAll(".scene-label, .headline, .subline, .machine-core, .question-line, .logic-orbit, .filmstrip-wrap, .assembly-hero, .slot-lab, .brand-breaker, .final-radar, .decision"));
+
+      for (let i = 0; i < TOTAL; i += 1) {
+        const at = i * SCENE;
+        const scene = scenes[i];
+        const isLast = i === TOTAL - 1;
+        tl.fromTo(scene, { autoAlpha: 0, scale: 1.045, y: 26 }, { autoAlpha: 1, scale: 1, y: 0, duration: .6, ease: "power2.out" }, at);
+        tl.to(scene, { scale: 1.018, duration: SCENE - 1.2, ease: "sine.inOut" }, at + .6);
+        tl.fromTo(baseItems(scene), { autoAlpha: 0, y: 34 }, { autoAlpha: 1, y: 0, duration: .62, stagger: .08, ease: "power3.out" }, at + .2);
+        const draw = gsap.utils.toArray(scene.querySelectorAll(".draw"));
+        if (draw.length) tl.to(draw, { strokeDashoffset: 0, duration: .7, ease: "power1.inOut" }, at + 2.2);
+
+        if (i === 0) {
+          tl.to(".machine-core", { rotation: 11, scale: 1.08, duration: 6.8, ease: "sine.inOut" }, at + 1.0);
+          tl.fromTo('[data-sticker="1a"]', { autoAlpha: 0, scale: .62, rotation: -10 }, { autoAlpha: 1, scale: 1, rotation: -3, duration: .42, ease: "back.out(2)" }, at + 1.35);
+          tl.fromTo(scene.querySelectorAll(".bad-token"), { autoAlpha: 0, y: 28, scale: .9 }, { autoAlpha: 1, y: 0, scale: 1, duration: .42, stagger: .08, ease: "back.out(1.7)" }, at + 1.7);
+          tl.fromTo('[data-sticker="1b"]', { autoAlpha: 0, scale: .6, rotation: 8 }, { autoAlpha: 1, scale: 1, rotation: -5, duration: .4, ease: "back.out(2)" }, at + 2.35);
+          tl.to(scene.querySelectorAll(".bad-token"), { x: (idx) => [-180, -60, 90, 190, 40][idx], y: (idx) => [80, 150, 110, 40, 210][idx], rotation: (idx) => [-9, 6, -5, 8, -3][idx], opacity: .36, duration: .8, stagger: .03, ease: "power3.inOut" }, at + 3.0);
+          tl.fromTo('[data-burst="1"]', { autoAlpha: 0, scale: .24, rotation: -30 }, { autoAlpha: 1, scale: 1, rotation: 0, duration: .32, ease: "power2.out" }, at + 3.55);
+          tl.to('[data-burst="1"]', { autoAlpha: 0, scale: 1.8, duration: .55, ease: "power2.out" }, at + 3.9);
+          tl.fromTo(scene.querySelectorAll(".pillar"), { autoAlpha: 0, y: 80, scale: .82 }, { autoAlpha: 1, y: 0, scale: 1, duration: .6, stagger: .14, ease: "back.out(1.8)" }, at + 3.8);
+        }
+        if (i === 1) {
+          tl.fromTo(scene.querySelectorAll(".logic-node"), { autoAlpha: 0, x: (idx) => idx === 1 ? 80 : -80 }, { autoAlpha: 1, x: 0, duration: .62, stagger: .18, ease: "power3.out" }, at + 1.4);
+          tl.fromTo(".logic-beam", { scaleY: 0, transformOrigin: "50% 0%" }, { scaleY: 1, duration: 1.2, ease: "power2.inOut" }, at + 2.0);
+          tl.fromTo(scene.querySelectorAll(".logic-port"), { autoAlpha: 0, scale: .48 }, { autoAlpha: 1, scale: 1, duration: .36, stagger: .18, ease: "back.out(2)" }, at + 2.15);
+          tl.fromTo('[data-sticker="2"]', { autoAlpha: 0, scale: .72, rotation: -8 }, { autoAlpha: 1, scale: 1, rotation: 4, duration: .42, ease: "back.out(2)" }, at + 4.7);
+          tl.to(scene.querySelectorAll(".logic-node"), { y: (idx) => [-18, 10, -8][idx], duration: 3.2, stagger: .05, ease: "sine.inOut" }, at + 4.6);
+        }
+        if (i === 2) {
+          tl.fromTo('[data-scene="3"] .frame', { autoAlpha: 0, x: 180 }, { autoAlpha: 1, x: 0, duration: .58, stagger: .1, ease: "power3.out" }, at + 1.2);
+          tl.fromTo('[data-sticker="3"]', { autoAlpha: 0, scale: .68, rotation: 6 }, { autoAlpha: 1, scale: 1, rotation: -4, duration: .42, ease: "back.out(2)" }, at + 1.75);
+          tl.fromTo('[data-slit="activity"]', { autoAlpha: 0, scale: .82, y: -40 }, { autoAlpha: 1, scale: 1, y: 0, duration: .48, ease: "power3.out" }, at + 2.15);
+          tl.fromTo('[data-shade="activity"]', { autoAlpha: 0 }, { autoAlpha: 1, duration: .46, ease: "power2.out" }, at + 2.18);
+          tl.fromTo('[data-cursor="activity"]', { autoAlpha: 0, scale: .45 }, { autoAlpha: 1, scale: 1, duration: .42, ease: "back.out(2)" }, at + 2.45);
+          tl.to('[data-strip="activity"]', { x: -1952, duration: 3.4, ease: "power2.inOut" }, at + 3.4);
+          tl.to('[data-cursor="activity"]', { x: -210, y: -80, duration: 3.1, ease: "power2.inOut" }, at + 3.35);
+          tl.to('[data-slit="activity"]', { x: 0, y: 0, duration: 3.1, ease: "power2.inOut" }, at + 3.35);
+          tl.fromTo('[data-callout="activity"]', { autoAlpha: 0, y: 22 }, { autoAlpha: 1, y: 0, duration: .45, ease: "power2.out" }, at + 5.5);
+        }
+        if (i === 3) {
+          tl.fromTo(scene.querySelectorAll(".slot"), { autoAlpha: 0, y: 80, scale: .9 }, { autoAlpha: 1, y: 0, scale: 1, duration: .55, stagger: .12, ease: "back.out(1.6)" }, at + 1.4);
+          tl.fromTo("[data-slot-beam]", { autoAlpha: 0, scaleX: 0, transformOrigin: "0% 50%" }, { autoAlpha: 1, scaleX: 1, duration: .72, ease: "power2.inOut" }, at + 2.35);
+          tl.to(scene.querySelectorAll(".slot"), { x: (idx) => [300, -300, 130, -240][idx], y: (idx) => [360, 400, -20, 18][idx], scale: .58, autoAlpha: .16, duration: 1.2, stagger: .04, ease: "power3.inOut" }, at + 2.75);
+          tl.fromTo(".sentence-build", { autoAlpha: 0, clipPath: "inset(0 100% 0 0)" }, { autoAlpha: 1, clipPath: "inset(0 0% 0 0)", duration: 1.1, ease: "power2.inOut" }, at + 3.55);
+          tl.fromTo('[data-burst="4"]', { autoAlpha: 0, scale: .22, rotation: -35 }, { autoAlpha: 1, scale: 1, rotation: 0, duration: .32, ease: "power2.out" }, at + 4.6);
+          tl.to('[data-burst="4"]', { autoAlpha: 0, scale: 1.8, duration: .55, ease: "power2.out" }, at + 4.92);
+        }
+        if (i === 4) {
+          tl.fromTo('[data-impact]', { autoAlpha: 0, scale: .74 }, { autoAlpha: 1, scale: 1, duration: .22, ease: "power2.out" }, at + 1.65);
+          tl.to('[data-impact]', { autoAlpha: 0, scale: 1.12, duration: .34, ease: "power2.out" }, at + 2.05);
+          tl.fromTo('[data-sticker="5"]', { autoAlpha: 0, scale: .7, rotation: 8 }, { autoAlpha: 1, scale: 1, rotation: -7, duration: .42, ease: "back.out(2)" }, at + 2.05);
+          tl.fromTo(scene.querySelectorAll(".map-node"), { autoAlpha: 0, scale: .84, y: 24 }, { autoAlpha: 1, scale: 1, y: 0, duration: .52, stagger: .12, ease: "back.out(1.7)" }, at + 2.7);
+          tl.to(".low-answer", { x: -42, rotation: -1.5, opacity: .62, duration: .7, ease: "power2.out" }, at + 3.2);
+          tl.to(".logic-map", { scale: 1.04, duration: 2.4, ease: "sine.inOut" }, at + 4.0);
+        }
+        if (i === 5) {
+          tl.fromTo('[data-scene="6"] .frame', { autoAlpha: 0, x: 180 }, { autoAlpha: 1, x: 0, duration: .58, stagger: .1, ease: "power3.out" }, at + 1.2);
+          tl.fromTo('[data-sticker="6"]', { autoAlpha: 0, scale: .68, rotation: -5 }, { autoAlpha: 1, scale: 1, rotation: 4, duration: .42, ease: "back.out(2)" }, at + 1.75);
+          tl.fromTo('[data-slit="brand"]', { autoAlpha: 0, scale: .82, y: -40 }, { autoAlpha: 1, scale: 1, y: 0, duration: .48, ease: "power3.out" }, at + 2.15);
+          tl.fromTo('[data-shade="brand"]', { autoAlpha: 0 }, { autoAlpha: 1, duration: .46, ease: "power2.out" }, at + 2.18);
+          tl.fromTo('[data-cursor="brand"]', { autoAlpha: 0, scale: .45 }, { autoAlpha: 1, scale: 1, duration: .42, ease: "back.out(2)" }, at + 2.45);
+          tl.to('[data-strip="brand"]', { x: -1952, duration: 3.4, ease: "power2.inOut" }, at + 3.4);
+          tl.to('[data-cursor="brand"]', { x: -210, y: -80, duration: 3.1, ease: "power2.inOut" }, at + 3.35);
+          tl.to('[data-slit="brand"]', { x: 0, y: 0, duration: 3.1, ease: "power2.inOut" }, at + 3.35);
+          tl.fromTo('[data-callout="brand"]', { autoAlpha: 0, y: 22 }, { autoAlpha: 1, y: 0, duration: .45, ease: "power2.out" }, at + 5.5);
+        }
+        if (i === 6) {
+          tl.fromTo(scene.querySelectorAll(".decision-card"), { autoAlpha: 0, x: 70 }, { autoAlpha: 1, x: 0, duration: .5, stagger: .12, ease: "power3.out" }, at + 1.4);
+          tl.to(".radar-sweep", { rotation: 330, duration: 5.2, ease: "none" }, at + 1.2);
+          tl.to(".final-radar", { scale: 1.04, duration: 4.2, ease: "sine.inOut" }, at + 2.0);
+          tl.fromTo('[data-burst="7"]', { autoAlpha: 0, scale: .22, rotation: -35 }, { autoAlpha: 1, scale: 1, rotation: 0, duration: .32, ease: "power2.out" }, at + 2.45);
+          tl.to('[data-burst="7"]', { autoAlpha: 0, scale: 1.8, duration: .55, ease: "power2.out" }, at + 2.78);
+          tl.to(scene.querySelectorAll(".decision-card"), { scale: (idx) => idx === 3 ? 1.05 : 1.015, duration: .55, stagger: .08, ease: "power2.out" }, at + 4.9);
+        }
+        if (!isLast) {
+          tl.fromTo("[data-wipe]", { autoAlpha: 0, x: -320 }, { autoAlpha: .95, x: 1540, duration: .72, ease: "power3.inOut" }, at + SCENE - .86);
+          tl.to("[data-wipe]", { autoAlpha: 0, duration: .1, ease: "none" }, at + SCENE - .12);
+          tl.to(scene, { autoAlpha: 0, duration: .5, ease: "power1.inOut" }, at + SCENE - .5);
+        }
+        window.__timelines[`scene-${i + 1}`] = { start: at, duration: SCENE };
+      }
+      subtitles.forEach((subtitle) => {
+        const start = Number(subtitle.dataset.start);
+        const end = Number(subtitle.dataset.end);
+        const duration = Math.max(.6, end - start);
+        const keys = gsap.utils.toArray(subtitle.querySelectorAll(".sub-key"));
+        tl.fromTo(subtitle, { autoAlpha: 0, y: 18, scale: .98, xPercent: -50 }, { autoAlpha: 1, y: 0, scale: 1, xPercent: -50, duration: .22, ease: "power2.out" }, start);
+        if (keys.length) {
+          tl.fromTo(keys, { backgroundSize: "0% 100%" }, { backgroundSize: "100% 100%", duration: Math.min(.7, duration - .24), stagger: .06, ease: "power1.out" }, start + .12);
+        }
+        tl.to(subtitle, { autoAlpha: 0, y: -10, scale: .99, duration: .18, ease: "power1.in" }, Math.max(start + .42, end - .18));
+      });
+      tl.to('[data-scene="7"]', { autoAlpha: 1, duration: 2 }, 70);
+      window.__timelines[COMPOSITION_ID] = tl;
+      window.__timelines.master = tl;
+      const previewTime = new URLSearchParams(window.location.search).get("t");
+      if (previewTime !== null) {
+        const seconds = Number(previewTime);
+        tl.pause(Number.isFinite(seconds) ? Math.max(0, Math.min(seconds, 72)) : 0);
+      } else {
+        tl.play(0);
+      }
+    </script>
+  </body>
+</html>

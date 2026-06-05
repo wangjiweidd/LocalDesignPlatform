@@ -1,0 +1,145 @@
+{
+  "templateId": "answer-signal-machine",
+  "name": "Answer Signal Machine",
+  "account": "Odin",
+  "renderer": "hyperframes",
+  "canvas": {
+    "width": 1440,
+    "height": 1920,
+    "ratio": "3:4"
+  },
+  "durationSeconds": 72,
+  "sceneSeconds": 10,
+  "sceneCount": 7,
+  "bestFor": [
+    "design interview Q&A",
+    "portfolio narrative coaching",
+    "resume and project responsibility explanation",
+    "case-study answer frameworks"
+  ],
+  "avoidFor": [
+    "pure listicle",
+    "full screenshot critique",
+    "simple carousel replacement",
+    "videos with no concrete answer examples"
+  ],
+  "minimumReadability": {
+    "subtitleFontPx": 50,
+    "filmstripBodyPx": 52,
+    "logicNodeBodyPx": 34,
+    "smallestImportantTextPx": 38
+  },
+  "scenes": [
+    {
+      "id": "opening-breakdown",
+      "screenJob": "Break a weak answer into low-signal tokens, then introduce the stronger signals.",
+      "replace": [
+        "scene label",
+        "headline",
+        "subline",
+        "question line",
+        "bad answer tokens",
+        "signal pillars",
+        "stickers"
+      ]
+    },
+    {
+      "id": "logic-chain",
+      "screenJob": "Show the reusable 3-step logic chain.",
+      "replace": [
+        "headline",
+        "subline",
+        "node 01 label/body",
+        "node 02 label/body",
+        "node 03 label/body",
+        "chain badge"
+      ]
+    },
+    {
+      "id": "example-filmstrip-a",
+      "screenJob": "Move a long concrete example through the focus window.",
+      "replace": [
+        "headline",
+        "subline",
+        "five filmstrip frames",
+        "callout",
+        "sticker"
+      ],
+      "rules": [
+        "Each frame should be one readable sentence.",
+        "Keep the focus mask enabled.",
+        "Do not show all example text at equal emphasis."
+      ]
+    },
+    {
+      "id": "template-assembly",
+      "screenJob": "Turn answer variables into one usable sentence pattern.",
+      "replace": [
+        "headline",
+        "subline",
+        "assembly hero",
+        "four slots",
+        "built sentence"
+      ]
+    },
+    {
+      "id": "contrast-map",
+      "screenJob": "Contrast weak answer phrasing with structured evidence logic.",
+      "replace": [
+        "headline",
+        "subline",
+        "weak answer card",
+        "logic map nodes",
+        "sticker"
+      ]
+    },
+    {
+      "id": "example-filmstrip-b",
+      "screenJob": "Move a second long concrete example through the same focus window.",
+      "replace": [
+        "headline",
+        "subline",
+        "five filmstrip frames",
+        "callout",
+        "sticker"
+      ],
+      "rules": [
+        "Use this to show a second project type or second answer variant.",
+        "If only one example exists, convert this scene into a deeper zoom on the first example instead of repeating filler."
+      ]
+    },
+    {
+      "id": "takeaway-radar",
+      "screenJob": "Close with the decision-maker checklist.",
+      "replace": [
+        "headline",
+        "subline",
+        "decision cards"
+      ]
+    }
+  ],
+  "captionRules": {
+    "source": "work/script.md",
+    "mustMatchVoiceover": true,
+    "display": "timed bottom subtitles",
+    "doNotUse": "full transcript visible at once"
+  },
+  "verificationCheckpoints": [
+    {
+      "time": 15.3,
+      "reason": "logic chain and chain badge are visible"
+    },
+    {
+      "time": 26.85,
+      "reason": "first filmstrip focus window is aligned"
+    },
+    {
+      "time": 56.85,
+      "reason": "second filmstrip focus window is aligned"
+    },
+    {
+      "time": 64,
+      "reason": "final caption safe area and decision cards are visible"
+    }
+  ]
+}

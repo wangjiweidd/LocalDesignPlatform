@@ -6,6 +6,7 @@
 - Portfolio 页面
 - 课程 PPT
 - Remotion 视频动效
+- Odin HyperFrames 视频模板
 
 ## Run
 
@@ -35,12 +36,14 @@ templates/
   portfolio-case/
   course-ppt/
   remotion-video/
+  odin-video/
 
 skills/
   xhs-carousel/
   portfolio-case/
   course-ppt/
   remotion-video/
+  odin-video/
 ```
 
 ## Pipeline Binding
@@ -55,6 +58,25 @@ skills/
 - `steps`：用户在工作台里看到的生产步骤。
 
 调整某条生产线时，优先改对应 skill 和这条配置，不需要改其他生产线。一个 skill 不等于单个 Markdown 文档；它可以包含脚本、模板、参考资料、关联 skill 和完整工作流。
+
+## Odin Video Workflow
+
+Odin video production is being solidified under:
+
+```text
+templates/odin-video/
+```
+
+Default rule: generate editable script and HyperFrames HTML preview first; render `final.mp4` only after explicit user confirmation. Each Odin project keeps a simple user-facing shape:
+
+```text
+project-folder/
+  assets/
+  work/
+  final.mp4
+```
+
+Use `assets/` for screenshots, recordings, copy, reference media, and stickers. Use `work/` for scripts, Minimax voiceover text, HTML preview, and agent-only temporary files under `work/_codex/`.
 
 ## CLI Agent Mode
 

@@ -1,0 +1,838 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1440, height=1920" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @font-face {
+        font-family: "OdinSong";
+        src: url("assets/fonts/Songti.ttc");
+      }
+
+      @font-face {
+        font-family: "OdinHei";
+        src: url("assets/fonts/STHeiti-Medium.ttc");
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 1440px;
+        height: 1920px;
+        margin: 0;
+        overflow: hidden;
+        background: #f3ffd9;
+      }
+
+      #root {
+        position: relative;
+        width: 1440px;
+        height: 1920px;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at 24% 4%, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0) 32%),
+          linear-gradient(180deg, #eaffc9 0%, #fbfff1 72%, #ffffff 100%);
+        color: #111;
+      }
+
+      #root::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        background:
+          linear-gradient(115deg, rgba(255, 225, 120, 0.18), transparent 30%),
+          linear-gradient(290deg, rgba(216, 23, 24, 0.07), transparent 38%);
+        mix-blend-mode: multiply;
+        pointer-events: none;
+      }
+
+      .scene {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: 2;
+        opacity: 0;
+      }
+
+      #scene-1 {
+        opacity: 1;
+      }
+
+      .paper-noise {
+        position: absolute;
+        inset: 0;
+        opacity: 0.12;
+        background-image:
+          linear-gradient(rgba(10, 10, 10, 0.035) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(10, 10, 10, 0.025) 1px, transparent 1px);
+        background-size: 46px 46px;
+        pointer-events: none;
+      }
+
+      .motion-rail {
+        position: absolute;
+        left: 74px;
+        top: 152px;
+        bottom: 284px;
+        z-index: 7;
+        width: 14px;
+        border: 3px solid rgba(17, 17, 17, 0.85);
+        background: #fff7e4;
+        box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.14);
+      }
+
+      .motion-rail span {
+        display: block;
+        width: 100%;
+        height: 20%;
+        border-bottom: 3px solid rgba(17, 17, 17, 0.36);
+        background: #f4cd3e;
+        transform-origin: top;
+      }
+
+      .scene-index {
+        position: absolute;
+        right: 82px;
+        top: 108px;
+        z-index: 9;
+        padding: 13px 18px 17px;
+        border: 4px solid #111;
+        background: #fff8e7;
+        font-family: "OdinHei", sans-serif;
+        font-size: 32px;
+        font-weight: 900;
+        line-height: 1;
+        box-shadow: 6px 7px 0 rgba(0, 0, 0, 0.16);
+      }
+
+      .scene-index strong {
+        color: #d81718;
+      }
+
+      .heading {
+        position: absolute;
+        top: 92px;
+        left: 70px;
+        right: 70px;
+        text-align: center;
+        z-index: 5;
+      }
+
+      .phonetic {
+        margin-bottom: 5px;
+        font-family: "OdinHei", sans-serif;
+        font-size: 24px;
+        font-weight: 900;
+        letter-spacing: 4px;
+      }
+
+      .heading-main {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 136px;
+        padding: 10px 18px 14px;
+        font-family: "OdinSong", serif;
+        font-size: 90px;
+        font-weight: 900;
+        line-height: 1.16;
+        background: linear-gradient(180deg, transparent 56%, #fff0a6 56%);
+        text-shadow:
+          4px 5px 0 #ffffff,
+          7px 8px 0 rgba(0, 0, 0, 0.16);
+      }
+
+      .pop-heading .heading-main {
+        color: #fff8c9;
+        -webkit-text-stroke: 5px #f04b26;
+        paint-order: stroke fill;
+        filter: drop-shadow(0 5px 0 #17843a);
+        background: none;
+      }
+
+      .material-duo {
+        position: absolute;
+        left: 84px;
+        right: 84px;
+        top: 292px;
+        height: 1030px;
+        display: grid;
+        grid-template-columns: 0.92fr 1.08fr;
+        align-items: center;
+        gap: 42px;
+      }
+
+      .video-tile {
+        position: relative;
+        height: 520px;
+        border: 8px solid #181818;
+        background:
+          linear-gradient(rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0)),
+          linear-gradient(135deg, #6f7d76 0%, #b8c1ba 45%, #253033 100%);
+        box-shadow: 0 9px 0 rgba(0, 0, 0, 0.16);
+        overflow: hidden;
+      }
+
+      .video-tile::before {
+        content: "";
+        position: absolute;
+        inset: 22px;
+        border: 4px solid rgba(255, 255, 255, 0.42);
+        pointer-events: none;
+      }
+
+      .video-tile::after {
+        content: "SOURCE MATERIAL";
+        position: absolute;
+        left: 28px;
+        bottom: 26px;
+        padding: 9px 15px 12px;
+        background: #111;
+        color: #ffe77d;
+        font-family: "OdinHei", sans-serif;
+        font-size: 24px;
+        font-weight: 900;
+      }
+
+      .talking-head {
+        position: relative;
+        width: 320px;
+        height: 430px;
+        margin: 82px auto 0;
+        border-radius: 170px 170px 16px 16px;
+        background: linear-gradient(180deg, #dfe8e2 0%, #b7c7bf 50%, #f0f3ea 51%);
+        box-shadow: inset -24px 0 42px rgba(0, 0, 0, 0.2);
+      }
+
+      .talking-head::before {
+        content: "";
+        position: absolute;
+        top: -46px;
+        left: 94px;
+        width: 132px;
+        height: 148px;
+        border-radius: 50%;
+        background: #12181a;
+      }
+
+      .bubble {
+        position: absolute;
+        top: 20px;
+        left: 12px;
+        width: 270px;
+        height: 150px;
+        border: 8px solid #111;
+        border-radius: 54% 48% 50% 46%;
+        background: #fff;
+        transform: rotate(-4deg);
+      }
+
+      .bubble::after {
+        content: "";
+        position: absolute;
+        left: 28px;
+        bottom: -38px;
+        width: 72px;
+        height: 60px;
+        border-left: 8px solid #111;
+        border-bottom: 8px solid #111;
+        background: #fff;
+        transform: rotate(-28deg);
+      }
+
+      .material-card {
+        position: relative;
+        min-height: 760px;
+        padding: 42px 46px;
+        border: 6px solid #a8906b;
+        background: #fff8e7;
+        box-shadow:
+          11px 11px 0 rgba(92, 68, 42, 0.14),
+          inset 0 0 0 3px rgba(255, 255, 255, 0.65);
+      }
+
+      .material-card::before {
+        content: "";
+        position: absolute;
+        left: 34px;
+        right: 34px;
+        top: 112px;
+        height: 122px;
+        border: 9px solid #d81718;
+        border-radius: 48% 52% 50% 45%;
+        transform: rotate(-2deg);
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .source-tabs {
+        position: absolute;
+        right: 34px;
+        top: -33px;
+        display: flex;
+        gap: 10px;
+      }
+
+      .source-tabs span {
+        padding: 10px 18px 13px;
+        border: 4px solid #111;
+        background: #f4cd3e;
+        font-family: "OdinHei", sans-serif;
+        font-size: 23px;
+        font-weight: 900;
+        box-shadow: 4px 5px 0 rgba(0, 0, 0, 0.14);
+      }
+
+      .card-title {
+        margin-bottom: 28px;
+        font-family: "OdinHei", sans-serif;
+        font-size: 46px;
+        font-weight: 900;
+        line-height: 1.12;
+      }
+
+      .fake-line {
+        height: 22px;
+        margin: 16px 0;
+        border-radius: 999px;
+        background: #2a2a2a;
+        opacity: 0.2;
+      }
+
+      .fake-line.short {
+        width: 64%;
+      }
+
+      .fake-line.hot {
+        height: 28px;
+        background: #a3f068;
+        opacity: 0.75;
+      }
+
+      .pill-stack {
+        position: absolute;
+        left: 104px;
+        top: 880px;
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+      }
+
+      .yellow-pill {
+        min-width: 470px;
+        padding: 22px 46px 29px;
+        border-radius: 999px;
+        background: #f6ef62;
+        font-family: "OdinSong", serif;
+        font-size: 58px;
+        font-weight: 900;
+        line-height: 1;
+        text-decoration: underline;
+        text-decoration-thickness: 5px;
+        text-underline-offset: 10px;
+        box-shadow: 0 10px 0 rgba(0, 0, 0, 0.12);
+      }
+
+      .evidence-card {
+        position: absolute;
+        left: 86px;
+        right: 86px;
+        top: 350px;
+        padding: 42px 48px 46px;
+        border: 5px solid #bda57f;
+        background: #fff7e4;
+        box-shadow: 9px 10px 0 rgba(86, 65, 41, 0.15);
+      }
+
+      .evidence-card::after {
+        content: "";
+        position: absolute;
+        inset: 18px;
+        border: 2px dashed rgba(17, 17, 17, 0.22);
+        pointer-events: none;
+      }
+
+      .proof-row {
+        position: relative;
+        display: grid;
+        grid-template-columns: 150px 1fr;
+        gap: 24px;
+        min-height: 194px;
+        padding: 28px 0 32px;
+        border-bottom: 3px solid rgba(83, 65, 42, 0.16);
+      }
+
+      .proof-row:last-child {
+        border-bottom: 0;
+      }
+
+      .badge {
+        align-self: start;
+        padding: 12px 12px 16px;
+        border-radius: 999px;
+        background: #111;
+        color: #ffe77d;
+        text-align: center;
+        font-family: "OdinHei", sans-serif;
+        font-size: 31px;
+        font-weight: 900;
+        line-height: 1;
+      }
+
+      .proof-row p {
+        margin: 0;
+        font-family: "OdinHei", sans-serif;
+        font-size: 43px;
+        font-weight: 900;
+        line-height: 1.38;
+      }
+
+      .red-arrow {
+        position: absolute;
+        width: 190px;
+        height: 14px;
+        background: #d81718;
+        border-radius: 999px;
+        transform: rotate(168deg);
+        z-index: 4;
+      }
+
+      .red-arrow::after {
+        content: "";
+        position: absolute;
+        right: -8px;
+        top: -25px;
+        width: 0;
+        height: 0;
+        border-top: 32px solid transparent;
+        border-bottom: 32px solid transparent;
+        border-left: 50px solid #d81718;
+      }
+
+      .arrow-1 {
+        right: 226px;
+        top: 548px;
+      }
+
+      .arrow-2 {
+        right: 244px;
+        top: 778px;
+      }
+
+      .arrow-3 {
+        right: 210px;
+        top: 1010px;
+      }
+
+      .red-circle {
+        position: absolute;
+        right: 118px;
+        top: 1036px;
+        width: 310px;
+        height: 148px;
+        border: 12px solid #d81718;
+        border-left-color: transparent;
+        border-top-color: transparent;
+        border-radius: 50%;
+        transform: rotate(-7deg);
+        z-index: 3;
+      }
+
+      .callout {
+        position: absolute;
+        right: 130px;
+        top: 1182px;
+        color: #d81718;
+        font-family: "OdinHei", sans-serif;
+        font-size: 48px;
+        font-weight: 900;
+        transform: rotate(-5deg);
+        z-index: 5;
+      }
+
+      .keyword-stack {
+        position: absolute;
+        left: 350px;
+        right: 350px;
+        top: 520px;
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+      }
+
+      .black-bar {
+        position: relative;
+        padding: 24px 42px 31px;
+        border-radius: 10px;
+        background: #050505;
+        color: #a8ffb6;
+        text-align: center;
+        font-family: "OdinSong", serif;
+        font-size: 58px;
+        font-weight: 900;
+        line-height: 1.08;
+        box-shadow: 0 8px 0 rgba(0, 0, 0, 0.18);
+      }
+
+      .black-bar::after {
+        content: "";
+        position: absolute;
+        left: 32px;
+        right: 32px;
+        bottom: 16px;
+        height: 6px;
+        background: rgba(255, 225, 120, 0.82);
+        transform: scaleX(1);
+        transform-origin: left;
+      }
+
+      .black-bar.orange {
+        color: #ff6a00;
+      }
+
+      .stamp-row {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 1198px;
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+      }
+
+      .stamp {
+        padding: 17px 28px 22px;
+        font-family: "OdinSong", serif;
+        font-size: 44px;
+        font-weight: 900;
+        line-height: 1;
+        box-shadow: 0 5px 0 rgba(0, 0, 0, 0.18);
+      }
+
+      .stamp:nth-child(1) {
+        background: #6ea1e8;
+        transform: rotate(-2deg);
+      }
+
+      .stamp:nth-child(2) {
+        background: #f4cd3e;
+        transform: rotate(1deg);
+      }
+
+      .stamp:nth-child(3) {
+        background: #f34c34;
+        transform: rotate(-1.5deg);
+      }
+
+      .caption {
+        position: absolute;
+        left: 86px;
+        right: 86px;
+        bottom: 92px;
+        z-index: 8;
+        text-align: center;
+        font-family: "OdinHei", sans-serif;
+        font-size: 54px;
+        font-weight: 900;
+        line-height: 1.16;
+        color: #111;
+        text-shadow: 0 3px 0 rgba(255, 255, 255, 0.75);
+      }
+
+      .caption::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: -26px;
+        width: 520px;
+        height: 12px;
+        background: #111;
+        transform: translateX(-50%);
+        box-shadow: 0 18px 0 #f4cd3e;
+      }
+
+      .caption .hot {
+        color: #c2410c;
+      }
+
+      .ring-target {
+        position: relative;
+        display: inline-block;
+        padding: 0 8px;
+        color: #c2410c;
+      }
+
+      .ring-target::after {
+        content: "";
+        position: absolute;
+        left: -18px;
+        right: -18px;
+        top: -8px;
+        bottom: -9px;
+        border: 10px solid #d81718;
+        border-radius: 50%;
+        transform: rotate(-4deg);
+        pointer-events: none;
+      }
+
+      #scene-4 .arrow-1 {
+        right: 252px;
+        top: 494px;
+      }
+
+      #scene-4 .arrow-2 {
+        right: 278px;
+        top: 721px;
+      }
+
+      #scene-4 .arrow-3 {
+        right: 425px;
+        top: 964px;
+        width: 130px;
+      }
+
+      #scene-4 .red-circle {
+        display: none;
+      }
+
+      #scene-4 .callout {
+        right: 246px;
+        top: 1120px;
+        font-size: 43px;
+      }
+
+      .marker-sweep {
+        position: absolute;
+        z-index: 6;
+        pointer-events: none;
+      }
+
+      .marker-sweep path {
+        fill: none;
+        stroke: #d81718;
+        stroke-width: 18;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-dasharray: 900;
+        stroke-dashoffset: 900;
+      }
+
+      .focus-note {
+        position: absolute;
+        left: 124px;
+        top: 1336px;
+        z-index: 7;
+        padding: 18px 26px 23px;
+        border: 5px solid #111;
+        background: #ff6a00;
+        color: #111;
+        font-family: "OdinSong", serif;
+        font-size: 43px;
+        font-weight: 900;
+        transform: rotate(-2deg);
+        box-shadow: 7px 8px 0 rgba(0, 0, 0, 0.18);
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="15"
+      data-width="1440"
+      data-height="1920"
+      data-track-index="0"
+    >
+      <div class="paper-noise" data-layout-ignore></div>
+      <div class="motion-rail" data-layout-ignore>
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+
+      <section id="scene-1" class="clip scene" data-start="0" data-duration="3" data-track-index="1">
+        <div class="scene-index"><strong>01</strong>/05</div>
+        <div class="heading pop-heading">
+          <div class="heading-main">判断力</div>
+        </div>
+        <div class="material-duo">
+          <div class="video-tile">
+            <div class="bubble"></div>
+            <div class="talking-head"></div>
+          </div>
+          <div class="material-card">
+            <div class="source-tabs"><span>题库</span><span>材料</span></div>
+            <div class="card-title">UX 面试常见问题 48 道</div>
+            <div class="fake-line hot"></div>
+            <div class="fake-line"></div>
+            <div class="fake-line"></div>
+            <div class="fake-line short"></div>
+            <div class="fake-line hot"></div>
+            <div class="fake-line"></div>
+            <div class="fake-line short"></div>
+          </div>
+        </div>
+        <svg class="marker-sweep" width="410" height="170" viewBox="0 0 410 170" style="right: 118px; top: 475px;">
+          <path d="M32 94 C76 26, 236 17, 349 58 C390 73, 365 140, 292 146 C183 154, 64 138, 32 94" />
+        </svg>
+        <div class="caption">很多设计师第一反应，是先罗列<span class="hot">数据结果</span></div>
+      </section>
+
+      <section id="scene-2" class="clip scene" data-start="3" data-duration="3" data-track-index="1">
+        <div class="scene-index"><strong>02</strong>/05</div>
+        <div class="heading">
+          <div class="phonetic">he / xin / ti / yan / liu / cun</div>
+          <div class="heading-main">核心体验留存类</div>
+        </div>
+        <div class="evidence-card">
+          <div class="proof-row">
+            <div class="badge">体验点</div>
+            <p>我这次做的是一个核心体验模块的优化，目标不是让用户“觉得爽”，而是让用户愿意留下来。</p>
+          </div>
+          <div class="proof-row">
+            <div class="badge">行为</div>
+            <p>所以我把优化聚焦在三个体验点上：注册更早感知、路径更直接、关键动作更明确。</p>
+          </div>
+          <div class="proof-row">
+            <div class="badge">结果</div>
+            <p>上线后，核心行为指标出现正向变化，说明这次优化不是“看起来更好看”。</p>
+          </div>
+        </div>
+        <div class="red-arrow arrow-1" data-layout-allow-overflow></div>
+        <div class="red-arrow arrow-2" data-layout-allow-overflow></div>
+        <div class="red-arrow arrow-3" data-layout-allow-overflow></div>
+        <div class="red-circle" data-layout-allow-overflow></div>
+        <div class="callout">面试官才会相信你理解机制</div>
+        <div class="focus-note">把证据钉在行为上</div>
+        <div class="caption">不是讲工具过程，而是讲清楚<span class="hot">判断依据</span></div>
+      </section>
+
+      <section id="scene-3" class="clip scene" data-start="6" data-duration="3" data-track-index="1">
+        <div class="scene-index"><strong>03</strong>/05</div>
+        <div class="heading">
+          <div class="phonetic">huo / dong / ying / xiao</div>
+          <div class="heading-main">活动营销设计</div>
+        </div>
+        <div class="keyword-stack">
+          <div class="black-bar">大促主视觉</div>
+          <div class="black-bar">节日 Campa</div>
+          <div class="black-bar">视觉提效资产库</div>
+          <div class="black-bar orange">转化结果</div>
+        </div>
+        <div class="stamp-row">
+          <div class="stamp">有节奏</div>
+          <div class="stamp">有难点</div>
+          <div class="stamp">有结果</div>
+        </div>
+        <div class="caption">这类项目，不要只讲<span class="hot">视觉好看</span></div>
+      </section>
+
+      <section id="scene-4" class="clip scene" data-start="9" data-duration="3" data-track-index="1">
+        <div class="scene-index"><strong>04</strong>/05</div>
+        <div class="heading">
+          <div class="phonetic">shang / ye / hua / bian / xian</div>
+          <div class="heading-main">商业化变现类</div>
+        </div>
+        <div class="evidence-card">
+          <div class="proof-row">
+            <div class="badge">双目标</div>
+            <p>既要让业务结果变好，也不能牺牲体验。这个冲突，才是项目真正的难点。</p>
+          </div>
+          <div class="proof-row">
+            <div class="badge">设计点</div>
+            <p>所以我先拆掉“看起来高级”的表达，保留能影响购买决策的关键信息。</p>
+          </div>
+          <div class="proof-row">
+            <div class="badge">双结果</div>
+            <p>最后不是一句“提升了转化”，<br />而是<span class="ring-target">收入、点击、留存</span>一起守住。</p>
+          </div>
+        </div>
+        <div class="red-arrow arrow-1" data-layout-allow-overflow></div>
+        <div class="red-arrow arrow-2" data-layout-allow-overflow></div>
+        <div class="red-arrow arrow-3" data-layout-allow-overflow></div>
+        <div class="callout">这才像设计决策</div>
+        <div class="caption">面试里要讲<span class="hot">权衡</span>，不是讲我做了什么图</div>
+      </section>
+
+      <section id="scene-5" class="clip scene" data-start="12" data-duration="3" data-track-index="1">
+        <div class="scene-index"><strong>05</strong>/05</div>
+        <div class="heading">
+          <div class="phonetic">shi / jue / zi / chan / ti / xi</div>
+          <div class="heading-main">视觉资产体系</div>
+        </div>
+        <div class="material-duo">
+          <div class="keyword-stack" style="position: static; margin-top: 0;">
+            <div class="black-bar">模板体系</div>
+            <div class="black-bar">物料规范</div>
+            <div class="black-bar">组件资产库</div>
+            <div class="black-bar">渠道出图系统</div>
+          </div>
+          <div class="material-card">
+            <div class="card-title">「BeanGo」营销物料模板库</div>
+            <div class="fake-line"></div>
+            <div class="fake-line hot"></div>
+            <div class="fake-line"></div>
+            <div class="fake-line short"></div>
+            <div class="fake-line hot"></div>
+            <div class="fake-line"></div>
+            <div class="fake-line short"></div>
+          </div>
+        </div>
+        <div class="caption">以后每期只换材料，保留同一套<span class="hot">视觉语法</span></div>
+      </section>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      const fromIfExists = (selector, vars, position) => {
+        if (document.querySelector(selector)) {
+          tl.from(selector, { immediateRender: false, ...vars }, position);
+        }
+      };
+      const toIfExists = (selector, vars, position) => {
+        if (document.querySelector(selector)) {
+          tl.to(selector, vars, position);
+        }
+      };
+
+      [
+        ["#scene-1", 0],
+        ["#scene-2", 3],
+        ["#scene-3", 6],
+        ["#scene-4", 9],
+        ["#scene-5", 12],
+      ].forEach(([selector, start]) => {
+        tl.set(selector, { opacity: 1 }, start);
+        fromIfExists(`${selector} .heading`, { y: -24, opacity: 0, duration: 0.28, ease: "back.out(1.4)" }, start + 0.04);
+        fromIfExists(`${selector} .video-tile`, { x: -38, opacity: 0, duration: 0.34, ease: "power2.out" }, start + 0.12);
+        fromIfExists(`${selector} .material-card`, { x: 38, opacity: 0, duration: 0.34, ease: "power2.out" }, start + 0.18);
+        fromIfExists(`${selector} .yellow-pill`, { x: -40, opacity: 0, duration: 0.28, stagger: 0.08, ease: "power3.out" }, start + 0.3);
+        fromIfExists(`${selector} .proof-row`, { y: 24, opacity: 0, duration: 0.3, stagger: 0.08, ease: "power2.out" }, start + 0.16);
+        fromIfExists(`${selector} .black-bar`, { scale: 0.96, opacity: 0, duration: 0.26, stagger: 0.08, ease: "back.out(1.35)" }, start + 0.18);
+        fromIfExists(`${selector} .stamp`, { y: 22, rotation: 0, opacity: 0, duration: 0.24, stagger: 0.05, ease: "back.out(1.7)" }, start + 0.64);
+        fromIfExists(`${selector} .caption`, { y: 14, opacity: 0, duration: 0.24, ease: "power2.out" }, start + 0.22);
+        fromIfExists(`${selector} .scene-index`, { x: 28, rotation: 2, opacity: 0, duration: 0.22, ease: "back.out(1.4)" }, start + 0.08);
+        fromIfExists(`${selector} .source-tabs span`, { y: -18, opacity: 0, duration: 0.18, stagger: 0.05, ease: "power2.out" }, start + 0.34);
+        fromIfExists(`${selector} .red-arrow`, { scaleX: 0, transformOrigin: "right center", duration: 0.2, stagger: 0.08, ease: "power2.out" }, start + 0.58);
+        fromIfExists(`${selector} .red-circle`, { scale: 0.86, opacity: 0, duration: 0.26, ease: "power2.out" }, start + 0.86);
+        fromIfExists(`${selector} .callout`, { y: 16, opacity: 0, duration: 0.22, ease: "power2.out" }, start + 1.0);
+        fromIfExists(`${selector} .focus-note`, { scale: 0.92, rotation: -7, opacity: 0, duration: 0.24, ease: "back.out(1.6)" }, start + 1.08);
+        toIfExists(`${selector} .marker-sweep path`, { strokeDashoffset: 0, duration: 0.36, ease: "power2.out" }, start + 0.8);
+        tl.to(".motion-rail span", { backgroundColor: "#d81718", duration: 0.08, stagger: 0.02, ease: "none" }, start + 0.02);
+
+        if (start < 12) {
+          toIfExists(selector, { opacity: 0, duration: 0.16, ease: "power1.in" }, start + 2.86);
+        }
+      });
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

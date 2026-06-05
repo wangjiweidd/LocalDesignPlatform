@@ -1,0 +1,55 @@
+{
+  "id": "2606031500-设计师会装指南-demo",
+  "name": "设计师\"会装\"指南：看起来专业有深度的 5 个技巧",
+  "type": "video",
+  "skill": "templates/odin-video",
+  "relatedSkills": [
+    "templates/odin-video",
+    "hyperframes",
+    "zh-writing-guardrails"
+  ],
+  "workflow": [
+    "topic",
+    "odin-video-spec",
+    "script",
+    "storyboard",
+    "html-preview",
+    "confirmed-export"
+  ],
+  "videoAccount": "odin",
+  "brief": "来源选题：第二大脑/01_Odin/02_选题与研究/02_选题池/02_面试系列-运营法师/I21_设计师\"会装\"指南：看起来专业有深度的 5 个技巧 🔥1万赞。目标是按 Odin HyperFrames 工作流生成 HTML 预览，强调\"会装不是撒谎，而是把真实价值包装到面试官一眼能看懂\"，并且明确过度包装的红线。",
+  "status": "html_preview_ready",
+  "createdAt": "2026-06-03T15:00:00.000+08:00",
+  "updatedAt": "2026-06-03T15:00:00.000+08:00",
+  "outputs": [
+    {
+      "type": "odin-video-spec",
+      "path": "work/odin-video-spec.md"
+    },
+    {
+      "type": "script",
+      "path": "work/script.md"
+    },
+    {
+      "type": "storyboard",
+      "path": "work/storyboard.md"
+    },
+    {
+      "type": "voiceover",
+      "path": "work/voiceover-minimax.txt"
+    },
+    {
+      "type": "html-preview",
+      "path": "work/html/index.html"
+    },
+    {
+      "type": "workspace-preview",
+      "path": "preview/index.html"
+    },
+    {
+      "type": "copy",
+      "path": "source/copy.md"
+    }
+  ],
+  "hasPreview": true
+}

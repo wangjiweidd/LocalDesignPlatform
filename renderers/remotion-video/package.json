@@ -1,0 +1,36 @@
+{
+  "name": "remotion-branch-video",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "remotion studio src/index.ts",
+    "build": "remotion bundle src/index.ts",
+    "lint": "tsc --noEmit",
+    "postinstall": "node scripts/patch-remotion-bundler.cjs",
+    "still:cover": "remotion still src/index.ts BranchCover public/output/cover.png --frame=30 --browser-executable=\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\"",
+    "still:frame": "remotion still src/index.ts BranchVideo public/output/frame.png --frame=210 --browser-executable=\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\"",
+    "render": "remotion render src/index.ts BranchVideo public/output/branch-video.mp4 --codec=h264 --concurrency=1 --browser-executable=\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\"",
+    "render:video": "remotion render src/index.ts VideoComposition public/output/video.mp4 --codec=h264 --concurrency=1 --browser-executable=\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\"",
+    "render:full": "npm run render:video && npx tsx scripts/export-script.ts",
+    "export-script": "npx tsx scripts/export-script.ts",
+    "build-voiceover": "npx tsx scripts/build-local-voiceover.ts"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.459",
+    "@remotion/fonts": "^4.0.459",
+    "@remotion/google-fonts": "4.0.459",
+    "@remotion/light-leaks": "4.0.459",
+    "@remotion/lottie": "4.0.459",
+    "@remotion/transitions": "4.0.459",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "remotion": "4.0.459"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.7",
+    "@types/react-dom": "19.2.3",
+    "tsx": "^4.21.0",
+    "typescript": "5.9.3"
+  }
+}

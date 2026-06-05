@@ -1,0 +1,80 @@
+{
+  "track": "knowledge-sharing",
+  "contentType": "comparison",
+  "title": "AI 项目别再只写会用工具",
+  "subtitle": "面试官要看判断来源",
+  "fps": 30,
+  "width": 1080,
+  "height": 1920,
+  "colorScheme": "dark",
+  "accentColor": "#10B981",
+  "shotDurationFrames": 75,
+  "cover": {
+    "title": "AI 项目别再只写\n会用工具",
+    "subtitle": "面试官要看判断来源",
+    "titleHighlight": "会用工具"
+  },
+  "shots": [
+    {
+      "text": "工具截图",
+      "keyword": "工具",
+      "caption": "面试官想知道，你为什么这样用",
+      "voiceoverText": "很多设计师写 AI 项目，第一页就开始放工具截图。看起来很新，但面试官真正想知道的是：你为什么这样用。",
+      "captionKeyword": "为什么",
+      "scene": "quote-hero",
+      "motionPreset": "stat-slam",
+      "animationStyle": "dramatic-slam"
+    },
+    {
+      "text": "操作记录",
+      "keyword": "操作记录",
+      "caption": "页面很好看，但决策依据没有站住",
+      "voiceoverText": "如果作品集里只剩操作记录，页面再完整，也很难看出你的判断从哪里来。",
+      "captionKeyword": "决策依据",
+      "scene": "comparison-split",
+      "motionPreset": "split-slide",
+      "animationStyle": "snappy-pop",
+      "comparisonSide": "neutral",
+      "comparisonLeft": "工具记录",
+      "comparisonRight": "设计判断",
+      "leftText": "用了模型生成方案",
+      "rightText": "说明限制和取舍"
+    },
+    {
+      "text": "三段结构",
+      "keyword": "三段",
+      "caption": "目标、限制、取舍，比工具截图更有用",
+      "voiceoverText": "更稳的写法，是把项目拆成三段：目标是什么，限制在哪里，最后为什么放弃了某些方案。",
+      "captionKeyword": "取舍",
+      "scene": "checklist-reveal",
+      "motionPreset": "check-draw",
+      "animationStyle": "smooth-reveal",
+      "checklistItems": [
+        "目标是什么",
+        "限制在哪里",
+        "放弃了什么"
+      ],
+      "sectionLabel": "PORTFOLIO"
+    },
+    {
+      "text": "决策链",
+      "keyword": "决策链",
+      "caption": "它负责扩展方案，你负责做选择",
+      "voiceoverText": "AI 可以帮你扩展方案，但筛选、取舍和解释，仍然要回到设计师自己身上。",
+      "captionKeyword": "做选择",
+      "scene": "concept-card",
+      "motionPreset": "highlight-sweep",
+      "animationStyle": "smooth-reveal"
+    },
+    {
+      "text": "设计判断",
+      "keyword": "判断",
+      "caption": "证明你能把工具结果变成设计判断",
+      "voiceoverText": "作品集真正要证明的是：你能把工具结果变成设计判断。",
+      "captionKeyword": "设计判断",
+      "scene": "quote-hero",
+      "motionPreset": "stat-slam",
+      "animationStyle": "dramatic-slam"
+    }
+  ]
+}
